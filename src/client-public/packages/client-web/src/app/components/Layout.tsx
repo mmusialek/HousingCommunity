@@ -1,4 +1,4 @@
-import { useRouter } from "../routing";
+import { useNavigate } from "react-router";
 import { BottomTeaser } from "./BottomTeaser";
 
 interface Props {
@@ -6,11 +6,14 @@ interface Props {
 }
 
 export const Layout = (props: Props) => {
-  const router = useRouter();
+  const navigate = useNavigate();
+
   return (
     <div>
       <div>
-        <button onClick={() => {router.routing.push("/go1")}}>go 1</button>
+        <button onClick={() => {navigate("/login")}}>login</button>
+        <button onClick={() => {navigate("/logout")}}>logout</button>
+        <button onClick={() => {navigate("/register")}}>register</button>
       </div>
       <div>{props.children}</div>
       <div>
