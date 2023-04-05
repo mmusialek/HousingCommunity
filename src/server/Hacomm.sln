@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33414.496
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacomm.AuthServer", "Hacomm.AuthServer\Hacomm.AuthServer.csproj", "{925386EB-60E0-4DB3-8379-D6986C279210}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hacomm.Database", "Hacomm.Database\Hacomm.Database.csproj", "{AAB46A2E-267B-418D-AE9B-821E1776BDEE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{925386EB-60E0-4DB3-8379-D6986C279210}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{925386EB-60E0-4DB3-8379-D6986C279210}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{925386EB-60E0-4DB3-8379-D6986C279210}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{925386EB-60E0-4DB3-8379-D6986C279210}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAB46A2E-267B-418D-AE9B-821E1776BDEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAB46A2E-267B-418D-AE9B-821E1776BDEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAB46A2E-267B-418D-AE9B-821E1776BDEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAB46A2E-267B-418D-AE9B-821E1776BDEE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2E3874C2-81D4-4EB9-9570-EB507AE0AF86}
+	EndGlobalSection
+EndGlobal
