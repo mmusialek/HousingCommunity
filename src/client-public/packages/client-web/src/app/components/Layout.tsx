@@ -1,22 +1,24 @@
-import { useNavigate } from "react-router";
 import { BottomTeaser } from "./BottomTeaser";
+import styles from "./Layout.module.scss";
+import { TopMenu } from "./TopMenu";
 
 interface Props {
   children: JSX.Element;
 }
 
 export const Layout = (props: Props) => {
-  const navigate = useNavigate();
 
   return (
-    <div>
-      <div>
-        <button onClick={() => {navigate("/login")}}>login</button>
-        <button onClick={() => {navigate("/logout")}}>logout</button>
-        <button onClick={() => {navigate("/register")}}>register</button>
+    <div className={styles.layout}>
+      <div className={styles.layout__top}>
+        <div>brand</div>
+        <div>
+          <TopMenu />
+        </div>
+        <div>actions</div>
       </div>
-      <div>{props.children}</div>
-      <div>
+      <div className={styles.layout__content}>{props.children}</div>
+      <div className={styles.layout__bottom}>
         <BottomTeaser />
       </div>
     </div>

@@ -1,0 +1,20 @@
+.layout {
+  height: 100vh;
+
+  &__top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 10%;
+    padding: 15px 15px 0 15px;
+  }
+
+  &__content {
+    padding: 5px;
+    height: 80%;
+  }
+
+  &__bottom {
+    height: 10%;
+  }
+}

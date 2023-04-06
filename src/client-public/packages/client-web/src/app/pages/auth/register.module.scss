@@ -1,0 +1,15 @@
+.register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  &__item {
+    padding-bottom: 15px;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
