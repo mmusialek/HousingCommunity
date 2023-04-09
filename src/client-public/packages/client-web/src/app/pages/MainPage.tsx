@@ -2,6 +2,8 @@ import { Outlet } from "react-router";
 import { Layout } from "../components/Layout";
 import { ThemeProvider } from "@emotion/react";
 import { CssBaseline, createTheme, responsiveFontSizes } from "@mui/material";
+import { AuthProvider } from "oidc-react";
+import { oidcConfig } from "./auth/authHandling";
 
 let theme = createTheme({
   palette: {
@@ -14,9 +16,11 @@ export const MainPage = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Layout>
-        <Outlet />
-      </Layout>
+      <AuthProvider {...oidcConfig}>
+        <Layout>
+          <Outlet />
+        </Layout>
+      </AuthProvider>
     </ThemeProvider>
   );
 };

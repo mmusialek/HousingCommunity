@@ -1,24 +1,45 @@
-using Hacomm.AuthServer.Models;
-using Hacomm.Database;
+using Hacomm.AuthServer;
+using Hacomm.AuthServer.Database;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Quartz;
+using System.Configuration;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
-var builder = WebApplication.CreateBuilder(args);
+var options = new WebApplicationOptions
+{
+    WebRootPath = "wwwroot",
+    ContentRootPath = Path.GetFullPath(Directory.GetCurrentDirectory()),
+    Args = args
+};
+
+var builder = WebApplication.CreateBuilder(options);
 
 // Add services to the container.
 
+//builder.Services.AddRazorPages();
+//builder.Services.AddServerSideBlazor();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 //builder.Services.AddSwaggerGen();
 
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      builder =>
+                      {
+                          //builder.WithOrigins("https://localhost:7200", "http://localhost:4200").AllowAnyHeader().AllowAnyMethod().AllowCredentials();
+                          builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                      });
+});
+
 builder.Services.AddDbContext<AuthDbContext>(options =>
 {
     // Configure the context to use sqlite.
-    options.UseSqlServer("DefaultConnection");
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 
     // Register the entity sets needed by OpenIddict.
     // Note: use the generic overload if you need
@@ -26,7 +47,7 @@ builder.Services.AddDbContext<AuthDbContext>(options =>
     options.UseOpenIddict();
 });
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+builder.Services.AddIdentity<ApplicationUserEntity, IdentityRole>()
             .AddEntityFrameworkStores<AuthDbContext>()
             .AddDefaultTokenProviders()
             .AddDefaultUI();
@@ -66,7 +87,9 @@ builder.Services.AddOpenIddict()
                        .EnableAuthorizationEndpointPassthrough()
                        .EnableLogoutEndpointPassthrough()
                        .EnableStatusCodePagesIntegration()
-                       .EnableTokenEndpointPassthrough();
+                       .EnableTokenEndpointPassthrough()
+                       .EnableUserinfoEndpointPassthrough()
+                       .EnableStatusCodePagesIntegration();
 
     })
 
@@ -79,6 +102,7 @@ builder.Services.AddOpenIddict()
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
+builder.Services.AddHostedService<BootstrapWorker>();
 
 var app = builder.Build();
 
@@ -98,11 +122,14 @@ app.UseHttpsRedirection();
 app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 app.UseRouting();
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapRazorPages();
 app.MapControllers();
+app.MapFallbackToFile("index.html");
 
 //app.UseEndpoints(options =>
 //{

@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hacomm.Database.Entities;
+namespace Hacomm.AuthServer.Database;
 
-public class ApplicationUser : IdentityUser
+public class ApplicationUserEntity : IdentityUser
 {
 }

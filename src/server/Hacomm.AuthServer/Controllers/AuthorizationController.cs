@@ -5,7 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Hacomm.AuthServer.Common;
-using Hacomm.AuthServer.Models;
+using Hacomm.AuthServer.Database;
 using Hacomm.AuthServer.ViewModels.Authorization;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Authentication;
@@ -29,15 +29,15 @@ namespace Hacomm.AuthServer.Controllers
         private readonly IOpenIddictApplicationManager _applicationManager;
         private readonly IOpenIddictAuthorizationManager _authorizationManager;
         private readonly IOpenIddictScopeManager _scopeManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUserEntity> _signInManager;
+        private readonly UserManager<ApplicationUserEntity> _userManager;
 
         public AuthorizationController(
     IOpenIddictApplicationManager applicationManager,
     IOpenIddictAuthorizationManager authorizationManager,
     IOpenIddictScopeManager scopeManager,
-    SignInManager<ApplicationUser> signInManager,
-    UserManager<ApplicationUser> userManager)
+    SignInManager<ApplicationUserEntity> signInManager,
+    UserManager<ApplicationUserEntity> userManager)
         {
             _applicationManager = applicationManager;
             _authorizationManager = authorizationManager;
