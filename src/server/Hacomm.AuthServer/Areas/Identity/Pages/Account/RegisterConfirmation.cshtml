@@ -1,0 +1,12 @@
+﻿@page
+@model RegisterConfirmationModel
+
+
+<div class="form-wrapper">
+    <div class="form-wrapper-confirmation">
+        <h1>@ViewData["Title"]</h1>
+        <p>We send email to @ViewData["email"].</p>
+        <p>Please check your email to confirm your account.</p>
+        <a id="login-submit" class="btn btn-lg btn-primary-web-count" href=@ViewData["ReturnUrl"]>Login page</a>
+    </div>
+</div>

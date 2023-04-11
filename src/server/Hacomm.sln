@@ -5,7 +5,7 @@ VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacomm.AuthServer", "Hacomm.AuthServer\Hacomm.AuthServer.csproj", "{925386EB-60E0-4DB3-8379-D6986C279210}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hacomm.Database", "Hacomm.Database\Hacomm.Database.csproj", "{AAB46A2E-267B-418D-AE9B-821E1776BDEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacomm.Database", "Hacomm.Database\Hacomm.Database.csproj", "{AAB46A2E-267B-418D-AE9B-821E1776BDEE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

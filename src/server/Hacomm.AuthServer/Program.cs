@@ -47,7 +47,21 @@ builder.Services.AddDbContext<AuthDbContext>(options =>
     options.UseOpenIddict();
 });
 
-builder.Services.AddIdentity<ApplicationUserEntity, IdentityRole>()
+builder.Services.AddIdentity<ApplicationUserEntity, IdentityRole>(q =>
+{
+    if (builder.Environment.IsDevelopment())
+    {
+        q.Password.RequireNonAlphanumeric = false;
+        q.Password.RequireUppercase = false;
+        //q.SignIn.RequireConfirmedAccount = true;
+        q.User.RequireUniqueEmail = true;
+    }
+    else
+    {
+        q.SignIn.RequireConfirmedAccount = true;
+        q.User.RequireUniqueEmail = true;
+    }
+})
             .AddEntityFrameworkStores<AuthDbContext>()
             .AddDefaultTokenProviders()
             .AddDefaultUI();
