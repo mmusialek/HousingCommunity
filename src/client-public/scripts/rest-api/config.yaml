@@ -1,0 +1,10 @@
+templateDir: scripts/rest-api/openapi-templates/typescript-fetch-ext
+additionalProperties:
+  typescriptThreePlus: "true"
+  useSingleRequestParameter: "false"
+  withInterfaces: "true"
+  prefixParameterInterfaces: "true"
+  prependFormOrBodyParameters: "true"
+  enumPropertyNaming: original
+  supportsES6: "true"
+  withoutRuntimeChecks: "true"

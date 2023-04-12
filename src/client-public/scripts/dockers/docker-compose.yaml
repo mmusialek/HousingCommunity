@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+    db_tag:
+        image: postgres:14.2-alpine
+        labels:
+            name: awr_dev_db_1
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres000
+            - POSTGRES_DB=awr
+        volumes:
+            - database_data:/var/lib/postgresql/data/
+        ports:
+            - 5432:5432
+
+    mailhog:
+        image: mailhog/mailhog:latest
+        labels:
+            name: awr_dev_mailhog_1
+        ports:
+            - 1025:1025
+            - 8025:8025
+
+volumes:
+    database_data:

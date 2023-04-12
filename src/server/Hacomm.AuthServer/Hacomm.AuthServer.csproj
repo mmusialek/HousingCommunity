@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Hacomm.Common\Hacomm.Common.csproj" />
     <ProjectReference Include="..\Hacomm.Database\Hacomm.Database.csproj" />
   </ItemGroup>
 

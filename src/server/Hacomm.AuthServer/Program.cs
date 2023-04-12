@@ -1,6 +1,8 @@
 using Hacomm.AuthServer;
 using Hacomm.AuthServer.Database;
+using Hacomm.Common;
 using Microsoft.AspNetCore.Identity;
+//using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Quartz;
 using System.Configuration;
@@ -23,6 +25,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 //builder.Services.AddSwaggerGen();
+
+builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
