@@ -8,11 +8,11 @@ public class EmailMessage
     public string? FromEmail { get; set; }
     public string ToEmail { get; set; } = string.Empty;
 
-    public string Body
+    public bool IsHtml
     {
         get
         {
-            return string.IsNullOrEmpty(HtmlBody) ? TextBody : HtmlBody;
+            return !string.IsNullOrEmpty(HtmlBody);
         }
     }
 

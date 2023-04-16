@@ -18,9 +18,10 @@ public class RegisterConfirmationModel : PageModel
 
     public IActionResult OnGet(string email, string? returnUrl = null)
     {
-        returnUrl = returnUrl ?? Url.Content("~/");
+        returnUrl ??= Url.Content("~/");
 
         //ViewData["ReturnUrl"] = _configuration["ClientUri"];
+        ViewData["email"] = email;
         ViewData["ReturnUrl"] = returnUrl;
 
         return Page();

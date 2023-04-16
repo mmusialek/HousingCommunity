@@ -87,9 +87,11 @@ public class RegisterModel : PageModel
                     values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                     protocol: Request.Scheme)!;
 
-                var email = EmailMessage.NewHtmlEmail("Confirm your email",
-                    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.",
-                    Input.Email);
+
+                var htmlBody = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.";
+                var htmlContent = $"<!DOCTYPE html><html><head></head><body>{htmlBody}</body></html>";
+
+                var email = EmailMessage.NewHtmlEmail("Confirm your email", htmlContent, Input.Email);
 
                 await _emailSender.SendAsync(email);
 

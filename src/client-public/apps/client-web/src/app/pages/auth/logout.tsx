@@ -8,7 +8,7 @@ export const Logout = () => {
       <div>
         <button
           onClick={async () => {
-            await auth.signOut();
+            await auth.signOutRedirect();
           }}
         >
           logout

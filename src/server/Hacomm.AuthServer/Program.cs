@@ -57,7 +57,7 @@ builder.Services.AddIdentity<ApplicationUserEntity, IdentityRole>(q =>
     {
         q.Password.RequireNonAlphanumeric = false;
         q.Password.RequireUppercase = false;
-        //q.SignIn.RequireConfirmedAccount = true;
+        q.SignIn.RequireConfirmedAccount = true;
         q.User.RequireUniqueEmail = true;
     }
     else

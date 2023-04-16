@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacomm.AuthServer", "Hacomm
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacomm.Database", "Hacomm.Database\Hacomm.Database.csproj", "{AAB46A2E-267B-418D-AE9B-821E1776BDEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hacomm.Common", "Hacomm.Common\Hacomm.Common.csproj", "{78C02337-74F5-4791-9B98-209E172573B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacomm.Common", "Hacomm.Common\Hacomm.Common.csproj", "{78C02337-74F5-4791-9B98-209E172573B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
