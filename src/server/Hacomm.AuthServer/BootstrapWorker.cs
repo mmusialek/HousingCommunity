@@ -31,8 +31,8 @@ namespace Hacomm.AuthServer
                 await manager.CreateAsync(new OpenIddictApplicationDescriptor
                 {
                     ClientId = "webapp",
-                    ClientSecret = "901564A5-E7FE-42CB-B10D-61EF6A8F3654",
-                    ConsentType = ConsentTypes.Explicit,
+                    //ClientSecret = "901564A5-E7FE-42CB-B10D-61EF6A8F3654",
+                    ConsentType = ConsentTypes.Implicit,
                     DisplayName = "Client WebApp",
                     RedirectUris =
                 {
@@ -47,8 +47,12 @@ namespace Hacomm.AuthServer
                     Permissions.Endpoints.Authorization,
                     Permissions.Endpoints.Logout,
                     Permissions.Endpoints.Token,
+
                     Permissions.GrantTypes.AuthorizationCode,
+                    Permissions.GrantTypes.RefreshToken,
+
                     Permissions.ResponseTypes.Code,
+
                     Permissions.Scopes.Email,
                     Permissions.Scopes.Profile,
                     Permissions.Scopes.Roles

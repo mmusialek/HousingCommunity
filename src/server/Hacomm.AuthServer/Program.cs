@@ -1,6 +1,7 @@
 using Hacomm.AuthServer;
 using Hacomm.AuthServer.Database;
 using Hacomm.Common;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 //using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
@@ -51,8 +52,21 @@ builder.Services.AddDbContext<AuthDbContext>(options =>
     options.UseOpenIddict();
 });
 
+builder.Services.Configure<IdentityOptions>(q =>
+{
+    q.ClaimsIdentity.UserNameClaimType = Claims.Name;
+    q.ClaimsIdentity.UserIdClaimType = Claims.Subject;
+    q.ClaimsIdentity.RoleClaimType = Claims.Role;
+    q.ClaimsIdentity.EmailClaimType = Claims.Email;
+});
+
 builder.Services.AddIdentity<ApplicationUserEntity, IdentityRole>(q =>
 {
+    //q.ClaimsIdentity.UserNameClaimType = Claims.Name;
+    //q.ClaimsIdentity.UserIdClaimType = Claims.Subject;
+    //q.ClaimsIdentity.RoleClaimType = Claims.Role;
+    //q.ClaimsIdentity.EmailClaimType = Claims.Email;
+
     if (builder.Environment.IsDevelopment())
     {
         q.Password.RequireNonAlphanumeric = false;
@@ -78,6 +92,7 @@ builder.Services.AddQuartz(options =>
 });
 
 builder.Services.AddQuartzHostedService(options => options.WaitForJobsToComplete = true);
+//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme);
 
 builder.Services.AddOpenIddict()
     .AddCore(options =>
