@@ -160,15 +160,10 @@ app.UseCors(MyAllowSpecificOrigins);
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapRazorPages();
 app.MapControllers();
+app.MapDefaultControllerRoute();
+app.MapRazorPages();
 app.MapFallbackToFile("index.html");
 
-//app.UseEndpoints(options =>
-//{
-//    options.MapRazorPages();
-//    options.MapControllers();
-//    options.MapFallbackToFile("index.html");
-//});
 
 app.Run();
