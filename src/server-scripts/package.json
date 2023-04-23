@@ -1,0 +1,16 @@
+{
+  "name": "server-scripts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "compile": "sass -w -s compressed ..\\server\\Vetheria.AuthServer\\wwwroot\\scss\\styles.scss ..\\server\\Vetheria.AuthServer\\wwwroot\\css\\styles.css",
+    "compile:single": "sass -s compressed ..\\server\\Vetheria.AuthServer\\wwwroot\\scss\\styles.scss ..\\server\\Vetheria.AuthServer\\wwwroot\\css\\styles.css"
+  },
+  "dependencies": {
+    "sass": "1.62.0"
+  },
+  "devDependencies": {
+    "@types/node": "18.16.0"
+  }
+}

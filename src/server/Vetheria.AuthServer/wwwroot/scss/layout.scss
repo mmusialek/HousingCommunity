@@ -1,0 +1,38 @@
+﻿@use "variables.scss" as var;
+
+$header-height: 108px;
+$footer-height: 100px;
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    background-color: var.$col-bodyBg;
+    min-height: 100vh;
+    color: var.$col-mainFont;
+
+    &_header {
+        height: $header-height;
+        background-color: darken(var.$col-footerBg, 10%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &_body {
+        // padding: 200px;
+        display: flex;
+        justify-content: center;
+        flex-grow: 1;
+        height: calc(100vh - ($header-height + $footer-height));
+        overflow: auto;
+        box-sizing: border-box;
+    }
+
+    &_footer {
+        height: $footer-height;
+        background-color: darken(var.$col-footerBg, 10%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
