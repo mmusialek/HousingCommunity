@@ -10,15 +10,16 @@ $footer-height: 100px;
     min-height: 100vh;
     color: var.$col-mainFont;
 
-    &_header {
+    &__header {
         height: $header-height;
         background-color: darken(var.$col-footerBg, 10%);
         display: flex;
         justify-content: center;
         align-items: center;
+        color: $col-mainFont-invert;
     }
 
-    &_body {
+    &__body {
         // padding: 200px;
         display: flex;
         justify-content: center;
@@ -28,11 +29,30 @@ $footer-height: 100px;
         box-sizing: border-box;
     }
 
-    &_footer {
+    &__footer {
         height: $footer-height;
         background-color: darken(var.$col-footerBg, 10%);
         display: flex;
         justify-content: center;
         align-items: center;
+        color: $col-mainFont-invert;
     }
+}
+
+.simple_teaser {
+    display: flex;
+    flex-direction: column;
+
+    &__header {
+        font-size: 2em;
+    }
+
+    &__body {
+        justify-items: center;
+        align-items: center;
+    }
+}
+
+.container {
+    padding: 7px;
 }

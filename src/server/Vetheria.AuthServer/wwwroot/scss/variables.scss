@@ -1,4 +1,18 @@
-﻿// colors
+﻿// flat palette
+// https://materialui.co/flatuicolors
+// https://flatuicolors.com/palette/us
+// https://flatcolors.net/palette/182-flat-ui-pallate#
+
+$col-clouds: #ECF0F1;
+$col-silver: #BDC3C7;
+
+$col-belizehole: #2980B9;
+
+$col-wetasphalt: #34495E;
+$col-midnightblue: #2C3E50;
+
+
+// colors
 
 $col-green: #002626;
 $col-ping: #be7aeb;
@@ -11,9 +25,11 @@ $col-white: #fff;
 
 // fonts
 
-$col-mainFont: #eee;
-$col-secondFont: #ccc;
+$col-mainFont: $col-wetasphalt;
+$col-secondFont: $col-midnightblue;
+$col-mainFont-invert: $col-clouds;
+$col-secondFont-invert: $col-silver;
 
-$col-headerBg: $col-green;
-$col-bodyBg: $col-green;
-$col-footerBg: $col-green;
+$col-headerBg: $col-belizehole;
+$col-bodyBg: $col-clouds;
+$col-footerBg: $col-belizehole;

@@ -6,22 +6,23 @@
     <title>Vetheria - Auth</title>
     <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/site.css" />
-    <link rel="stylesheet" href="/scss/styles.scss" />
+    <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
-    <div class="vh-100">`
-        <header>
-            <div class="d-flex justify-content-center py-3 fs-2">Vetheria</div>
+
+    <div class="layout">
+        <header class="layout__header">
+            <div>Vetheria</div>
         </header>
 
-        <div class="container d-flex justify-content-center">
+        <div class="layout__body">
             <main role="main" class="pb-3">
                 @RenderBody()
             </main>
         </div>
 
-        <footer class="border-top footer text-muted">
-            <div class="container p-2 text-center">
+        <footer class="layout__footer">
+            <div>
                 <span>&copy; @DateTime.Now.Year - Vetheria - All rights reserved - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a></span>
             </div>
         </footer>
