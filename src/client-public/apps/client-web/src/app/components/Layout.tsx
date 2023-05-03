@@ -1,6 +1,5 @@
 import { BottomTeaser } from "./BottomTeaser";
 import styles from "./Layout.module.scss";
-import { LeftNavbar } from "./LeftNavbar/LeftNavbar";
 import { TopBrand } from "./TopBrand";
 import { TopMenu } from "./TopMenu";
 import { TopUserActions } from "./TopUserActions";
