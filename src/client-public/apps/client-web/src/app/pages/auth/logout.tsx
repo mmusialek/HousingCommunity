@@ -3,7 +3,7 @@ import { useAuth } from "oidc-react";
 export const Logout = () => {
   const auth = useAuth();
   return (
-    <div>
+    <div className="simple-centered-box">
       <div>Logout</div>
       <div>
         <button
