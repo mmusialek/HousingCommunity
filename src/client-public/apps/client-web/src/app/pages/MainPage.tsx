@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-import { Layout } from "../components/Layout";
+import { Layout } from "../components";
 import { ThemeProvider } from "@emotion/react";
 import { CssBaseline, createTheme, responsiveFontSizes } from "@mui/material";
 import { AuthProvider } from "oidc-react";

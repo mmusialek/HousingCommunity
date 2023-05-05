@@ -5,11 +5,15 @@ VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vetheria.AuthServer", "Vetheria.AuthServer\Vetheria.AuthServer.csproj", "{925386EB-60E0-4DB3-8379-D6986C279210}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacomm.Database", "Hacomm.Database\Hacomm.Database.csproj", "{AAB46A2E-267B-418D-AE9B-821E1776BDEE}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vetheria.Common", "Vetheria.Common\Vetheria.Common.csproj", "{78C02337-74F5-4791-9B98-209E172573B6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VetheriaSource", "VetheriaSource", "{237081C1-B9A0-40A7-8962-650FEDE39785}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hacomm.Backend", "Hacomm.Backend", "{14538B99-B0B0-46E8-B668-DE3D9AA3D463}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hacomm.WebApi", "Hacomm.WebApi\Hacomm.WebApi.csproj", "{4DEBE3FB-797C-4EEE-A75F-5572CAED526C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hacomm.Database", "Hacomm.Database\Hacomm.Database.csproj", "{0C0F6513-8170-4DA9-AA91-C32B369F3E3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,14 +25,18 @@ Global
 		{925386EB-60E0-4DB3-8379-D6986C279210}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{925386EB-60E0-4DB3-8379-D6986C279210}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{925386EB-60E0-4DB3-8379-D6986C279210}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AAB46A2E-267B-418D-AE9B-821E1776BDEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AAB46A2E-267B-418D-AE9B-821E1776BDEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AAB46A2E-267B-418D-AE9B-821E1776BDEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AAB46A2E-267B-418D-AE9B-821E1776BDEE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{78C02337-74F5-4791-9B98-209E172573B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{78C02337-74F5-4791-9B98-209E172573B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78C02337-74F5-4791-9B98-209E172573B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78C02337-74F5-4791-9B98-209E172573B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DEBE3FB-797C-4EEE-A75F-5572CAED526C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DEBE3FB-797C-4EEE-A75F-5572CAED526C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DEBE3FB-797C-4EEE-A75F-5572CAED526C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DEBE3FB-797C-4EEE-A75F-5572CAED526C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C0F6513-8170-4DA9-AA91-C32B369F3E3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C0F6513-8170-4DA9-AA91-C32B369F3E3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C0F6513-8170-4DA9-AA91-C32B369F3E3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C0F6513-8170-4DA9-AA91-C32B369F3E3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,6 +44,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{925386EB-60E0-4DB3-8379-D6986C279210} = {237081C1-B9A0-40A7-8962-650FEDE39785}
 		{78C02337-74F5-4791-9B98-209E172573B6} = {237081C1-B9A0-40A7-8962-650FEDE39785}
+		{4DEBE3FB-797C-4EEE-A75F-5572CAED526C} = {14538B99-B0B0-46E8-B668-DE3D9AA3D463}
+		{0C0F6513-8170-4DA9-AA91-C32B369F3E3B} = {14538B99-B0B0-46E8-B668-DE3D9AA3D463}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2E3874C2-81D4-4EB9-9570-EB507AE0AF86}

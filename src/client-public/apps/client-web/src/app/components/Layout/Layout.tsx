@@ -5,6 +5,7 @@ import { TopBrand } from "./TopBrand";
 import { TopMenu } from "./TopMenu";
 import { TopUserActions } from "./TopUserActions";
 import { CircularProgress } from "@mui/material";
+import { ProgressIndicator } from "../Progress/progressIndicator";
 
 interface Props {
   children: JSX.Element;
@@ -43,5 +44,10 @@ export const Layout = (props: Props) => {
     );
   };
 
-  return auth.isLoading ? getLoader() : getLayout();
+  // return auth.isLoading ? getLoader() : getLayout();
+  return (
+    <ProgressIndicator size="5rem" isLoading={auth.isLoading}>
+      {getLayout()}
+    </ProgressIndicator>
+  );
 };

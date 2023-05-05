@@ -4,9 +4,11 @@ import MailIcon from "@mui/icons-material/Mail";
 import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import { useNavigate } from "react-router";
 
 export const LeftNavbar = () => {
   const [isOpened, setIsOpened] = useState(false);
+  const navigate = useNavigate();
 
   const getMenuItem = (text: string, onMenuClick: (event: React.MouseEvent<HTMLElement> | undefined) => void) => {
     return (
@@ -28,7 +30,7 @@ export const LeftNavbar = () => {
 
     return (
       <List>
-        {getMenuItem("Item 1", () => defaultHandler({ target: "Item 1" } as any))}
+        {getMenuItem("Ogłoszenia", () => navigate("/announcements"))}
         {getMenuItem("Item 2", () => defaultHandler({ target: "Item 2" } as any))}
         <Divider />
         {getMenuItem("Item 3", () => defaultHandler({ target: "Item 3" } as any))}
