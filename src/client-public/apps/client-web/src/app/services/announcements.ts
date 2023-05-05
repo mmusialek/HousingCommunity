@@ -6,7 +6,7 @@ export const useAnnouncementService = () => {
   const [isLoading, setIsLoading] = useState(false);
   const getAnnouncements = (): IAnnouncement[] => {
     setIsLoading(true);
-    //get data
+    // TODO get data
     setIsLoading(false);
     return [];
   }

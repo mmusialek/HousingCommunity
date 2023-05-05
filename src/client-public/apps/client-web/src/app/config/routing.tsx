@@ -1,8 +1,5 @@
 import { RouteObject, createBrowserRouter } from "react-router-dom";
-import { MainPage } from "./pages/MainPage";
-import { Logout } from "./pages/auth/logout";
-import { Profile } from "./pages/profile/profile";
-import { Announcements } from "./pages/announcements/announcements";
+import { Announcements, Logout, MainPage, PageError, Profile } from "../pages";
 
 export interface IRouting {
   routes: RouteObject[];
@@ -12,7 +9,7 @@ const routes: RouteObject[] = [
   {
     path: "/",
     element: <MainPage />,
-    errorElement: <div>error occured :(</div>,
+    errorElement: <PageError />,
     children: [
       {
         path: "logout",

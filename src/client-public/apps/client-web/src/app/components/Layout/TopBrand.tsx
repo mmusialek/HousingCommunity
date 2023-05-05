@@ -2,7 +2,11 @@ import { Button } from "@mui/material";
 import { useNavigate } from "react-router";
 import { LeftNavbar } from "../LeftNavbar/LeftNavbar";
 
-export const TopBrand = () => {
+interface ITopBrand {
+  showNavbar: boolean;
+}
+
+export const TopBrand = (props: ITopBrand) => {
   const navigate = useNavigate();
 
   const onHomeClick = () => {
@@ -11,7 +15,7 @@ export const TopBrand = () => {
 
   return (
     <>
-      <LeftNavbar />
+      {props.showNavbar && <LeftNavbar />}
       <Button onClick={onHomeClick}>H comm</Button>
     </>
   );
