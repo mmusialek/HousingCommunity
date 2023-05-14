@@ -1,4 +1,4 @@
-import { IAnnouncement } from './../models/announcements';
+import { IAnnouncement } from '../../models/announcements';
 import { useState } from 'react';
 import { create } from 'zustand';
 

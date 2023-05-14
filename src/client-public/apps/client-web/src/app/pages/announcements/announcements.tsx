@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { IAnnouncement } from "../../models";
-import { useAnnouncementService, useAnnouncementStore } from "../../services";
 import { StringUtils } from "../../utils";
 import { ProgressIndicator } from "../../components";
+import { useAnnouncementService, useAnnouncementStore } from "./announcementStore";
 
 export const Announcements = () => {
   const { getAnnouncements, isLoading } = useAnnouncementService();
@@ -25,12 +25,11 @@ export const Announcements = () => {
   };
 
   const renderList = () => {
-    if(store.announcements.length){
-
+    if (store.announcements.length) {
       return <div>{store.announcements.map((q) => renderAnnouncement(q))}</div>;
     }
 
-    return <div>no data</div>
+    return <div>no data</div>;
   };
 
   return (

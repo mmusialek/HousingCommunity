@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { IUser } from "../models";
+import { IUser } from "../../models";
 
 interface IUserStore {
   currentUser?: IUser | null;

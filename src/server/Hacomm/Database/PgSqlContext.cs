@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore;
 using Hacomm.Database.Entities;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace Hacomm.Database;
 public class PgSqlContext : DbContext
@@ -35,4 +36,16 @@ public class PgSqlContext : DbContext
     {
         modelBuilder.BuildAll();
     }
+
+    public DbSet<Announcement> Announcements { get; set; } = null!;
+    public DbSet<Address> Addresses { get; set; } = null!;
+    public DbSet<HousingCommunity> HousingCommunities { get; set; } = null!;
+    public DbSet<User> Users { get; set; } = null!;
+}
+
+public class AuthDbContextFactoryDesignTime : IDesignTimeDbContextFactory<PgSqlContext>
+{
+    private readonly string _connString = "Server=127.0.0.1;User Id=postgres;Password=postgres000;Database=hacomm;";
+
+    public PgSqlContext CreateDbContext(string[] args) => new(new DbContextOptionsBuilder<PgSqlContext>().UseNpgsql(_connString).Options);
 }

@@ -30,6 +30,4 @@ public class AuthDbContextFactoryDesignTime : IDesignTimeDbContextFactory<AuthDb
     private readonly string _connString = "Server=127.0.0.1;User Id=postgres;Password=postgres000;Database=postgres;";
 
     public AuthDbContext CreateDbContext(string[] args) => new(new DbContextOptionsBuilder<AuthDbContext>().UseNpgsql(_connString).Options);
-
-
 }

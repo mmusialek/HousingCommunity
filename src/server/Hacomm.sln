@@ -11,9 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VetheriaSource", "VetheriaS
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hacomm.Backend", "Hacomm.Backend", "{14538B99-B0B0-46E8-B668-DE3D9AA3D463}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hacomm.WebApi", "Hacomm.WebApi\Hacomm.WebApi.csproj", "{4DEBE3FB-797C-4EEE-A75F-5572CAED526C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacomm.WebApi", "Hacomm.WebApi\Hacomm.WebApi.csproj", "{4DEBE3FB-797C-4EEE-A75F-5572CAED526C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hacomm.Database", "Hacomm.Database\Hacomm.Database.csproj", "{0C0F6513-8170-4DA9-AA91-C32B369F3E3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacomm", "Hacomm\Hacomm.csproj", "{0C0F6513-8170-4DA9-AA91-C32B369F3E3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
