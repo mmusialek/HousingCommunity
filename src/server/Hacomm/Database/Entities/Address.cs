@@ -9,6 +9,7 @@ public class Address
 {
     public Guid Id { get; set; }
     public string City { get; set; } = null!;
+    public string ZipCode { get; set; } = null!;
     public string Street { get; set; } = null!;
     public string HomeNr { get; set; } = null!;
     public int? FlatNr { get; set; }

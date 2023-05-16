@@ -1,12 +1,12 @@
 ﻿using Hacomm.Database;
 using Microsoft.EntityFrameworkCore;
 
-namespace Hacomm.WebApi;
+namespace Hacomm.WebApi.Bootstrap;
 
 public static class WebApiSetup
 {
 
-    public static void AddNecessaryStuff(this IServiceCollection services, string connectionString)
+    public static void AddHacommStuff(this IServiceCollection services, string connectionString)
     {
 
         services.AddDbContext<PgSqlContext>(options =>

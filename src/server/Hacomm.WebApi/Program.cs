@@ -1,5 +1,5 @@
 using Hacomm.Database;
-using Hacomm.WebApi;
+using Hacomm.WebApi.Bootstrap;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -15,7 +15,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddNecessaryStuff(connectionString);
+builder.Services.AddHacomAuth("https://localhost:7200");
+builder.Services.AddHacommStuff(connectionString);
 
 var app = builder.Build();
 

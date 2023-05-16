@@ -15,6 +15,6 @@ public class HousingCommunity
     public Address Address { get; set; } = null!;
 
     public List<Announcement> Announcements { get; set; } = null!;
-    public List<User> Users { get; set; } = null!;
 
+    public List<User> Users { get; set; } = null!;
 }

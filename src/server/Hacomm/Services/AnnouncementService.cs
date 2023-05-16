@@ -33,15 +33,19 @@ public class AnnouncementService
 
     public IEnumerable<AnnouncementDto> Get(GetAnnouncementParams query)
     {
-        var data = _context.Announcements.ToList();
+        var data = _context.Announcements.Where(q => q.ValidTo < DateTime.UtcNow).ToList();
         var res = data.Select(ToDto);
 
         return res;
     }
 
-    public Task UpdateAsync(UpdateAnnouncementRequest request)
+    public async Task UpdateAsync(UpdateAnnouncementRequest request)
     {
-        return Task.CompletedTask;
+        var item = _context.Announcements.First(q => q.Id == request.Id && q.AuthorId == request.AuthorId);
+        item.Title = request.Title;
+        item.Message = request.Message;
+
+        await _context.SaveChangesAsync();
     }
 
     private AnnouncementDto ToDto(Announcement entity)

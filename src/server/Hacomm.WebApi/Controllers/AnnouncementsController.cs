@@ -7,7 +7,7 @@ using OpenIddict.Server.AspNetCore;
 
 namespace Hacomm.WebApi.Controllers;
 
-[Authorize(AuthenticationSchemes = OpenIddictServerAspNetCoreDefaults.AuthenticationScheme)]
+[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class AnnouncementsController : ControllerBase

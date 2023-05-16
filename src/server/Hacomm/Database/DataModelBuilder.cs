@@ -27,6 +27,7 @@ static class DataModelBuilder
         entity.Property(q => q.Id).HasDefaultValueSql("gen_random_uuid()");
 
         entity.Property(q => q.City).HasMaxLength(255).IsRequired();
+        entity.Property(q => q.ZipCode).HasMaxLength(10).IsRequired();
         entity.Property(q => q.Street).HasMaxLength(255).IsRequired();
         entity.Property(q => q.HomeNr).HasMaxLength(10).IsRequired();
         entity.Property(q => q.FlatNr).IsRequired(false);
@@ -69,8 +70,7 @@ static class DataModelBuilder
 
         entity.Property(q => q.Name).HasMaxLength(255).IsRequired();
 
-
-        entity.HasOne(q => q.Address).WithMany(q => q.HousingCommunities).HasForeignKey(q => q.AddressId);
+        entity.HasOne(q => q.Address).WithMany(q => q.HousingCommunities).HasForeignKey(q => q.AddressId).IsRequired();
         //obj.HasIndex(q => new
         //{
         //    q.Name,

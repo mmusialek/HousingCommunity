@@ -92,7 +92,7 @@ builder.Services.AddQuartz(options =>
 });
 
 builder.Services.AddQuartzHostedService(options => options.WaitForJobsToComplete = true);
-//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme);
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme);
 
 builder.Services.AddOpenIddict()
     .AddCore(options =>
@@ -125,7 +125,6 @@ builder.Services.AddOpenIddict()
                        .EnableStatusCodePagesIntegration();
 
     })
-
     .AddValidation(options =>
      {
          options.UseLocalServer();
