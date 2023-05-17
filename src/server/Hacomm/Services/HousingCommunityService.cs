@@ -1,7 +1,9 @@
-﻿using Hacomm.Contracts.Common;
+﻿using Hacomm.Contracts.Announcements;
+using Hacomm.Contracts.Common;
 using Hacomm.Contracts.HousingCommunities;
 using Hacomm.Database;
 using Hacomm.Database.Entities;
+using Hocomm.Services;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Hacomm.Services;
-public class HousingCommunityService
+public class HousingCommunityService : ServiceBase
 {
     private readonly PgSqlContext _context;
 
@@ -19,7 +21,7 @@ public class HousingCommunityService
         _context = context;
     }
 
-    public async Task AddAsync(AddHousingCommunityRequest request)
+    public async Task<Guid> AddAsync(AddHousingCommunityRequest request)
     {
         HousingCommunity entity = new();
         entity.Name = request.Name;
@@ -32,11 +34,12 @@ public class HousingCommunityService
 
         _context.Add(entity);
         await _context.SaveChangesAsync();
+        return entity.Id;
     }
 
-    public HousingCommunityDto Get(string id)
+    public HousingCommunityDto Get(GetHousingCommunityParams query)
     {
-        var entity = _context.HousingCommunities.First(q => q.Id.Equals(id));
+        var entity = _context.HousingCommunities.First(q => q.Id.Equals(query.HousingCommunityId));
         return ToDto(entity);
     }
 

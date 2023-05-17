@@ -1,6 +1,8 @@
 ﻿using Hacomm.Contracts.Announcements;
 using Hacomm.Database;
 using Hacomm.Database.Entities;
+using Hocomm;
+using Hocomm.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Hacomm.Services;
-public class AnnouncementService
+public class AnnouncementService : ServiceBase
 {
     private readonly PgSqlContext _context;
 
@@ -22,7 +24,8 @@ public class AnnouncementService
         var entity = new Announcement();
         entity.Title = request.Title;
         entity.Message = request.Message;
-        entity.AuthorId = request.AuthorId;
+        //entity.AuthorId = request.AuthorId;
+        entity.AuthorId = _metadata.UserId;
         entity.ValidTo = request.ValidTo;
 
         entity.HousingCommunityId = Guid.Empty;
@@ -41,7 +44,7 @@ public class AnnouncementService
 
     public async Task UpdateAsync(UpdateAnnouncementRequest request)
     {
-        var item = _context.Announcements.First(q => q.Id == request.Id && q.AuthorId == request.AuthorId);
+        var item = _context.Announcements.First(q => q.Id == request.Id && q.AuthorId == _metadata.UserId);
         item.Title = request.Title;
         item.Message = request.Message;
 

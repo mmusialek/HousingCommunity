@@ -17,6 +17,7 @@ static class DataModelBuilder
         builder.AnnouncementBuilder();
         builder.HousingCommunityBuilder();
         builder.UserBuilder();
+        builder.UserMeters();
     }
 
     private static void AddressBuilder(this ModelBuilder builder)
@@ -78,5 +79,32 @@ static class DataModelBuilder
         //}).IsUnique();
 
         //obj.HasOne(q => q.StarSystem).WithMany(q => q.Stations).HasForeignKey(q => q.StarSystemId);
+    }
+
+    private static void UserMeters(this ModelBuilder builder)
+    {
+        // meter types
+        var meterType = builder.Entity<UserMeterType>();
+        meterType.HasKey(q => q.Id);
+        meterType.Property(q => q.Id).HasDefaultValueSql("gen_random_uuid()");
+
+        meterType.Property(q => q.Name).HasMaxLength(100).IsRequired();
+        meterType.Property(q => q.Description).HasMaxLength(500).IsRequired(false);
+        meterType.Property(q => q.CreatedAt).HasDefaultValueSql("timezone('utc', now())");
+
+        meterType.HasOne(q => q.HousingCommunity).WithMany(q => q.UserMeterTypes).HasForeignKey(q => q.HousingCommunityId);
+
+
+        // meters
+        var meter = builder.Entity<UserMeter>();
+        meter.HasKey(q => q.Id);
+        meter.Property(q => q.Id).HasDefaultValueSql("gen_random_uuid()");
+
+        meter.Property(q => q.Value).IsRequired();
+        meter.Property(q => q.CreatedAt).HasDefaultValueSql("timezone('utc', now())");
+
+        meter.HasOne(q => q.User).WithMany(q => q.UserMeters).HasForeignKey(q => q.UserId);
+        meter.HasOne(q => q.HousingCommunity).WithMany(q => q.UserMeters).HasForeignKey(q => q.HousingCommunityId);
+        meter.HasOne(q => q.UserMeterType).WithMany(q => q.UserMeters).HasForeignKey(q => q.UserMeterTypeId);
     }
 }

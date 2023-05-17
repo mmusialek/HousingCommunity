@@ -18,4 +18,5 @@ public class User
     public Address Address { get; set; } = null!;
 
     public List<HousingCommunity> HousingCommunities { get; set; } = null!;
+    public List<UserMeter> UserMeters { get; set; } = null!;
 }

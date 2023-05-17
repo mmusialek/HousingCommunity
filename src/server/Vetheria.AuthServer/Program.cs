@@ -125,6 +125,7 @@ builder.Services.AddOpenIddict()
                        .EnableStatusCodePagesIntegration();
 
     })
+
     .AddValidation(options =>
      {
          options.UseLocalServer();

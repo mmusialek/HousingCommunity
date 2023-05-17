@@ -41,6 +41,8 @@ public class PgSqlContext : DbContext
     public DbSet<Address> Addresses { get; set; } = null!;
     public DbSet<HousingCommunity> HousingCommunities { get; set; } = null!;
     public DbSet<User> Users { get; set; } = null!;
+    public DbSet<UserMeter> UserMeters { get; set; } = null!;
+    public DbSet<UserMeterType> UserMeterTypes { get; set; } = null!;
 }
 
 public class AuthDbContextFactoryDesignTime : IDesignTimeDbContextFactory<PgSqlContext>

@@ -14,5 +14,5 @@ public class PageDto
 
     [Required]
     [Range(1, int.MaxValue)]
-    public int PAge { get; set; }
+    public int Page { get; set; }
 }

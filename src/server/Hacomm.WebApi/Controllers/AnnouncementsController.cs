@@ -1,9 +1,12 @@
 ﻿using Hacomm.Contracts.Announcements;
 using Hacomm.Services;
+using Hocomm;
+using Hocomm.WebApi.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OpenIddict.Server.AspNetCore;
+using System.Security.Claims;
 
 namespace Hacomm.WebApi.Controllers;
 
@@ -13,9 +16,12 @@ namespace Hacomm.WebApi.Controllers;
 public class AnnouncementsController : ControllerBase
 {
     private readonly AnnouncementService _service;
-    public AnnouncementsController(AnnouncementService service)
+
+    public AnnouncementsController(AnnouncementService service, HttpContext httpContext)
     {
         _service = service;
+
+        _service.SetMetaData(httpContext.GetMetadata());
     }
 
     [HttpGet]

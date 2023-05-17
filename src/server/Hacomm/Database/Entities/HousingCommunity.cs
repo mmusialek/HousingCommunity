@@ -17,4 +17,6 @@ public class HousingCommunity
     public List<Announcement> Announcements { get; set; } = null!;
 
     public List<User> Users { get; set; } = null!;
+    public List<UserMeter> UserMeters { get; set; } = null!;
+    public List<UserMeterType> UserMeterTypes { get; set; } = null!;
 }
