@@ -1,0 +1,167 @@
+zarzadzianie wspolnota
+----------------------
+zarzadcy
+	Dashboard - > zgłoszenia awarii
+    Kalendarz
+-    Ważne sprawy
+-    Wirtualny dysk
+    Komunikaty
+-    Ankiety
+-    Finanse
+    Awarie i zgłoszenia
+-    Konfigurator
+    Media
+    Uprawnienia
+    Ewidencja
+-    Uchwały
+
+
+mieszkancy
+
+    Kalendarz
+    Komunikaty
+-    Ankiety
+    Awarie i zgłoszenia
+-    Opłaty
+    Formularz kontaktowy
+    Stan liczników
+-    Uchwały
+
+
+INNE
+
+osiagniecia/gamifikacja
+gry wspolnotowe
+
+
+--------------------
+DB structure
+
+----------------
+
+
+Rejestracja wspolnoty
+------------
+- jedna wspolnota jeden adres
+
+
+HousingCommunity
+id, name, addressId, cratedAt
+
+??
+HousingCommunityMembers
+id, HousingCommunityId, userId
+
+
+
+Ogłoszenia/Komunikaty
+------------
+- kazdy moze wyslac ogloszenie, okres waznosci ogloszenia: max miesiac, do okreslonej daty
+
+
+Announcement
+id, title, message, fromUserId, housingCommunityId, createdAt, validTo
+
+
+
+
+Ewidencja
+------------
+evidencja mieszkan, piwnic, pomieszczen gospodarczych, miejsc parkingowych, garazy, itp.
+
+
+EvidenceItem
+id, nr, floorNr, shortDescription, area, evidenceTypeId, createdAt
+
+EvidenceTypeItem
+id, name, shortDescription, housingCommunityId, createdAt
+
+EvidenceItemMembers
+id, EvidenceItemId, ownerUserId?, housingCommunityId, parentEvidenceItemId?, createdAt
+
+
+
+Liczniki ->
+------------
+
+UserMeters
+id, EvidenceItemId?, housingCommunityId, userMeterTypeId, value, createdAt
+
+
+UserMeterTypes
+id, name, unitType, description
+
+
+
+Awarie ->
+------------
+FailureReports
+id, title, message, fromUserId, HousingCommunityId, createdAt, finishedAt?, 
+status (new, in progress, solved, rejected)
+
+FailureReportAttachements
+id, FailureReportId, name, path
+
+FailureReportsComments
+id, FailureReportId, message, fromUserId
+
+
+Ustawy ->
+------------
+
+
+Ustawy ->
+------------
+
+Resolutions
+id ???
+
+
+Kalendarz
+------------
+
+Events
+id createdAt eventDateFrom, evendDateTo, title, description, householdCommunityId, evidenceItemId?
+recurrent, validFrom, mon, tue, wed, thu, fri, sat, sun, every week, every month, every year
+creatorUserId
+isFinished
+
+EventsMembers
+id, eventId, userId?
+
+
+
+
+Kontakt
+------------
+
+InternalMessage
+id, message, fromUserId, toUserId, housingCommunityId
+
+InternalMessageConnection
+id, parentInternalMessageId, childInternalMessageId
+
+
+
+Opłaty
+------------
+- Rozliczanie opłat wynikające z prowadzenia wspólnoty
+- Rozliczanie opłat za media kazdego z mieszkan
+
+
+sposob rozliczania
+- równo na każde mieszkanie
+- w zależności od powierzchni mieszkania
+- w zależności od zużycia
+
+
+
+
+
+
+
+
+
+
+
+

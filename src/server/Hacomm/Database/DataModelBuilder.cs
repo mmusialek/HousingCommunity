@@ -89,6 +89,7 @@ static class DataModelBuilder
         meterType.Property(q => q.Id).HasDefaultValueSql("gen_random_uuid()");
 
         meterType.Property(q => q.Name).HasMaxLength(100).IsRequired();
+        meterType.Property(q => q.UnitType).HasMaxLength(10).IsRequired();
         meterType.Property(q => q.Description).HasMaxLength(500).IsRequired(false);
         meterType.Property(q => q.CreatedAt).HasDefaultValueSql("timezone('utc', now())");
 
