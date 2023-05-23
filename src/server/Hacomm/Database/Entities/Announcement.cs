@@ -14,8 +14,6 @@ public class Announcement
     public DateTime? ModifiedAt { get; set; }
     public DateTime? ValidTo { get; set; }
 
-
-
     // ref
     public Guid AuthorId { get; set; }
     public User Author { get; set; } = null!;

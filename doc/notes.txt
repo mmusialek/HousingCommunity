@@ -7,7 +7,7 @@ zarzadcy
 -    Wirtualny dysk
     Komunikaty
 -    Ankiety
--    Finanse
+    Finanse
     Awarie i zgłoszenia
 -    Konfigurator
     Media
@@ -22,7 +22,7 @@ mieszkancy
     Komunikaty
 -    Ankiety
     Awarie i zgłoszenia
--    Opłaty
+    Opłaty
     Formularz kontaktowy
     Stan liczników
 -    Uchwały
@@ -71,7 +71,7 @@ evidencja mieszkan, piwnic, pomieszczen gospodarczych, miejsc parkingowych, gara
 
 
 EvidenceItem
-id, nr, floorNr, shortDescription, area, evidenceTypeId, createdAt
+id, nr, floorNr, shortDescription, area, personCount, evidenceTypeId, createdAt
 
 EvidenceTypeItem
 id, name, shortDescription, housingCommunityId, createdAt
@@ -106,9 +106,6 @@ FailureReportsComments
 id, FailureReportId, message, fromUserId
 
 
-Ustawy ->
-------------
-
 
 Ustawy ->
 ------------
@@ -121,7 +118,7 @@ Kalendarz
 ------------
 
 Events
-id createdAt eventDateFrom, evendDateTo, title, description, householdCommunityId, evidenceItemId?
+id createdAt eventDateFrom, evendDateTo, title, description, housingCommunityId, evidenceItemId?
 recurrent, validFrom, mon, tue, wed, thu, fri, sat, sun, every week, every month, every year
 creatorUserId
 isFinished
@@ -145,21 +142,56 @@ id, parentInternalMessageId, childInternalMessageId
 
 Opłaty
 ------------
+zadania modułu
 - Rozliczanie opłat wynikające z prowadzenia wspólnoty
 - Rozliczanie opłat za media kazdego z mieszkan
+- Nie mozna zmieniac kosztow gdy za dany okres wystawiono fakture
 
 
-sposob rozliczania
-- równo na każde mieszkanie
-- w zależności od powierzchni mieszkania
-- w zależności od zużycia
+Flow ->
+. wprowadzamy koszty:
+	- CostInvoices
+	- CostOther
+. wystawiamy rachunek per mieszkanie dla wspolnoty
+	- pozycja na rachunku:
+		- pozycja z CostInvoices
+		- pozycha z CostOther
+	- pozycja jest wyliczana wg 3 dostepnych sposobow
+		- równo na każde mieszkanie
+		- w zależności od powierzchni mieszkania
+		- w zależności od zużycia
 
 
 
 
+Company
+id, name, nip, addressId
+
+
+CostInvoices
+id, name, invoinceNumber, issuedAt, dueTo, issuedByCompanyId, grossValue, netValue, vatValue, householdCommunityId, createdAt, modifiedAt
+
+
+CostOther
+id, name, grossValue, housingCommunityId, createdAt, modifiedAt
+	
+
+EvidenceFees
+id, feeNr, evidenceItemId, paidTo, createdAt, modifiedAt, status (draft, issued)
+
+
+EvidenceFeeItems
+id, EvidenceFeeId, name, feeValue
+
+
+EvidenceFeeUserPayments
+id, EvidenceFeesId, paidValue, paidAt
 
 
 
+x - not for now
+CostInvoiceItems
+id, name, netValue, grossValue, vatValue, CostInvoiceId, invoicePos, 
 
 
 
