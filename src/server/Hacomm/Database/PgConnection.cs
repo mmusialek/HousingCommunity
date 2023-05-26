@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hacomm.Database;
+namespace Hocomm.Database;
 public class PgConnection
 {
     private static string _connString = "Host=localhost;Database=eef;Username=postgres;Password=postgres000;";

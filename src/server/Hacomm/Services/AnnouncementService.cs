@@ -1,6 +1,6 @@
-﻿using Hacomm.Contracts.Announcements;
-using Hacomm.Database;
-using Hacomm.Database.Entities;
+﻿using Hocomm.Contracts.Announcements;
+using Hocomm.Database;
+using Hocomm.Database.Entities;
 using Hocomm;
 using Hocomm.Services;
 using System;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hacomm.Services;
+namespace Hocomm.Services;
 public class AnnouncementService : ServiceBase
 {
     private readonly PgSqlContext _context;

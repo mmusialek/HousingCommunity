@@ -1,8 +1,8 @@
-﻿using Hacomm.Contracts.Announcements;
-using Hacomm.Contracts.Common;
-using Hacomm.Contracts.HousingCommunities;
-using Hacomm.Database;
-using Hacomm.Database.Entities;
+﻿using Hocomm.Contracts.Announcements;
+using Hocomm.Contracts.Common;
+using Hocomm.Contracts.HousingCommunities;
+using Hocomm.Database;
+using Hocomm.Database.Entities;
 using Hocomm.Services;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hacomm.Services;
+namespace Hocomm.Services;
 public class HousingCommunityService : ServiceBase
 {
     private readonly PgSqlContext _context;

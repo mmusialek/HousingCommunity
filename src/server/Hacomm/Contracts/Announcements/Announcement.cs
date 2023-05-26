@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hacomm.Contracts.Announcements;
+namespace Hocomm.Contracts.Announcements;
 public class AddAnnouncementRequest
 {
     [Required]

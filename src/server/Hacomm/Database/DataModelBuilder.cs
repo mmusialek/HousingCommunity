@@ -1,4 +1,4 @@
-﻿using Hacomm.Database.Entities;
+﻿using Hocomm.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hacomm.Database;
+namespace Hocomm.Database;
 static class DataModelBuilder
 {
     internal static void BuildAll(this ModelBuilder builder)

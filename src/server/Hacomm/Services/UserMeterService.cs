@@ -1,7 +1,7 @@
-﻿using Hacomm.Contracts;
-using Hacomm.Contracts.UserMeters;
-using Hacomm.Database;
-using Hacomm.Database.Entities;
+﻿using Hocomm.Contracts;
+using Hocomm.Contracts.UserMeters;
+using Hocomm.Database;
+using Hocomm.Database.Entities;
 using Hocomm.Services;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Hacomm.Services;
+namespace Hocomm.Services;
 public class UserMeterService : ServiceBase
 {
     private readonly PgSqlContext _context;

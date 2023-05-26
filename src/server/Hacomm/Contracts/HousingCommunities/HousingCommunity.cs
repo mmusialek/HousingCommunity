@@ -1,4 +1,4 @@
-﻿using Hacomm.Contracts.Common;
+﻿using Hocomm.Contracts.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hacomm.Contracts.HousingCommunities;
+namespace Hocomm.Contracts.HousingCommunities;
 
 public class AddHousingCommunityRequest
 {

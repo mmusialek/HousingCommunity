@@ -1,6 +1,6 @@
-﻿using Hacomm.Contracts.HousingCommunities;
-using Hacomm.Contracts.UserMeters;
-using Hacomm.Services;
+﻿using Hocomm.Contracts.HousingCommunities;
+using Hocomm.Contracts.UserMeters;
+using Hocomm.Services;
 using Hocomm.WebApi.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

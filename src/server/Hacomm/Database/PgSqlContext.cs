@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore;
-using Hacomm.Database.Entities;
+using Hocomm.Database.Entities;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace Hacomm.Database;
+namespace Hocomm.Database;
 public class PgSqlContext : DbContext
 {
 

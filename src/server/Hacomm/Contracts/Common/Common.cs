@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hacomm.Contracts.Common;
+namespace Hocomm.Contracts.Common;
 public class AddressDto
 {
     public Guid? Id { get; set; }

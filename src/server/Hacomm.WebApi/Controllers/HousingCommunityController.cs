@@ -1,7 +1,7 @@
-﻿using Hacomm.Contracts.Announcements;
-using Hacomm.Contracts.HousingCommunities;
-using Hacomm.Database.Entities;
-using Hacomm.Services;
+﻿using Hocomm.Contracts.Announcements;
+using Hocomm.Contracts.HousingCommunities;
+using Hocomm.Database.Entities;
+using Hocomm.Services;
 using Hocomm.WebApi.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

@@ -1,4 +1,4 @@
-﻿using Hacomm.Database.Entities;
+﻿using Hocomm.Database.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

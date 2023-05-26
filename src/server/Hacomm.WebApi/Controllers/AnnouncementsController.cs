@@ -1,5 +1,5 @@
-﻿using Hacomm.Contracts.Announcements;
-using Hacomm.Services;
+﻿using Hocomm.Contracts.Announcements;
+using Hocomm.Services;
 using Hocomm;
 using Hocomm.WebApi.Extensions;
 using Microsoft.AspNetCore.Authorization;
@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using OpenIddict.Server.AspNetCore;
 using System.Security.Claims;
 
-namespace Hacomm.WebApi.Controllers;
+namespace Hocomm.WebApi.Controllers;
 
 [Authorize]
 [Route("api/[controller]")]

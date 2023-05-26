@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hacomm.Contracts;
+namespace Hocomm.Contracts;
 public class PageDto
 {
     [Required]

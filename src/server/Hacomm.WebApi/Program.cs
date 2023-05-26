@@ -1,5 +1,5 @@
-using Hacomm.Database;
-using Hacomm.WebApi.Bootstrap;
+using Hocomm.Database;
+using Hocomm.WebApi.Bootstrap;
 using Microsoft.EntityFrameworkCore;
 
 

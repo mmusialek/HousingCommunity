@@ -117,13 +117,12 @@ id ???
 Kalendarz
 ------------
 
-Events
+CalendarEvents
 id createdAt eventDateFrom, evendDateTo, title, description, housingCommunityId, evidenceItemId?
 recurrent, validFrom, mon, tue, wed, thu, fri, sat, sun, every week, every month, every year
 creatorUserId
-isFinished
 
-EventsMembers
+CalendarEventsMembers
 id, eventId, userId?
 
 

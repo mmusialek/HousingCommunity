@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hacomm.Contracts.UserMeters;
+namespace Hocomm.Contracts.UserMeters;
 public class AddUserMeterRequest
 {
     [Required]

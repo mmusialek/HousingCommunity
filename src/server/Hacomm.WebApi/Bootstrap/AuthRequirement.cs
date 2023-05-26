@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 
-namespace Hacomm.WebApi.Bootstrap;
+namespace Hocomm.WebApi.Bootstrap;
 
 public class AuthRequirement : IAuthorizationRequirement
 {

@@ -1,7 +1,7 @@
-﻿using Hacomm.Database;
+﻿using Hocomm.Database;
 using Microsoft.EntityFrameworkCore;
 
-namespace Hacomm.WebApi.Bootstrap;
+namespace Hocomm.WebApi.Bootstrap;
 
 public static class WebApiSetup
 {
