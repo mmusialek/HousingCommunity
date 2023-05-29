@@ -10,43 +10,45 @@ using System.Threading.Tasks;
 namespace Hocomm.Database;
 static class DataModelBuilder
 {
+    public delegate void BuildModelExt(ModelBuilder builder);
+
     internal static void BuildAll(this ModelBuilder builder)
     {
         builder.UseCollation("en_US.utf8");
-        builder.AddressBuilder();
-        builder.AnnouncementBuilder();
-        builder.HousingCommunityBuilder();
-        builder.UserBuilder();
-        builder.UserMeters();
+
+        var builderList = new List<BuildModelExt>
+        {
+            AddressModelBuilder.Build,
+            AnnouncementModelBuilder.Build,
+            CalendarEventModelBuilder.Build,
+            EvidenceItemModelBuilder.Build
+        };
+
+        foreach (var builderItem in builderList)
+        {
+            builderItem(builder);
+        }
+        //builder.AddressBuilder();
+        //builder.AnnouncementBuilder();
+        //builder.HousingCommunityBuilder();
+        //builder.UserBuilder();
+        //builder.UserMeters();
     }
 
-    private static void AddressBuilder(this ModelBuilder builder)
-    {
-        var entity = builder.Entity<Address>();
+    //private static void AddressBuilder(this ModelBuilder builder)
+    //{
+    //    AddressModelBuilder.Build(builder);
+    //}
 
-        entity.HasKey(q => q.Id);
-        entity.Property(q => q.Id).HasDefaultValueSql("gen_random_uuid()");
+    //private static void AnnouncementBuilder(this ModelBuilder builder)
+    //{
+    //    AnnouncementModelBuilder.Build(builder);
+    //}
 
-        entity.Property(q => q.City).HasMaxLength(255).IsRequired();
-        entity.Property(q => q.ZipCode).HasMaxLength(10).IsRequired();
-        entity.Property(q => q.Street).HasMaxLength(255).IsRequired();
-        entity.Property(q => q.HomeNr).HasMaxLength(10).IsRequired();
-        entity.Property(q => q.FlatNr).IsRequired(false);
-    }
-
-    private static void AnnouncementBuilder(this ModelBuilder builder)
-    {
-        var entity = builder.Entity<Announcement>();
-
-        entity.HasKey(q => q.Id);
-        entity.Property(q => q.Id).HasDefaultValueSql("gen_random_uuid()");
-
-        entity.Property(q => q.Message).IsRequired();
-        entity.Property(q => q.Title).HasMaxLength(100).IsRequired();
-        entity.Property(q => q.CreatedAt).HasDefaultValueSql("timezone('utc', now())");
-
-        entity.HasOne(q => q.HousingCommunity).WithMany(q => q.Announcements).HasForeignKey(q => q.HousingCommunityId);
-    }
+    //private static void CalendarEventBuilder(this ModelBuilder builder)
+    //{
+    //    CalendarEventModelBuilder.Build(builder);
+    //}
 
     private static void UserBuilder(this ModelBuilder builder)
     {

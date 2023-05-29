@@ -1,4 +1,5 @@
 ﻿using Hocomm.Database.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,4 +66,52 @@ public class FailureReportsComment
 
     public Guid FailureReportId { get; set; }
     public FailureReport FailureReport { get; set; } = null!;
+}
+
+
+internal static class FailureReportModelBuilder
+{
+    public static void Build(this ModelBuilder builder)
+    {
+        var failureReport = builder.Entity<FailureReport>();
+        failureReport.HasKey(q => q.Id);
+        failureReport.Property(q => q.Id).HasDefaultValueSql("gen_random_uuid()");
+
+        //FailureReport
+
+        failureReport.Property(q => q.Title).HasMaxLength(100).IsRequired();
+        failureReport.Property(q => q.Message).IsRequired();
+        failureReport.Property(q => q.Status).IsRequired();
+        failureReport.Property(q => q.CreatedAt).HasDefaultValueSql("timezone('utc', now())");
+        failureReport.Property(q => q.FinishedAt).IsRequired(false);
+
+        // ref
+        failureReport.HasOne(q => q.FromUser).WithMany(q => q.FailureReports).HasForeignKey(q => q.FromUserId);
+        failureReport.HasOne(q => q.HousingCommunity).WithMany(q => q.FailureReports).HasForeignKey(q => q.HousingCommunityId);
+
+
+        var failureReportAttachement = builder.Entity<FailureReportAttachement>();
+        failureReportAttachement.HasKey(q => q.Id);
+        failureReportAttachement.Property(q => q.Id).HasDefaultValueSql("gen_random_uuid()");
+
+        failureReportAttachement.Property(q => q.Name).HasMaxLength(100).IsRequired();
+        failureReportAttachement.Property(q => q.Path).HasMaxLength(500).IsRequired();
+        failureReportAttachement.Property(q => q.CreatedAt).HasDefaultValueSql("timezone('utc', now())");
+
+        // ref
+        failureReportAttachement.HasOne(q => q.CreatedBy).WithMany(q => q.FailureReportAttachements).HasForeignKey(q => q.CreatedById);
+        failureReportAttachement.HasOne(q => q.FailureReport).WithMany(q => q.FailureReportAttachements).HasForeignKey(q => q.FailureReportId);
+
+
+        var failureReportsComment = builder.Entity<FailureReportsComment>();
+        failureReportsComment.HasKey(q => q.Id);
+        failureReportsComment.Property(q => q.Id).HasDefaultValueSql("gen_random_uuid()");
+
+        failureReportsComment.Property(q => q.Message).HasMaxLength(500).IsRequired();
+        failureReportsComment.Property(q => q.CreatedAt).HasDefaultValueSql("timezone('utc', now())");
+
+        // ref
+        failureReportsComment.HasOne(q => q.FromUser).WithMany(q => q.FailureReportsComments).HasForeignKey(q => q.FromUserId);
+        failureReportsComment.HasOne(q => q.FailureReport).WithMany(q => q.FailureReportsComments).HasForeignKey(q => q.FailureReportId);
+    }
 }

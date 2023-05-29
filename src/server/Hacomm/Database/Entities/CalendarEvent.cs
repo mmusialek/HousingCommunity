@@ -1,4 +1,5 @@
 ﻿using Hocomm.Database.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,4 +61,49 @@ public class CalendarEventMember
 
     public Guid CalendarEventId { get; set; }
     public CalendarEvent CalendarEvent { get; set; } = null!;
+}
+
+
+internal static class CalendarEventModelBuilder
+{
+    public static void Build(this ModelBuilder builder)
+    {
+        var calendarEvent = builder.Entity<CalendarEvent>();
+        calendarEvent.HasKey(q => q.Id);
+        calendarEvent.Property(q => q.Id).HasDefaultValueSql("gen_random_uuid()");
+
+        calendarEvent.Property(q => q.CreatedAt).IsRequired();
+        calendarEvent.Property(q => q.EventDateFrom).IsRequired();
+        calendarEvent.Property(q => q.EvendDateTo).IsRequired();
+
+        calendarEvent.Property(q => q.Title).HasMaxLength(100).IsRequired();
+        calendarEvent.Property(q => q.Description).IsRequired();
+
+        calendarEvent.Property(q => q.IsRecurrent).IsRequired().HasDefaultValue(false);
+        calendarEvent.Property(q => q.ValidFrom).IsRequired(false);
+
+        calendarEvent.Property(q => q.Monday).IsRequired(false);
+        calendarEvent.Property(q => q.Tuesday).IsRequired(false);
+        calendarEvent.Property(q => q.Wednesday).IsRequired(false);
+        calendarEvent.Property(q => q.Thursday).IsRequired(false);
+        calendarEvent.Property(q => q.Friday).IsRequired(false);
+        calendarEvent.Property(q => q.Saturday).IsRequired(false);
+        calendarEvent.Property(q => q.Sunday).IsRequired(false);
+        calendarEvent.Property(q => q.EveryWeek).IsRequired(false);
+        calendarEvent.Property(q => q.EveryMonth).IsRequired(false);
+        calendarEvent.Property(q => q.EveryYear).IsRequired(false);
+
+
+        calendarEvent.HasOne(q => q.HousingCommunity).WithMany(q => q.CalendarEvents).HasForeignKey(q => q.HousingCommunityId);
+        calendarEvent.HasOne(q => q.EvidenceItem).WithMany(q => q.CalendarEvents).HasForeignKey(q => q.EvidenceItemId);
+        calendarEvent.HasOne(q => q.Author).WithMany(q => q.CalendarEvents).HasForeignKey(q => q.AuthorId);
+
+
+        var calendarEventMember = builder.Entity<CalendarEventMember>();
+        calendarEventMember.HasKey(q => q.Id);
+        calendarEventMember.Property(q => q.Id).HasDefaultValueSql("gen_random_uuid()");
+
+        calendarEventMember.HasOne(q => q.Member).WithMany(q => q.CalendarEventMembers).HasForeignKey(q => q.MemberId);
+        calendarEventMember.HasOne(q => q.CalendarEvent).WithMany(q => q.CalendarEventMembers).HasForeignKey(q => q.CalendarEventId);
+    }
 }

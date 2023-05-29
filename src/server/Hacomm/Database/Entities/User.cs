@@ -17,9 +17,12 @@ public class User
     public Guid AddressId { get; set; }
     public Address Address { get; set; } = null!;
 
-    public List<HousingCommunity> HousingCommunities { get; set; } = null!;
-    public List<UserMeter> UserMeters { get; set; } = null!;
+    public IList<Announcement> Announcements { get; set; } = null!;
+    public IList<HousingCommunity> HousingCommunities { get; set; } = null!;
+    public IList<UserMeter> UserMeters { get; set; } = null!;
     public IList<EvidenceItem> EvidenceItems { get; set; } = null!;
+    public IList<EvidenceItemMember> EvidenceItemMemberOwnedByUser { get; set; } = null!;
+    public IList<EvidenceItemMember> EvidenceItemMemberCreatedBy { get; set; } = null!;
 
     public IList<ResolutionVote> ResolutionVotes { get; set; } = null!;
     public IList<Resolution> Resolutions { get; set; } = null!;
