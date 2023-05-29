@@ -15,12 +15,19 @@ public class HousingCommunity
     public Guid AddressId { get; set; }
     public Address Address { get; set; } = null!;
 
-    public List<Announcement> Announcements { get; set; } = null!;
+    public IList<Announcement> Announcements { get; set; } = null!;
+    public IList<EvidenceItem> EvidenceItems { get; set; } = null!;
+    public IList<EvidenceTypeItem> EvidenceTypeItems { get; set; } = null!;
+    public IList<EvidenceItemMember> EvidenceItemMembers { get; set; } = null!;
 
-    public List<User> Users { get; set; } = null!;
-    public List<UserMeter> UserMeters { get; set; } = null!;
-    public List<UserMeterType> UserMeterTypes { get; set; } = null!;
-    public List<Resolution> Resolutions { get; set; } = null!;
-    public List<InternalMessage> ToUserInternalMessages { get; set; } = null!;
-    public List<InternalMessage> FromUserInternalMessages { get; set; } = null!;
+    public IList<User> Users { get; set; } = null!;
+    public IList<UserMeter> UserMeters { get; set; } = null!;
+    public IList<UserMeterType> UserMeterTypes { get; set; } = null!;
+    public IList<Resolution> Resolutions { get; set; } = null!;
+    public IList<InternalMessage> ToUserInternalMessages { get; set; } = null!;
+    public IList<InternalMessage> FromUserInternalMessages { get; set; } = null!;
+    public IList<CalendarEvent> CalendarEvents { get; set; } = null!;
+    public IList<FailureReport> FailureReports { get; set; } = null!;
+    public IList<CostInvoice> CostInvoices { get; set; } = null!;
+    public IList<CostOther> CostOthers { get; set; } = null!;
 }

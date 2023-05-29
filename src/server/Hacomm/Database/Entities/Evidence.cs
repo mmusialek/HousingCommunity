@@ -25,6 +25,16 @@ public class EvidenceItem
 
     public Guid HousingCommunityId { get; set; }
     public HousingCommunity HousingCommunity { get; set; } = null!;
+
+
+    // ref lists
+
+    public IList<EvidenceItemMember> EvidenceItemMembers { get; set; } = null!;
+    public IList<EvidenceItemMember> ParentEvidenceItemMembers { get; set; } = null!;
+    public IList<CalendarEvent> CalendarEvents { get; set; } = null!;
+    public IList<UserMeter> UserMeters { get; set; } = null!;
+    public IList<UserMeterType> UserMeterTypes { get; set; } = null!;
+    public IList<EvidenceFee> EvidenceFees { get; set; } = null!;
 }
 
 
@@ -47,7 +57,7 @@ public class EvidenceTypeItem
     public HousingCommunity HousingCommunity { get; set; } = null!;
 }
 
-public class EvidenceItemMembers
+public class EvidenceItemMember
 {
     //EvidenceItemMembers
     //id, EvidenceItemId, ownerUserId?, housingCommunityId, parentEvidenceItemId?, createdAt x

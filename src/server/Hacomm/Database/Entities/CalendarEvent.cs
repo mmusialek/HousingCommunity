@@ -45,9 +45,12 @@ public class CalendarEvent
 
     public Guid AuthorId { get; set; }
     public User Author { get; set; } = null!;
+
+    // ref list
+    public IList<CalendarEventMember> CalendarEventMembers { get; set; } = null!;
 }
 
-public class CalendarEventMembers
+public class CalendarEventMember
 {
     //id, eventId, userId
     public Guid Id { get; set; }

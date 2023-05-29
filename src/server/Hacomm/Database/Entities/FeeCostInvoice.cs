@@ -8,8 +8,17 @@ namespace Hocomm.Database.Entities;
 
 public enum CompanyTypes
 {
-    WspolnotaMieszkaniowa = 0,
-    Firma = 1,
+    None = 0,
+    WspolnotaMieszkaniowa = 1,
+    Firma = 2,
+}
+
+
+public enum EvidenceFeeType
+{
+    None = 0,
+    Draft = 1,
+    Issued = 2,
 }
 
 public class Company
@@ -24,6 +33,9 @@ public class Company
     // ref
     public Guid AddressId { get; set; }
     public Address Address { get; set; } = null!;
+
+    // ref lists
+    public IList<CostInvoice> CostInvoices { get; set; } = null!;
 }
 
 public class CostInvoice
@@ -75,13 +87,6 @@ public class CostOther
 }
 
 
-
-public enum EvidenceFeeType
-{
-    Draft = 1,
-    Issued = 2,
-}
-
 public class EvidenceFee
 {
     //id, feeNr, evidenceItemId, paidTo, createdAt, modifiedAt, status(draft, issued)
@@ -98,6 +103,7 @@ public class EvidenceFee
     public Guid EvidenceItemId { get; set; }
     public EvidenceItem EvidenceItem { get; set; } = null!;
 
+    public IList<EvidenceFeeItem> EvidenceFeeItems { get; set; } = null!;
 }
 
 public class EvidenceFeeItem

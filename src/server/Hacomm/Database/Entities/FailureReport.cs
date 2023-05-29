@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Hocomm.Database.Entities;
-public class FailureReports
+public class FailureReport
 {
     // FailureReports
     // id, title, message, fromUserId, HousingCommunityId, createdAt, finishedAt?,
@@ -25,10 +25,13 @@ public class FailureReports
 
     public Guid HousingCommunityId { get; set; }
     public HousingCommunity HousingCommunity { get; set; } = null!;
+
+    public IList<FailureReportAttachement> FailureReportAttachements { get; set; } = null!;
+    public IList<FailureReportsComment> FailureReportsComments { get; set; } = null!;
 }
 
 
-public class FailureReportAttachements
+public class FailureReportAttachement
 {
     //FailureReportAttachements
     //id, FailureReportId, name, path
@@ -39,12 +42,15 @@ public class FailureReportAttachements
 
 
     // ref
+    public Guid CreatedById { get; set; }
+    public User CreatedBy { get; set; } = null!;
+
     public Guid FailureReportId { get; set; }
-    public User FailureReport { get; set; } = null!;
+    public FailureReport FailureReport { get; set; } = null!;
 }
 
 
-public class FailureReportsComments
+public class FailureReportsComment
 {
     //FailureReportsComments
     //id, FailureReportId, message, fromUserId
@@ -58,5 +64,5 @@ public class FailureReportsComments
     public User FromUser { get; set; } = null!;
 
     public Guid FailureReportId { get; set; }
-    public User FailureReport { get; set; } = null!;
+    public FailureReport FailureReport { get; set; } = null!;
 }

@@ -38,11 +38,9 @@ public class UserMeterType
     public DateTime? ModifiedAt { get; set; }
 
     // ref
-    public Guid EvidenceItemId { get; set; }
-    public EvidenceItem EvidenceItem { get; set; } = null!;
 
     public Guid HousingCommunityId { get; set; }
     public HousingCommunity HousingCommunity { get; set; } = null!;
 
-    public IList<UserMeter> UserMeters { get; set; }
+    public IList<UserMeter> UserMeters { get; set; } = null!;
 }

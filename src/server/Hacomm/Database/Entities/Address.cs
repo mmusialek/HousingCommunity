@@ -16,7 +16,7 @@ public class Address
 
     //ref
 
-    public List<User> Users { get; set; } = null!;
-    public List<HousingCommunity> HousingCommunities { get; set; } = null!;
-
+    public IList<User> Users { get; set; } = null!;
+    public IList<HousingCommunity> HousingCommunities { get; set; } = null!;
+    public IList<Company> Companies { get; set; } = null!;
 }

@@ -14,8 +14,8 @@ public class Resolution
     public DateTime? ModifiedAt { get; set; }
 
     // ref
-    public Guid AuthorId { get; set; }
-    public User Author { get; set; } = null!;
+    public Guid CreatedById { get; set; }
+    public User CreatedBy { get; set; } = null!;
 
     public Guid HousingCommunityId { get; set; }
     public HousingCommunity HousingCommunity { get; set; } = null!;
