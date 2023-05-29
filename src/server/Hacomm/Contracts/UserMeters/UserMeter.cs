@@ -13,7 +13,7 @@ public class AddUserMeterRequest
     public long MeterValue { get; set; }
 
     [Required]
-    public Guid HousingCommunityId { get; set; }
+    public Guid EvidenceItemId { get; set; }
 
     [Required]
     public Guid UserMeterTypeId { get; set; }
@@ -33,7 +33,7 @@ public class GetUserMeterParams
 public class UserMeterDto
 {
     public Guid Id { get; set; }
-    public long MeterValue { get; set; }    
+    public double MeterValue { get; set; }    
     public DateTime CreatedAt { get; set; }
     public Guid UserMeterTypeId { get; set; }
 }

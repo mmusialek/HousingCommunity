@@ -5,11 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Hocomm.Database.Entities;
+
+public enum CompanyTypes
+{
+    WspolnotaMieszkaniowa = 0,
+    Firma = 1,
+}
+
 public class Company
 {
     public Guid Id { get; set; }
     public string Name { get; set; } = null!;
     public int Nip { get; set; }
+    public CompanyTypes CompanyType { get; set; }
+
 
 
     // ref

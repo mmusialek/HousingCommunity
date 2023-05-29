@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hocomm.Database.Entities;
 
-public class UserMeters
+public class UserMeter
 {
     //UserMeters
     //id, EvidenceItemId?, housingCommunityId, userMeterTypeId, value, createdAt
@@ -16,14 +16,17 @@ public class UserMeters
     public DateTime CreatedAt { get; set; }
 
     // ref
+    public Guid CreatedById { get; set; }
+    public User CreatedBy { get; set; } = null!;
+
     public Guid EvidenceItemId { get; set; }
     public EvidenceItem EvidenceItem { get; set; } = null!;
 
-    public Guid HousingCommunityId { get; set; }
-    public HousingCommunity HousingCommunity { get; set; } = null!;
+    public Guid UserMeterTypeId { get; set; }
+    public UserMeterType UserMeterType { get; set; } = null!;
 }
 
-public class UserMeterTypes
+public class UserMeterType
 {
     //UserMeterTypes
     //id, name, unitType, description
@@ -40,4 +43,6 @@ public class UserMeterTypes
 
     public Guid HousingCommunityId { get; set; }
     public HousingCommunity HousingCommunity { get; set; } = null!;
+
+    public IList<UserMeter> UserMeters { get; set; }
 }

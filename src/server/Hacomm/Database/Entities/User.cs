@@ -19,4 +19,9 @@ public class User
 
     public List<HousingCommunity> HousingCommunities { get; set; } = null!;
     public List<UserMeter> UserMeters { get; set; } = null!;
+
+    public IList<ResolutionVote> ResolutionVotes { get; set; } = null!;
+    public IList<Resolution> Resolutions { get; set; } = null!;
+    public IList<InternalMessage> InternalMessages { get; set; } = null!;
+
 }

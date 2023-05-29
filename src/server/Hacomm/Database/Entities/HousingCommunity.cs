@@ -20,4 +20,7 @@ public class HousingCommunity
     public List<User> Users { get; set; } = null!;
     public List<UserMeter> UserMeters { get; set; } = null!;
     public List<UserMeterType> UserMeterTypes { get; set; } = null!;
+    public List<Resolution> Resolutions { get; set; } = null!;
+    public List<InternalMessage> ToUserInternalMessages { get; set; } = null!;
+    public List<InternalMessage> FromUserInternalMessages { get; set; } = null!;
 }

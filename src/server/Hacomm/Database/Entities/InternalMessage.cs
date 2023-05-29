@@ -22,6 +22,9 @@ public class InternalMessage
 
     public Guid HousingCommunityId { get; set; }
     public HousingCommunity HousingCommunity { get; set; } = null!;
+
+    public List<InternalMessageConnection> ParentInternalMessageConnections { get; set; } = null!;
+    public List<InternalMessageConnection> ChildsInternalMessageConnections { get; set; } = null!;
 }
 
 public class InternalMessageConnection

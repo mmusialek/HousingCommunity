@@ -104,8 +104,7 @@ static class DataModelBuilder
         meter.Property(q => q.Value).IsRequired();
         meter.Property(q => q.CreatedAt).HasDefaultValueSql("timezone('utc', now())");
 
-        meter.HasOne(q => q.User).WithMany(q => q.UserMeters).HasForeignKey(q => q.UserId);
-        meter.HasOne(q => q.HousingCommunity).WithMany(q => q.UserMeters).HasForeignKey(q => q.HousingCommunityId);
+        meter.HasOne(q => q.CreatedBy).WithMany(q => q.UserMeters).HasForeignKey(q => q.CreatedBy);
         meter.HasOne(q => q.UserMeterType).WithMany(q => q.UserMeters).HasForeignKey(q => q.UserMeterTypeId);
     }
 }

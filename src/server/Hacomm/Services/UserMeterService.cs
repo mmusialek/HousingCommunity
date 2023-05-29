@@ -27,7 +27,7 @@ public class UserMeterService : ServiceBase
 
         var skip = page.Page * page.Size;
         var take = page.Size;
-        var list = _context.UserMeters.Where(q => q.HousingCommunityId == query.HousingCommunityId).Skip(skip).Take(take);
+        var list = _context.UserMeters.Where(q => q.EvidenceItem.HousingCommunityId == query.HousingCommunityId).Skip(skip).Take(take);
         var res = list.Select(ToDto).ToList();
         return res;
     }
@@ -37,8 +37,7 @@ public class UserMeterService : ServiceBase
         UserMeter entity = new();
         entity.Value = request.MeterValue;
         entity.UserMeterTypeId = request.UserMeterTypeId;
-        entity.HousingCommunityId = request.HousingCommunityId;
-        entity.UserId = _metadata.UserId;
+        entity.CreatedById = _metadata.UserId;
 
         _context.Add(entity);
         await _context.SaveChangesAsync();
