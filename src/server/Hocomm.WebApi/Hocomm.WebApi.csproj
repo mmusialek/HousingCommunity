@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Hacomm\Hocomm.csproj" />
+    <ProjectReference Include="..\Hocomm\Hocomm.csproj" />
   </ItemGroup>
 
 </Project>

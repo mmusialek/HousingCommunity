@@ -6,7 +6,7 @@ namespace Hocomm.WebApi.Bootstrap;
 public static class WebApiSetup
 {
 
-    public static void AddHacommStuff(this IServiceCollection services, string connectionString)
+    public static void AddHocommStuff(this IServiceCollection services, string connectionString)
     {
 
         services.AddDbContext<PgSqlContext>(options =>
@@ -19,7 +19,7 @@ public static class WebApiSetup
         services.AddHacommServices();
     }
 
-    public static void UseHaComm(this IApplicationBuilder app)
+    public static void UseHocomm(this IApplicationBuilder app)
     {
         app.MigrateDatabase();
     }

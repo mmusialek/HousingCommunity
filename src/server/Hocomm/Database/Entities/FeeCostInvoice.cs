@@ -137,8 +137,8 @@ internal static class FeeCostsInvoicesModelBuilder
 
         entityCostInvoice.Property(q => q.Name).HasMaxLength(100).IsRequired();
         entityCostInvoice.Property(q => q.InvoinceNumber).HasMaxLength(100).IsRequired();
-        entityCostInvoice.Property(q => q.IssuedAt).IsRequired(false);
-        entityCostInvoice.Property(q => q.DueTo).IsRequired(false);
+        entityCostInvoice.Property(q => q.IssuedAt).IsRequired();
+        entityCostInvoice.Property(q => q.DueTo).IsRequired();
 
         entityCostInvoice.Property(q => q.GrossValue).IsRequired();
         entityCostInvoice.Property(q => q.NetValue).IsRequired();

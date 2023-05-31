@@ -16,8 +16,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddHacomAuth("https://localhost:7200");
-builder.Services.AddHacommStuff(connectionString);
+builder.Services.AddHocomAuth("https://localhost:7200");
+builder.Services.AddHocommStuff(connectionString);
 
 var app = builder.Build();
 
@@ -34,6 +34,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.UseHaComm();
+app.UseHocomm();
 
 app.Run();

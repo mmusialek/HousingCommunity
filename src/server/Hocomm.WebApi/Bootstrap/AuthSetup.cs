@@ -8,7 +8,7 @@ public static class AuthSetup
 {
     public const string PolicyName = "hacomGeneralPolicy";
 
-    public static void AddHacomAuth(this IServiceCollection services, string authorizationServerUri)
+    public static void AddHocomAuth(this IServiceCollection services, string authorizationServerUri)
     {
         services.AddAuthentication(options =>
         {

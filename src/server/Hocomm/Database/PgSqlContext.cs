@@ -26,12 +26,6 @@ public class PgSqlContext : DbContext
 
     }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder builder)
-    {
-        var connString = PgConnection.GetConnecitonString();
-        builder.UseNpgsql(connString);
-    }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.BuildAll();

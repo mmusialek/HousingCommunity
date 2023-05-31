@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Hocomm.Database;
 static class DataModelBuilder
 {
-    public delegate void BuildModelExt(ModelBuilder builder);
+    private delegate void BuildModelExt(ModelBuilder builder);
 
     internal static void BuildAll(this ModelBuilder builder)
     {
