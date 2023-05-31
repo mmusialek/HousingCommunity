@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,4 +35,21 @@ public class User
     public IList<EvidenceTypeItem> EvidenceTypeItems { get; set; } = null!;
     public IList<CalendarEvent> CalendarEvents { get; set; } = null!;
     public IList<CalendarEventMember> CalendarEventMembers { get; set; } = null!;
+}
+
+
+internal static class UserModelBuilder
+{
+    public static void Build(this ModelBuilder builder)
+    {
+        var entity = builder.Entity<User>();
+        entity.HasKey(q => q.Id);
+        entity.Property(q => q.Id).HasDefaultValueSql("gen_random_uuid()");
+
+        entity.Property(q => q.FirstName).HasMaxLength(100).IsRequired();
+        entity.Property(q => q.LastName).HasMaxLength(100).IsRequired();
+
+        //ref
+        entity.HasOne(q => q.Address).WithMany(q => q.Users).HasForeignKey(q => q.AddressId);
+    }
 }

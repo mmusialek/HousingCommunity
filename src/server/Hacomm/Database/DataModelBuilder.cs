@@ -21,34 +21,21 @@ static class DataModelBuilder
             AddressModelBuilder.Build,
             AnnouncementModelBuilder.Build,
             CalendarEventModelBuilder.Build,
-            EvidenceItemModelBuilder.Build
+            EvidenceItemModelBuilder.Build,
+            FailureReportModelBuilder.Build,
+            FeeCostsInvoicesModelBuilder.Build,
+            HousingCommunityModelBuilder.Build,
+            InternalMessageModelBuilder.Build,
+            ResolutionModelBuilder.Build,
+            UserModelBuilder.Build,
+            UserMeterModelBuilder.Build
         };
 
         foreach (var builderItem in builderList)
         {
             builderItem(builder);
         }
-        //builder.AddressBuilder();
-        //builder.AnnouncementBuilder();
-        //builder.HousingCommunityBuilder();
-        //builder.UserBuilder();
-        //builder.UserMeters();
     }
-
-    //private static void AddressBuilder(this ModelBuilder builder)
-    //{
-    //    AddressModelBuilder.Build(builder);
-    //}
-
-    //private static void AnnouncementBuilder(this ModelBuilder builder)
-    //{
-    //    AnnouncementModelBuilder.Build(builder);
-    //}
-
-    //private static void CalendarEventBuilder(this ModelBuilder builder)
-    //{
-    //    CalendarEventModelBuilder.Build(builder);
-    //}
 
     private static void UserBuilder(this ModelBuilder builder)
     {

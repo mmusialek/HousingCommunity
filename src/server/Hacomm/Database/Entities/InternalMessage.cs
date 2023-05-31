@@ -1,4 +1,5 @@
 ﻿using Hocomm.Database.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,4 +37,29 @@ public class InternalMessageConnection
 
     public Guid ChildInternalMessageId { get; set; }
     public InternalMessage ChildInternalMessage { get; set; } = null!;
+}
+
+internal static class InternalMessageModelBuilder
+{
+    public static void Build(this ModelBuilder builder)
+    {
+        var entity = builder.Entity<InternalMessage>();
+        entity.HasKey(q => q.Id);
+        entity.Property(q => q.Id).HasDefaultValueSql("gen_random_uuid()");
+
+        entity.Property(q => q.Message).IsRequired();
+
+        // ref
+        entity.HasOne(q => q.FromUser).WithMany(q => q.FromInternalMessages).HasForeignKey(q => q.FromUserId);
+        entity.HasOne(q => q.ToUser).WithMany(q => q.ToInternalMessages).HasForeignKey(q => q.ToUserId);
+        entity.HasOne(q => q.HousingCommunity).WithMany(q => q.InternalMessages).HasForeignKey(q => q.HousingCommunityId);
+
+        var entityInternalMessageConnection = builder.Entity<InternalMessageConnection>();
+        entityInternalMessageConnection.HasKey(q => q.Id);
+        entityInternalMessageConnection.Property(q => q.Id).HasDefaultValueSql("gen_random_uuid()");
+
+        // ref
+        entityInternalMessageConnection.HasOne(q => q.ParentInternalMessage).WithMany(q => q.ParentInternalMessageConnections).HasForeignKey(q => q.ParentInternalMessageId);
+        entityInternalMessageConnection.HasOne(q => q.ChildInternalMessage).WithMany(q => q.ChildsInternalMessageConnections).HasForeignKey(q => q.ChildInternalMessageId);
+    }
 }
