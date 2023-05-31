@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hocomm.Contracts;
 
 namespace Hocomm.Services;
 public class AnnouncementService : ServiceBase
@@ -21,14 +22,15 @@ public class AnnouncementService : ServiceBase
 
     public async Task AddAsync(AddAnnouncementRequest request)
     {
+        var user = _context.Users.First(q => q.Id == _metadata.UserId);
+
         var entity = new Announcement();
         entity.Title = request.Title;
         entity.Message = request.Message;
-        //entity.AuthorId = request.AuthorId;
         entity.AuthorId = _metadata.UserId;
         entity.ValidTo = request.ValidTo;
 
-        entity.HousingCommunityId = Guid.Empty;
+        entity.HousingCommunityId = request.HousingCommunityId;
 
         _context.Add(entity);
         await _context.SaveChangesAsync();
@@ -36,7 +38,9 @@ public class AnnouncementService : ServiceBase
 
     public IEnumerable<AnnouncementDto> Get(GetAnnouncementParams query)
     {
-        var data = _context.Announcements.Where(q => q.ValidTo < DateTime.UtcNow).ToList();
+        var (page, skip) = query.PageDto.GetPage();
+
+        var data = _context.Announcements.Where(q => q.ValidTo < DateTime.UtcNow).Skip(skip).Take(page).ToList();
         var res = data.Select(ToDto);
 
         return res;

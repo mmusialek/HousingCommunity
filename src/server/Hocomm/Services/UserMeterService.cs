@@ -23,21 +23,21 @@ public class UserMeterService : ServiceBase
 
     public IReadOnlyList<UserMeterDto> Get(GetUserMeterParams query)
     {
-        var page = query.PageDto ?? new PageDto { Page = 1, Size = 10 };
+        var (page, skip) = query.PageDto.GetPage();
 
-        var skip = page.Page * page.Size;
-        var take = page.Size;
-        var list = _context.UserMeters.Where(q => q.EvidenceItem.HousingCommunityId == query.HousingCommunityId).Skip(skip).Take(take);
+        var list = _context.UserMeters.Where(q => q.EvidenceItem.HousingCommunityId == query.HousingCommunityId).Skip(skip).Take(page);
         var res = list.Select(ToDto).ToList();
         return res;
     }
 
     public async Task<Guid> AddEntryAsync(AddUserMeterRequest request)
     {
-        UserMeter entity = new();
-        entity.Value = request.MeterValue;
-        entity.UserMeterTypeId = request.UserMeterTypeId;
-        entity.CreatedById = _metadata.UserId;
+        UserMeter entity = new()
+        {
+            Value = request.MeterValue,
+            UserMeterTypeId = request.UserMeterTypeId,
+            CreatedById = _metadata.UserId
+        };
 
         _context.Add(entity);
         await _context.SaveChangesAsync();

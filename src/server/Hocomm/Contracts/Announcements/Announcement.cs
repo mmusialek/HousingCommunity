@@ -16,8 +16,8 @@ public class AddAnnouncementRequest
     [MinLength(10)]
     public string Message { get; set; } = null!;
 
-    //[Required]
-    //public Guid AuthorId { get; set; }
+    [Required]
+    public Guid HousingCommunityId { get; set; }
 
 
     public DateTime? ValidTo { get; set; }
