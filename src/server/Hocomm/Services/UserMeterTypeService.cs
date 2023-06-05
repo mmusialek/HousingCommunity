@@ -11,11 +11,8 @@ using System.Threading.Tasks;
 namespace Hocomm.Services;
 public class UserMeterTypeService : ServiceBase
 {
-    private readonly PgSqlContext _context;
-
-    public UserMeterTypeService(PgSqlContext context)
+    public UserMeterTypeService(PgSqlContext context) : base(context)
     {
-        _context = context;
     }
 
     public async Task<Guid> AddAsync(AddUserMeterTypeRequest dto)

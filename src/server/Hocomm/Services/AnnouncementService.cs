@@ -13,11 +13,8 @@ using Hocomm.Contracts;
 namespace Hocomm.Services;
 public class AnnouncementService : ServiceBase
 {
-    private readonly PgSqlContext _context;
-
-    public AnnouncementService(PgSqlContext context)
+    public AnnouncementService(PgSqlContext context) : base(context)
     {
-        _context = context;
     }
 
     public async Task AddAsync(AddAnnouncementRequest request)
@@ -29,7 +26,6 @@ public class AnnouncementService : ServiceBase
         entity.Message = request.Message;
         entity.AuthorId = _metadata.UserId;
         entity.ValidTo = request.ValidTo;
-
         entity.HousingCommunityId = request.HousingCommunityId;
 
         _context.Add(entity);

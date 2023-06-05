@@ -196,3 +196,11 @@ id, name, netValue, grossValue, vatValue, CostInvoiceId, invoicePos,
 
 
 
+
+-----------------
+temp
+
+
+relation in User table
+
+

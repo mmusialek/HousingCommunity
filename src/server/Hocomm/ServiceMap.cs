@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Hocomm;
 public static class ServiceMap
 {
-    public static void AddHacommServices(this IServiceCollection services)
+    public static void AddHocommServices(this IServiceCollection services)
     {
         services.AddScoped(typeof(AnnouncementService));
     }

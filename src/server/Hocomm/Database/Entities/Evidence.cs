@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,7 +40,7 @@ public class EvidenceItem
 }
 
 
-public class EvidenceTypeItem
+public class EvidenceType
 {
     //EvidenceTypeItem
     //id, name, shortDescription, housingCommunityId, createdAt
@@ -101,7 +102,7 @@ internal static class EvidenceItemModelBuilder
         evidenceItem.HasOne(q => q.HousingCommunity).WithMany(q => q.EvidenceItems).HasForeignKey(q => q.HousingCommunityId);
 
 
-        var evidenceTypeItem = builder.Entity<EvidenceTypeItem>();
+        var evidenceTypeItem = builder.Entity<EvidenceType>();
         evidenceTypeItem.HasKey(q => q.Id);
         evidenceTypeItem.Property(q => q.Id).HasDefaultValueSql("gen_random_uuid()");
 

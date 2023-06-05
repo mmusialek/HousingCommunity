@@ -14,11 +14,8 @@ using System.Threading.Tasks;
 namespace Hocomm.Services;
 public class UserMeterService : ServiceBase
 {
-    private readonly PgSqlContext _context;
-
-    public UserMeterService(PgSqlContext context)
+    public UserMeterService(PgSqlContext context) : base(context)
     {
-        _context = context;
     }
 
     public IReadOnlyList<UserMeterDto> Get(GetUserMeterParams query)

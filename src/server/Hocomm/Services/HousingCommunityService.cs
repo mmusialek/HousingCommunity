@@ -14,11 +14,8 @@ using System.Threading.Tasks;
 namespace Hocomm.Services;
 public class HousingCommunityService : ServiceBase
 {
-    private readonly PgSqlContext _context;
-
-    public HousingCommunityService(PgSqlContext context)
+    public HousingCommunityService(PgSqlContext context) : base(context)
     {
-        _context = context;
     }
 
     public async Task<Guid> AddAsync(AddHousingCommunityRequest request)

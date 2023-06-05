@@ -19,7 +19,7 @@ public class HousingCommunity
 
     public IList<Announcement> Announcements { get; set; } = null!;
     public IList<EvidenceItem> EvidenceItems { get; set; } = null!;
-    public IList<EvidenceTypeItem> EvidenceTypeItems { get; set; } = null!;
+    public IList<EvidenceType> EvidenceTypeItems { get; set; } = null!;
     public IList<EvidenceItemMember> EvidenceItemMembers { get; set; } = null!;
 
     public IList<User> Users { get; set; } = null!;

@@ -30,11 +30,14 @@ public class User
     public IList<InternalMessage> FromInternalMessages { get; set; } = null!;
     public IList<InternalMessage> ToInternalMessages { get; set; } = null!;
     public IList<FailureReport> FailureReports { get; set; } = null!;
-    public IList<FailureReportsComment> FailureReportsComments { get; set; } = null!;
+    public IList<FailureReportComment> FailureReportsComments { get; set; } = null!;
     public IList<FailureReportAttachement> FailureReportAttachements { get; set; } = null!;
-    public IList<EvidenceTypeItem> EvidenceTypeItems { get; set; } = null!;
+    public IList<EvidenceType> EvidenceTypeItems { get; set; } = null!;
     public IList<CalendarEvent> CalendarEvents { get; set; } = null!;
     public IList<CalendarEventMember> CalendarEventMembers { get; set; } = null!;
+    public IList<InternalMessageConnection> FromUserInternalMessageConnections { get; set; } = null!;
+    public IList<InternalMessageConnection> ToUserInternalMessageConnections { get; set; } = null!;
+    public IList<InternalMessageConnection> RecievedByUserInternalMessageConnections { get; set; } = null!;
 }
 
 
@@ -44,7 +47,7 @@ internal static class UserModelBuilder
     {
         var entity = builder.Entity<User>();
         entity.HasKey(q => q.Id);
-        entity.Property(q => q.Id).HasDefaultValueSql("gen_random_uuid()");
+        // key should be added the same what AspNetUsers have
 
         entity.Property(q => q.FirstName).HasMaxLength(100).IsRequired();
         entity.Property(q => q.LastName).HasMaxLength(100).IsRequired();

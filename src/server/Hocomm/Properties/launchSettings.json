@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "Hacomm.Database": {
+    "Hocomm.Database": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

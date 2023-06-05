@@ -428,7 +428,7 @@ namespace Hocomm.Migrations
 
                     b.HasIndex("HousingCommunityId");
 
-                    b.ToTable("EvidenceItem");
+                    b.ToTable("EvidenceItems");
                 });
 
             modelBuilder.Entity("Hocomm.Database.Entities.EvidenceItemMember", b =>
@@ -464,10 +464,10 @@ namespace Hocomm.Migrations
 
                     b.HasIndex("ParentEvidenceItemId");
 
-                    b.ToTable("EvidenceItemMember");
+                    b.ToTable("EvidenceItemMembers");
                 });
 
-            modelBuilder.Entity("Hocomm.Database.Entities.EvidenceTypeItem", b =>
+            modelBuilder.Entity("Hocomm.Database.Entities.EvidenceType", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -504,7 +504,7 @@ namespace Hocomm.Migrations
 
                     b.HasIndex("HousingCommunityId");
 
-                    b.ToTable("EvidenceTypeItem");
+                    b.ToTable("EvidenceTypes");
                 });
 
             modelBuilder.Entity("Hocomm.Database.Entities.FailureReport", b =>
@@ -546,7 +546,7 @@ namespace Hocomm.Migrations
 
                     b.HasIndex("HousingCommunityId");
 
-                    b.ToTable("FailureReport");
+                    b.ToTable("FailureReports");
                 });
 
             modelBuilder.Entity("Hocomm.Database.Entities.FailureReportAttachement", b =>
@@ -583,10 +583,10 @@ namespace Hocomm.Migrations
 
                     b.HasIndex("FailureReportId");
 
-                    b.ToTable("FailureReportAttachement");
+                    b.ToTable("FailureReportAttachements");
                 });
 
-            modelBuilder.Entity("Hocomm.Database.Entities.FailureReportsComment", b =>
+            modelBuilder.Entity("Hocomm.Database.Entities.FailureReportComment", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -615,7 +615,7 @@ namespace Hocomm.Migrations
 
                     b.HasIndex("FromUserId");
 
-                    b.ToTable("FailureReportsComment");
+                    b.ToTable("FailureReportComments");
                 });
 
             modelBuilder.Entity("Hocomm.Database.Entities.HousingCommunity", b =>
@@ -655,6 +655,11 @@ namespace Hocomm.Migrations
                         .HasColumnType("uuid")
                         .HasDefaultValueSql("gen_random_uuid()");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("timezone('utc', now())");
+
                     b.Property<Guid>("FromUserId")
                         .HasColumnType("uuid");
 
@@ -676,7 +681,7 @@ namespace Hocomm.Migrations
 
                     b.HasIndex("ToUserId");
 
-                    b.ToTable("InternalMessage");
+                    b.ToTable("InternalMessages");
                 });
 
             modelBuilder.Entity("Hocomm.Database.Entities.InternalMessageConnection", b =>
@@ -686,19 +691,29 @@ namespace Hocomm.Migrations
                         .HasColumnType("uuid")
                         .HasDefaultValueSql("gen_random_uuid()");
 
-                    b.Property<Guid>("ChildInternalMessageId")
+                    b.Property<Guid>("FromUserId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("ParentInternalMessageId")
+                    b.Property<Guid>("InternalMessageId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("RecievedByUserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ToUserId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ChildInternalMessageId");
+                    b.HasIndex("FromUserId");
 
-                    b.HasIndex("ParentInternalMessageId");
+                    b.HasIndex("InternalMessageId");
 
-                    b.ToTable("InternalMessageConnection");
+                    b.HasIndex("RecievedByUserId");
+
+                    b.HasIndex("ToUserId");
+
+                    b.ToTable("InternalMessageConnections");
                 });
 
             modelBuilder.Entity("Hocomm.Database.Entities.Resolution", b =>
@@ -774,8 +789,7 @@ namespace Hocomm.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasDefaultValueSql("gen_random_uuid()");
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("AddressId")
                         .HasColumnType("uuid");
@@ -1079,7 +1093,7 @@ namespace Hocomm.Migrations
                     b.Navigation("ParentEvidenceItem");
                 });
 
-            modelBuilder.Entity("Hocomm.Database.Entities.EvidenceTypeItem", b =>
+            modelBuilder.Entity("Hocomm.Database.Entities.EvidenceType", b =>
                 {
                     b.HasOne("Hocomm.Database.Entities.User", "CreatedByUser")
                         .WithMany("EvidenceTypeItems")
@@ -1136,7 +1150,7 @@ namespace Hocomm.Migrations
                     b.Navigation("FailureReport");
                 });
 
-            modelBuilder.Entity("Hocomm.Database.Entities.FailureReportsComment", b =>
+            modelBuilder.Entity("Hocomm.Database.Entities.FailureReportComment", b =>
                 {
                     b.HasOne("Hocomm.Database.Entities.FailureReport", "FailureReport")
                         .WithMany("FailureReportsComments")
@@ -1195,21 +1209,37 @@ namespace Hocomm.Migrations
 
             modelBuilder.Entity("Hocomm.Database.Entities.InternalMessageConnection", b =>
                 {
-                    b.HasOne("Hocomm.Database.Entities.InternalMessage", "ChildInternalMessage")
-                        .WithMany("ChildsInternalMessageConnections")
-                        .HasForeignKey("ChildInternalMessageId")
+                    b.HasOne("Hocomm.Database.Entities.User", "FromUser")
+                        .WithMany("FromUserInternalMessageConnections")
+                        .HasForeignKey("FromUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Hocomm.Database.Entities.InternalMessage", "ParentInternalMessage")
-                        .WithMany("ParentInternalMessageConnections")
-                        .HasForeignKey("ParentInternalMessageId")
+                    b.HasOne("Hocomm.Database.Entities.InternalMessage", "InternalMessage")
+                        .WithMany("InternalMessageConnections")
+                        .HasForeignKey("InternalMessageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ChildInternalMessage");
+                    b.HasOne("Hocomm.Database.Entities.User", "RecievedByUser")
+                        .WithMany("RecievedByUserInternalMessageConnections")
+                        .HasForeignKey("RecievedByUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("ParentInternalMessage");
+                    b.HasOne("Hocomm.Database.Entities.User", "ToUser")
+                        .WithMany("ToUserInternalMessageConnections")
+                        .HasForeignKey("ToUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("FromUser");
+
+                    b.Navigation("InternalMessage");
+
+                    b.Navigation("RecievedByUser");
+
+                    b.Navigation("ToUser");
                 });
 
             modelBuilder.Entity("Hocomm.Database.Entities.Resolution", b =>
@@ -1397,9 +1427,7 @@ namespace Hocomm.Migrations
 
             modelBuilder.Entity("Hocomm.Database.Entities.InternalMessage", b =>
                 {
-                    b.Navigation("ChildsInternalMessageConnections");
-
-                    b.Navigation("ParentInternalMessageConnections");
+                    b.Navigation("InternalMessageConnections");
                 });
 
             modelBuilder.Entity("Hocomm.Database.Entities.Resolution", b =>
@@ -1431,11 +1459,17 @@ namespace Hocomm.Migrations
 
                     b.Navigation("FromInternalMessages");
 
+                    b.Navigation("FromUserInternalMessageConnections");
+
+                    b.Navigation("RecievedByUserInternalMessageConnections");
+
                     b.Navigation("ResolutionVotes");
 
                     b.Navigation("Resolutions");
 
                     b.Navigation("ToInternalMessages");
+
+                    b.Navigation("ToUserInternalMessageConnections");
 
                     b.Navigation("UserMeters");
                 });

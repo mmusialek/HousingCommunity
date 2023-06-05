@@ -73,7 +73,7 @@ namespace Hocomm.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     FirstName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     LastName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     AddressId = table.Column<Guid>(type: "uuid", nullable: false)
@@ -177,7 +177,7 @@ namespace Hocomm.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EvidenceItem",
+                name: "EvidenceItems",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
@@ -193,15 +193,15 @@ namespace Hocomm.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EvidenceItem", x => x.Id);
+                    table.PrimaryKey("PK_EvidenceItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EvidenceItem_HousingCommunities_HousingCommunityId",
+                        name: "FK_EvidenceItems_HousingCommunities_HousingCommunityId",
                         column: x => x.HousingCommunityId,
                         principalTable: "HousingCommunities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EvidenceItem_Users_CreatedByUserId",
+                        name: "FK_EvidenceItems_Users_CreatedByUserId",
                         column: x => x.CreatedByUserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -209,7 +209,7 @@ namespace Hocomm.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EvidenceTypeItem",
+                name: "EvidenceTypes",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
@@ -222,15 +222,15 @@ namespace Hocomm.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EvidenceTypeItem", x => x.Id);
+                    table.PrimaryKey("PK_EvidenceTypes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EvidenceTypeItem_HousingCommunities_HousingCommunityId",
+                        name: "FK_EvidenceTypes_HousingCommunities_HousingCommunityId",
                         column: x => x.HousingCommunityId,
                         principalTable: "HousingCommunities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EvidenceTypeItem_Users_CreatedByUserId",
+                        name: "FK_EvidenceTypes_Users_CreatedByUserId",
                         column: x => x.CreatedByUserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -238,7 +238,7 @@ namespace Hocomm.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "FailureReport",
+                name: "FailureReports",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
@@ -252,15 +252,15 @@ namespace Hocomm.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FailureReport", x => x.Id);
+                    table.PrimaryKey("PK_FailureReports", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FailureReport_HousingCommunities_HousingCommunityId",
+                        name: "FK_FailureReports_HousingCommunities_HousingCommunityId",
                         column: x => x.HousingCommunityId,
                         principalTable: "HousingCommunities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_FailureReport_Users_FromUserId",
+                        name: "FK_FailureReports_Users_FromUserId",
                         column: x => x.FromUserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -292,32 +292,33 @@ namespace Hocomm.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "InternalMessage",
+                name: "InternalMessages",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
                     Message = table.Column<string>(type: "text", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "timezone('utc', now())"),
                     FromUserId = table.Column<Guid>(type: "uuid", nullable: false),
                     ToUserId = table.Column<Guid>(type: "uuid", nullable: false),
                     HousingCommunityId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_InternalMessage", x => x.Id);
+                    table.PrimaryKey("PK_InternalMessages", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_InternalMessage_HousingCommunities_HousingCommunityId",
+                        name: "FK_InternalMessages_HousingCommunities_HousingCommunityId",
                         column: x => x.HousingCommunityId,
                         principalTable: "HousingCommunities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_InternalMessage_Users_FromUserId",
+                        name: "FK_InternalMessages_Users_FromUserId",
                         column: x => x.FromUserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_InternalMessage_Users_ToUserId",
+                        name: "FK_InternalMessages_Users_ToUserId",
                         column: x => x.ToUserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -383,9 +384,9 @@ namespace Hocomm.Migrations
                 {
                     table.PrimaryKey("PK_CalendarEvent", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CalendarEvent_EvidenceItem_EvidenceItemId",
+                        name: "FK_CalendarEvent_EvidenceItems_EvidenceItemId",
                         column: x => x.EvidenceItemId,
-                        principalTable: "EvidenceItem",
+                        principalTable: "EvidenceItems",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_CalendarEvent_HousingCommunities_HousingCommunityId",
@@ -417,15 +418,15 @@ namespace Hocomm.Migrations
                 {
                     table.PrimaryKey("PK_EvidenceFee", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EvidenceFee_EvidenceItem_EvidenceItemId",
+                        name: "FK_EvidenceFee_EvidenceItems_EvidenceItemId",
                         column: x => x.EvidenceItemId,
-                        principalTable: "EvidenceItem",
+                        principalTable: "EvidenceItems",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "EvidenceItemMember",
+                name: "EvidenceItemMembers",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -437,31 +438,31 @@ namespace Hocomm.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EvidenceItemMember", x => x.Id);
+                    table.PrimaryKey("PK_EvidenceItemMembers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EvidenceItemMember_EvidenceItem_EvidenceItemId",
+                        name: "FK_EvidenceItemMembers_EvidenceItems_EvidenceItemId",
                         column: x => x.EvidenceItemId,
-                        principalTable: "EvidenceItem",
+                        principalTable: "EvidenceItems",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EvidenceItemMember_EvidenceItem_ParentEvidenceItemId",
+                        name: "FK_EvidenceItemMembers_EvidenceItems_ParentEvidenceItemId",
                         column: x => x.ParentEvidenceItemId,
-                        principalTable: "EvidenceItem",
+                        principalTable: "EvidenceItems",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_EvidenceItemMember_HousingCommunities_HousingCommunityId",
+                        name: "FK_EvidenceItemMembers_HousingCommunities_HousingCommunityId",
                         column: x => x.HousingCommunityId,
                         principalTable: "HousingCommunities",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_EvidenceItemMember_Users_CreatedByUserId",
+                        name: "FK_EvidenceItemMembers_Users_CreatedByUserId",
                         column: x => x.CreatedByUserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EvidenceItemMember_Users_OwnedByUserId",
+                        name: "FK_EvidenceItemMembers_Users_OwnedByUserId",
                         column: x => x.OwnedByUserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -485,9 +486,9 @@ namespace Hocomm.Migrations
                 {
                     table.PrimaryKey("PK_UserMeterTypes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserMeterTypes_EvidenceItem_EvidenceItemId",
+                        name: "FK_UserMeterTypes_EvidenceItems_EvidenceItemId",
                         column: x => x.EvidenceItemId,
-                        principalTable: "EvidenceItem",
+                        principalTable: "EvidenceItems",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_UserMeterTypes_HousingCommunities_HousingCommunityId",
@@ -498,7 +499,7 @@ namespace Hocomm.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "FailureReportAttachement",
+                name: "FailureReportAttachements",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
@@ -510,15 +511,15 @@ namespace Hocomm.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FailureReportAttachement", x => x.Id);
+                    table.PrimaryKey("PK_FailureReportAttachements", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FailureReportAttachement_FailureReport_FailureReportId",
+                        name: "FK_FailureReportAttachements_FailureReports_FailureReportId",
                         column: x => x.FailureReportId,
-                        principalTable: "FailureReport",
+                        principalTable: "FailureReports",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_FailureReportAttachement_Users_CreatedById",
+                        name: "FK_FailureReportAttachements_Users_CreatedById",
                         column: x => x.CreatedById,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -526,7 +527,7 @@ namespace Hocomm.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "FailureReportsComment",
+                name: "FailureReportComments",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
@@ -537,15 +538,15 @@ namespace Hocomm.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FailureReportsComment", x => x.Id);
+                    table.PrimaryKey("PK_FailureReportComments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FailureReportsComment_FailureReport_FailureReportId",
+                        name: "FK_FailureReportComments_FailureReports_FailureReportId",
                         column: x => x.FailureReportId,
-                        principalTable: "FailureReport",
+                        principalTable: "FailureReports",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_FailureReportsComment_Users_FromUserId",
+                        name: "FK_FailureReportComments_Users_FromUserId",
                         column: x => x.FromUserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -553,26 +554,40 @@ namespace Hocomm.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "InternalMessageConnection",
+                name: "InternalMessageConnections",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
-                    ParentInternalMessageId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ChildInternalMessageId = table.Column<Guid>(type: "uuid", nullable: false)
+                    InternalMessageId = table.Column<Guid>(type: "uuid", nullable: false),
+                    FromUserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ToUserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    RecievedByUserId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_InternalMessageConnection", x => x.Id);
+                    table.PrimaryKey("PK_InternalMessageConnections", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_InternalMessageConnection_InternalMessage_ChildInternalMess~",
-                        column: x => x.ChildInternalMessageId,
-                        principalTable: "InternalMessage",
+                        name: "FK_InternalMessageConnections_InternalMessages_InternalMessage~",
+                        column: x => x.InternalMessageId,
+                        principalTable: "InternalMessages",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_InternalMessageConnection_InternalMessage_ParentInternalMes~",
-                        column: x => x.ParentInternalMessageId,
-                        principalTable: "InternalMessage",
+                        name: "FK_InternalMessageConnections_Users_FromUserId",
+                        column: x => x.FromUserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_InternalMessageConnections_Users_RecievedByUserId",
+                        column: x => x.RecievedByUserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_InternalMessageConnections_Users_ToUserId",
+                        column: x => x.ToUserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -664,9 +679,9 @@ namespace Hocomm.Migrations
                 {
                     table.PrimaryKey("PK_UserMeters", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserMeters_EvidenceItem_EvidenceItemId",
+                        name: "FK_UserMeters_EvidenceItems_EvidenceItemId",
                         column: x => x.EvidenceItemId,
-                        principalTable: "EvidenceItem",
+                        principalTable: "EvidenceItems",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -754,79 +769,79 @@ namespace Hocomm.Migrations
                 column: "EvidenceFeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EvidenceItem_CreatedByUserId",
-                table: "EvidenceItem",
+                name: "IX_EvidenceItemMembers_CreatedByUserId",
+                table: "EvidenceItemMembers",
                 column: "CreatedByUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EvidenceItem_HousingCommunityId",
-                table: "EvidenceItem",
-                column: "HousingCommunityId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_EvidenceItemMember_CreatedByUserId",
-                table: "EvidenceItemMember",
-                column: "CreatedByUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_EvidenceItemMember_EvidenceItemId",
-                table: "EvidenceItemMember",
+                name: "IX_EvidenceItemMembers_EvidenceItemId",
+                table: "EvidenceItemMembers",
                 column: "EvidenceItemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EvidenceItemMember_HousingCommunityId",
-                table: "EvidenceItemMember",
+                name: "IX_EvidenceItemMembers_HousingCommunityId",
+                table: "EvidenceItemMembers",
                 column: "HousingCommunityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EvidenceItemMember_OwnedByUserId",
-                table: "EvidenceItemMember",
+                name: "IX_EvidenceItemMembers_OwnedByUserId",
+                table: "EvidenceItemMembers",
                 column: "OwnedByUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EvidenceItemMember_ParentEvidenceItemId",
-                table: "EvidenceItemMember",
+                name: "IX_EvidenceItemMembers_ParentEvidenceItemId",
+                table: "EvidenceItemMembers",
                 column: "ParentEvidenceItemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EvidenceTypeItem_CreatedByUserId",
-                table: "EvidenceTypeItem",
+                name: "IX_EvidenceItems_CreatedByUserId",
+                table: "EvidenceItems",
                 column: "CreatedByUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EvidenceTypeItem_HousingCommunityId",
-                table: "EvidenceTypeItem",
+                name: "IX_EvidenceItems_HousingCommunityId",
+                table: "EvidenceItems",
                 column: "HousingCommunityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FailureReport_FromUserId",
-                table: "FailureReport",
-                column: "FromUserId");
+                name: "IX_EvidenceTypes_CreatedByUserId",
+                table: "EvidenceTypes",
+                column: "CreatedByUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FailureReport_HousingCommunityId",
-                table: "FailureReport",
+                name: "IX_EvidenceTypes_HousingCommunityId",
+                table: "EvidenceTypes",
                 column: "HousingCommunityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FailureReportAttachement_CreatedById",
-                table: "FailureReportAttachement",
+                name: "IX_FailureReportAttachements_CreatedById",
+                table: "FailureReportAttachements",
                 column: "CreatedById");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FailureReportAttachement_FailureReportId",
-                table: "FailureReportAttachement",
+                name: "IX_FailureReportAttachements_FailureReportId",
+                table: "FailureReportAttachements",
                 column: "FailureReportId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FailureReportsComment_FailureReportId",
-                table: "FailureReportsComment",
+                name: "IX_FailureReportComments_FailureReportId",
+                table: "FailureReportComments",
                 column: "FailureReportId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FailureReportsComment_FromUserId",
-                table: "FailureReportsComment",
+                name: "IX_FailureReportComments_FromUserId",
+                table: "FailureReportComments",
                 column: "FromUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FailureReports_FromUserId",
+                table: "FailureReports",
+                column: "FromUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FailureReports_HousingCommunityId",
+                table: "FailureReports",
+                column: "HousingCommunityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_HousingCommunities_AddressId",
@@ -839,29 +854,39 @@ namespace Hocomm.Migrations
                 column: "UsersId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InternalMessage_FromUserId",
-                table: "InternalMessage",
+                name: "IX_InternalMessageConnections_FromUserId",
+                table: "InternalMessageConnections",
                 column: "FromUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InternalMessage_HousingCommunityId",
-                table: "InternalMessage",
-                column: "HousingCommunityId");
+                name: "IX_InternalMessageConnections_InternalMessageId",
+                table: "InternalMessageConnections",
+                column: "InternalMessageId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InternalMessage_ToUserId",
-                table: "InternalMessage",
+                name: "IX_InternalMessageConnections_RecievedByUserId",
+                table: "InternalMessageConnections",
+                column: "RecievedByUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InternalMessageConnections_ToUserId",
+                table: "InternalMessageConnections",
                 column: "ToUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InternalMessageConnection_ChildInternalMessageId",
-                table: "InternalMessageConnection",
-                column: "ChildInternalMessageId");
+                name: "IX_InternalMessages_FromUserId",
+                table: "InternalMessages",
+                column: "FromUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InternalMessageConnection_ParentInternalMessageId",
-                table: "InternalMessageConnection",
-                column: "ParentInternalMessageId");
+                name: "IX_InternalMessages_HousingCommunityId",
+                table: "InternalMessages",
+                column: "HousingCommunityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InternalMessages_ToUserId",
+                table: "InternalMessages",
+                column: "ToUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Resolution_CreatedById",
@@ -938,22 +963,22 @@ namespace Hocomm.Migrations
                 name: "EvidenceFeeItem");
 
             migrationBuilder.DropTable(
-                name: "EvidenceItemMember");
+                name: "EvidenceItemMembers");
 
             migrationBuilder.DropTable(
-                name: "EvidenceTypeItem");
+                name: "EvidenceTypes");
 
             migrationBuilder.DropTable(
-                name: "FailureReportAttachement");
+                name: "FailureReportAttachements");
 
             migrationBuilder.DropTable(
-                name: "FailureReportsComment");
+                name: "FailureReportComments");
 
             migrationBuilder.DropTable(
                 name: "HousingCommunityUser");
 
             migrationBuilder.DropTable(
-                name: "InternalMessageConnection");
+                name: "InternalMessageConnections");
 
             migrationBuilder.DropTable(
                 name: "ResolutionVote");
@@ -971,10 +996,10 @@ namespace Hocomm.Migrations
                 name: "EvidenceFee");
 
             migrationBuilder.DropTable(
-                name: "FailureReport");
+                name: "FailureReports");
 
             migrationBuilder.DropTable(
-                name: "InternalMessage");
+                name: "InternalMessages");
 
             migrationBuilder.DropTable(
                 name: "Resolution");
@@ -983,7 +1008,7 @@ namespace Hocomm.Migrations
                 name: "UserMeterTypes");
 
             migrationBuilder.DropTable(
-                name: "EvidenceItem");
+                name: "EvidenceItems");
 
             migrationBuilder.DropTable(
                 name: "HousingCommunities");

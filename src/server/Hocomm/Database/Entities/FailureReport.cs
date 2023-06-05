@@ -7,6 +7,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Hocomm.Database.Entities;
+
+public enum FailureReportStatus
+{
+    None = 0,
+    InProgress = 1,
+    Solved = 2,
+    Rejected = 4
+}
+
 public class FailureReport
 {
     // FailureReports
@@ -15,7 +24,7 @@ public class FailureReport
     public Guid Id { get; set; }
     public string Title { get; set; } = null!;
     public string Message { get; set; } = null!;
-    public int Status { get; set; }
+    public FailureReportStatus Status { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? FinishedAt { get; set; }
 
@@ -28,7 +37,7 @@ public class FailureReport
     public HousingCommunity HousingCommunity { get; set; } = null!;
 
     public IList<FailureReportAttachement> FailureReportAttachements { get; set; } = null!;
-    public IList<FailureReportsComment> FailureReportsComments { get; set; } = null!;
+    public IList<FailureReportComment> FailureReportsComments { get; set; } = null!;
 }
 
 
@@ -51,7 +60,7 @@ public class FailureReportAttachement
 }
 
 
-public class FailureReportsComment
+public class FailureReportComment
 {
     //FailureReportsComments
     //id, FailureReportId, message, fromUserId
@@ -103,7 +112,7 @@ internal static class FailureReportModelBuilder
         failureReportAttachement.HasOne(q => q.FailureReport).WithMany(q => q.FailureReportAttachements).HasForeignKey(q => q.FailureReportId);
 
 
-        var failureReportsComment = builder.Entity<FailureReportsComment>();
+        var failureReportsComment = builder.Entity<FailureReportComment>();
         failureReportsComment.HasKey(q => q.Id);
         failureReportsComment.Property(q => q.Id).HasDefaultValueSql("gen_random_uuid()");
 

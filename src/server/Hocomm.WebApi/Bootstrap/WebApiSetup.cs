@@ -16,7 +16,7 @@ public static class WebApiSetup
         services.AddSingleton<Func<PgSqlContext>>(() => new PgSqlContext(new DbContextOptionsBuilder<PgSqlContext>()
             .UseNpgsql(connectionString).Options));
 
-        services.AddHacommServices();
+        services.AddHocommServices();
     }
 
     public static void UseHocomm(this IApplicationBuilder app)
