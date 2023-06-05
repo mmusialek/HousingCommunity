@@ -32,6 +32,7 @@ public class InternalMessageService : ServiceBase
 
         return res;
     }
+
     public static InternalMessageConnection ToEntity(CreateInternalMessageDto dto, Guid internalMessageId, ServiceMetadata metadata)
     {
         InternalMessageConnection res = new();
