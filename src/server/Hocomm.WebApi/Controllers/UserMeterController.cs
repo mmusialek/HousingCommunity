@@ -12,11 +12,11 @@ public class UserMeterTypeController : ControllerBase
 {
     private readonly UserMeterService _service;
 
-    public UserMeterTypeController(UserMeterService service, HttpContext httpContext)
+    public UserMeterTypeController(UserMeterService service, IHttpContextAccessor httpContextAccessor)
     {
         _service = service;
 
-        _service.SetMetaData(httpContext.GetMetadata());
+        _service.SetMetaData(httpContextAccessor.GetMetadata());
     }
 
     [HttpGet]

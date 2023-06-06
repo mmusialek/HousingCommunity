@@ -16,12 +16,11 @@ public enum FailureReportStatus
     Rejected = 4
 }
 
-public class FailureReport
+public class FailureReport : BaseEntity
 {
     // FailureReports
     // id, title, message, fromUserId, HousingCommunityId, createdAt, finishedAt?,
     // status(new, in progress, solved, rejected)
-    public Guid Id { get; set; }
     public string Title { get; set; } = null!;
     public string Message { get; set; } = null!;
     public FailureReportStatus Status { get; set; }
@@ -41,11 +40,10 @@ public class FailureReport
 }
 
 
-public class FailureReportAttachement
+public class FailureReportAttachement : BaseEntity
 {
     //FailureReportAttachements
     //id, FailureReportId, name, path
-    public Guid Id { get; set; }
     public string Name { get; set; } = null!;
     public string Path { get; set; } = null!;
     public DateTime CreatedAt { get; set; }

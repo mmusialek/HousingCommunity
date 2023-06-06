@@ -147,6 +147,26 @@ namespace Hocomm.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "InternalMessages",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
+                    Message = table.Column<string>(type: "text", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "timezone('utc', now())"),
+                    HousingCommunityId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InternalMessages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_InternalMessages_HousingCommunities_HousingCommunityId",
+                        column: x => x.HousingCommunityId,
+                        principalTable: "HousingCommunities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Announcements",
                 columns: table => new
                 {
@@ -292,40 +312,6 @@ namespace Hocomm.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "InternalMessages",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
-                    Message = table.Column<string>(type: "text", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "timezone('utc', now())"),
-                    FromUserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ToUserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    HousingCommunityId = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_InternalMessages", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_InternalMessages_HousingCommunities_HousingCommunityId",
-                        column: x => x.HousingCommunityId,
-                        principalTable: "HousingCommunities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_InternalMessages_Users_FromUserId",
-                        column: x => x.FromUserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_InternalMessages_Users_ToUserId",
-                        column: x => x.ToUserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Resolution",
                 columns: table => new
                 {
@@ -349,6 +335,45 @@ namespace Hocomm.Migrations
                     table.ForeignKey(
                         name: "FK_Resolution_Users_CreatedById",
                         column: x => x.CreatedById,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "InternalMessageConnections",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
+                    InternalMessageId = table.Column<Guid>(type: "uuid", nullable: false),
+                    FromUserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ToUserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    RecievedByUserId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InternalMessageConnections", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_InternalMessageConnections_InternalMessages_InternalMessage~",
+                        column: x => x.InternalMessageId,
+                        principalTable: "InternalMessages",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_InternalMessageConnections_Users_FromUserId",
+                        column: x => x.FromUserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_InternalMessageConnections_Users_RecievedByUserId",
+                        column: x => x.RecievedByUserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_InternalMessageConnections_Users_ToUserId",
+                        column: x => x.ToUserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -548,45 +573,6 @@ namespace Hocomm.Migrations
                     table.ForeignKey(
                         name: "FK_FailureReportComments_Users_FromUserId",
                         column: x => x.FromUserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "InternalMessageConnections",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
-                    InternalMessageId = table.Column<Guid>(type: "uuid", nullable: false),
-                    FromUserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ToUserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    RecievedByUserId = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_InternalMessageConnections", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_InternalMessageConnections_InternalMessages_InternalMessage~",
-                        column: x => x.InternalMessageId,
-                        principalTable: "InternalMessages",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_InternalMessageConnections_Users_FromUserId",
-                        column: x => x.FromUserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_InternalMessageConnections_Users_RecievedByUserId",
-                        column: x => x.RecievedByUserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_InternalMessageConnections_Users_ToUserId",
-                        column: x => x.ToUserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -874,19 +860,9 @@ namespace Hocomm.Migrations
                 column: "ToUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InternalMessages_FromUserId",
-                table: "InternalMessages",
-                column: "FromUserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_InternalMessages_HousingCommunityId",
                 table: "InternalMessages",
                 column: "HousingCommunityId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_InternalMessages_ToUserId",
-                table: "InternalMessages",
-                column: "ToUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Resolution_CreatedById",

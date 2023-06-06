@@ -17,8 +17,8 @@ public class EvidenceService : ServiceBase
     public Guid AddEvidence(CreateEvidenceItemDto dto)
     {
         var entity = ToEntity(dto, _metadata);
-        _context.Add(entity);
-        _context.SaveChanges();
+        //_context.Add(entity);
+        //_context.SaveChanges();
 
         if (dto.OwnerIds != null && dto.OwnerIds.Any())
         {
@@ -27,11 +27,12 @@ public class EvidenceService : ServiceBase
                 EvidenceItemMember entityMember = new();
                 entityMember.OwnedByUserId = dtoItem;
                 entityMember.CreatedByUserId = _metadata.UserId;
-                entityMember.EvidenceItemId = entity.Id;
-                _context.Add(entityMember);
+                entityMember.EvidenceItem = entity;
+                //entityMember.EvidenceItemId = entity.Id;
+                //_context.Add(entityMember);
             }
-            _context.SaveChanges();
         }
+        _context.SaveChanges();
 
         return entity.Id;
     }

@@ -16,12 +16,11 @@ public class InternalMessageService : ServiceBase
 
     public Guid AddMessage(CreateInternalMessageDto dto)
     {
-        var entity = ToEntity(dto, _metadata);
-        AddAndSave(entity);
-        var entityConn = ToEntity(dto, entity.Id, _metadata);
-        AddAndSave(entityConn);
+        var internalMessage = ToEntity(dto, _metadata);
+        var entityConn = ToEntity(dto, internalMessage, _metadata);
+        AddRangeAndSave(entityConn);
 
-        return entity.Id;
+        return internalMessage.Id;
     }
 
     public static InternalMessage ToEntity(CreateInternalMessageDto dto, ServiceMetadata metadata)
@@ -33,14 +32,20 @@ public class InternalMessageService : ServiceBase
         return res;
     }
 
-    public static InternalMessageConnection ToEntity(CreateInternalMessageDto dto, Guid internalMessageId, ServiceMetadata metadata)
+    public static IList<InternalMessageConnection> ToEntity(CreateInternalMessageDto dto, InternalMessage internalMessage, ServiceMetadata metadata)
     {
-        InternalMessageConnection res = new();
-        res.InternalMessageId = internalMessageId;
-        res.FromUserId = metadata.UserId;
-        res.ToUserId = dto.ToUserId;
-        res.RecievedByUserId = dto.ToUserId;
+        InternalMessageConnection toUserEntityCopy = new();
+        toUserEntityCopy.InternalMessage = internalMessage;
+        toUserEntityCopy.FromUserId = metadata.UserId;
+        toUserEntityCopy.ToUserId = dto.ToUserId;
+        toUserEntityCopy.RecievedByUserId = dto.ToUserId;
 
-        return res;
+        InternalMessageConnection fromUserEntityCopy = new();
+        fromUserEntityCopy.InternalMessage = internalMessage;
+        fromUserEntityCopy.FromUserId = metadata.UserId;
+        fromUserEntityCopy.ToUserId = dto.ToUserId;
+        fromUserEntityCopy.RecievedByUserId = dto.ToUserId;
+
+        return new[] { fromUserEntityCopy, toUserEntityCopy };
     }
 }

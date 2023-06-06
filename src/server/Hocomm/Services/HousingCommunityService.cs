@@ -18,19 +18,15 @@ public class HousingCommunityService : ServiceBase
     {
     }
 
-    public async Task<Guid> AddAsync(AddHousingCommunityRequest request)
+    public Guid Add(AddHousingCommunityRequest request)
     {
+        var address = AddressService.ToEntity(request.Address);
+
         HousingCommunity entity = new();
         entity.Name = request.Name;
-        entity.Address = new Address();
-        entity.Address.City = request.Address.City;
-        entity.Address.ZipCode = request.Address.ZipCode;
-        entity.Address.Street = request.Address.Street;
-        entity.Address.HomeNr = request.Address.HomeNr;
-        entity.Address.FlatNr = request.Address.FlatNr;
+        entity.Address = address;
 
-        _context.Add(entity);
-        await _context.SaveChangesAsync();
+        AddAndSave(entity);
         return entity.Id;
     }
 

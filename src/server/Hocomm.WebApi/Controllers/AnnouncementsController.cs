@@ -17,11 +17,11 @@ public class AnnouncementsController : ControllerBase
 {
     private readonly AnnouncementService _service;
 
-    public AnnouncementsController(AnnouncementService service, HttpContext httpContext)
+    public AnnouncementsController(AnnouncementService service, IHttpContextAccessor httpContextAccessor)
     {
         _service = service;
 
-        _service.SetMetaData(httpContext.GetMetadata());
+        _service.SetMetaData(httpContextAccessor.GetMetadata());
     }
 
     [HttpGet]

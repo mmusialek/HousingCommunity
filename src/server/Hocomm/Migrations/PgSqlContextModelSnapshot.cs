@@ -660,9 +660,6 @@ namespace Hocomm.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasDefaultValueSql("timezone('utc', now())");
 
-                    b.Property<Guid>("FromUserId")
-                        .HasColumnType("uuid");
-
                     b.Property<Guid>("HousingCommunityId")
                         .HasColumnType("uuid");
 
@@ -670,16 +667,9 @@ namespace Hocomm.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("ToUserId")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("FromUserId");
-
                     b.HasIndex("HousingCommunityId");
-
-                    b.HasIndex("ToUserId");
 
                     b.ToTable("InternalMessages");
                 });
@@ -1182,29 +1172,13 @@ namespace Hocomm.Migrations
 
             modelBuilder.Entity("Hocomm.Database.Entities.InternalMessage", b =>
                 {
-                    b.HasOne("Hocomm.Database.Entities.User", "FromUser")
-                        .WithMany("FromInternalMessages")
-                        .HasForeignKey("FromUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Hocomm.Database.Entities.HousingCommunity", "HousingCommunity")
                         .WithMany("InternalMessages")
                         .HasForeignKey("HousingCommunityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Hocomm.Database.Entities.User", "ToUser")
-                        .WithMany("ToInternalMessages")
-                        .HasForeignKey("ToUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("FromUser");
-
                     b.Navigation("HousingCommunity");
-
-                    b.Navigation("ToUser");
                 });
 
             modelBuilder.Entity("Hocomm.Database.Entities.InternalMessageConnection", b =>
@@ -1457,8 +1431,6 @@ namespace Hocomm.Migrations
 
                     b.Navigation("FailureReportsComments");
 
-                    b.Navigation("FromInternalMessages");
-
                     b.Navigation("FromUserInternalMessageConnections");
 
                     b.Navigation("RecievedByUserInternalMessageConnections");
@@ -1466,8 +1438,6 @@ namespace Hocomm.Migrations
                     b.Navigation("ResolutionVotes");
 
                     b.Navigation("Resolutions");
-
-                    b.Navigation("ToInternalMessages");
 
                     b.Navigation("ToUserInternalMessageConnections");
 

@@ -11,6 +11,15 @@ public static class ServiceMap
 {
     public static void AddHocommServices(this IServiceCollection services)
     {
+        services.AddScoped(typeof(AddressService));
         services.AddScoped(typeof(AnnouncementService));
+        services.AddScoped(typeof(EvidenceService));
+        services.AddScoped(typeof(EvidenceTypeItemSerivce));
+        services.AddScoped(typeof(FailureReportService));
+        services.AddScoped(typeof(HousingCommunityService));
+        services.AddScoped(typeof(InternalMessageService));
+        services.AddScoped(typeof(UserMeterService));
+        services.AddScoped(typeof(UserMeterTypeService));
+        services.AddScoped(typeof(UserService));
     }
 }

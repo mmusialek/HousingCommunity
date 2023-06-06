@@ -17,11 +17,11 @@ public class HousingCommunityController : ControllerBase
 {
     private readonly HousingCommunityService _service;
 
-    public HousingCommunityController(HousingCommunityService service, HttpContext httpContext)
+    public HousingCommunityController(HousingCommunityService service, IHttpContextAccessor httpContextAccessor)
     {
         _service = service;
 
-        _service.SetMetaData(httpContext.GetMetadata());
+        _service.SetMetaData(httpContextAccessor.GetMetadata());
     }
 
     [HttpGet]
@@ -33,6 +33,6 @@ public class HousingCommunityController : ControllerBase
     [HttpPost]
     public async Task<Guid> Post([FromBody] AddHousingCommunityRequest request)
     {
-        return await _service.AddAsync(request);
+        return _service.Add(request);
     }
 }

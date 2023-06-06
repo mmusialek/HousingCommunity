@@ -29,4 +29,12 @@ public abstract class ServiceBase
 
         return entity.Id;
     }
+
+    protected IList<Guid> AddRangeAndSave<TEntity>(IList<TEntity> entity) where TEntity : BaseEntity
+    {
+        _context.AddRange(entity);
+        _context.SaveChanges();
+
+        return entity.Select(q => q.Id).ToList();
+    }
 }

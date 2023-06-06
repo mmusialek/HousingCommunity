@@ -19,8 +19,6 @@ public class AnnouncementService : ServiceBase
 
     public async Task AddAsync(AddAnnouncementRequest request)
     {
-        var user = _context.Users.First(q => q.Id == _metadata.UserId);
-
         var entity = new Announcement();
         entity.Title = request.Title;
         entity.Message = request.Message;
@@ -28,8 +26,7 @@ public class AnnouncementService : ServiceBase
         entity.ValidTo = request.ValidTo;
         entity.HousingCommunityId = request.HousingCommunityId;
 
-        _context.Add(entity);
-        await _context.SaveChangesAsync();
+        AddAndSave(entity);
     }
 
     public IEnumerable<AnnouncementDto> Get(GetAnnouncementParams query)

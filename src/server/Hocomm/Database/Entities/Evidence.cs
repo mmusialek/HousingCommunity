@@ -9,10 +9,9 @@ using System.Threading.Tasks;
 
 namespace Hocomm.Database.Entities;
 
-public class EvidenceItem
+public class EvidenceItem : BaseEntity
 {
     //id, nr, floorNr, shortDescription, area, personCount, evidenceTypeId, createdAt
-    public Guid Id { get; set; }
     public string Nr { get; set; } = null!;
     public int FloorNr { get; set; }
     public string ShortDescription { get; set; } = null!;
@@ -40,12 +39,10 @@ public class EvidenceItem
 }
 
 
-public class EvidenceType
+public class EvidenceType : BaseEntity
 {
     //EvidenceTypeItem
     //id, name, shortDescription, housingCommunityId, createdAt
-
-    public Guid Id { get; set; }
     public string Name { get; set; } = null!;
     public string ShortDescription { get; set; } = null!;
     public DateTime CreatedAt { get; set; }
@@ -59,12 +56,10 @@ public class EvidenceType
     public HousingCommunity HousingCommunity { get; set; } = null!;
 }
 
-public class EvidenceItemMember
+public class EvidenceItemMember : BaseEntity
 {
     //EvidenceItemMembers
-    //id, EvidenceItemId, ownerUserId?, housingCommunityId, parentEvidenceItemId?, createdAt x
-    public Guid Id { get; set; }
-
+    //id, EvidenceItemId, ownerUserId?, housingCommunityId, parentEvidenceItemId?, createdAt
 
     // ref
     public Guid OwnedByUserId { get; set; }

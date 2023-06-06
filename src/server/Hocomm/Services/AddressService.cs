@@ -17,8 +17,7 @@ public class AddressService : ServiceBase
     public Guid AddNew(AddressDto dto)
     {
         var entity = ToEntity(dto);
-        _context.Add(entity);
-        _context.SaveChanges();
+        AddAndSave(entity);
         return entity.Id;
     }
 
@@ -26,6 +25,7 @@ public class AddressService : ServiceBase
     {
         Address res = new();
         res.City = dto.City;
+        res.ZipCode = dto.ZipCode;
         res.Street = dto.Street;
         res.HomeNr = dto.HomeNr;
         res.FlatNr = dto.FlatNr;

@@ -26,9 +26,7 @@ public class User
     public IList<EvidenceItemMember> EvidenceItemMemberCreatedBy { get; set; } = null!;
 
     public IList<ResolutionVote> ResolutionVotes { get; set; } = null!;
-    public IList<Resolution> Resolutions { get; set; } = null!;
-    public IList<InternalMessage> FromInternalMessages { get; set; } = null!;
-    public IList<InternalMessage> ToInternalMessages { get; set; } = null!;
+    public IList<Resolution> Resolutions { get; set; } = null!;    
     public IList<FailureReport> FailureReports { get; set; } = null!;
     public IList<FailureReportComment> FailureReportsComments { get; set; } = null!;
     public IList<FailureReportAttachement> FailureReportAttachements { get; set; } = null!;

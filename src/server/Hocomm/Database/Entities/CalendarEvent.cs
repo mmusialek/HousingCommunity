@@ -7,13 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Hocomm.Database.Entities;
-public class CalendarEvent
+public class CalendarEvent : BaseEntity
 {
     //    id createdAt eventDateFrom, evendDateTo, title, description, housingCommunityId, evidenceItemId?
     //recurrent, validFrom, mon, tue, wed, thu, fri, sat, sun, every week, every month, every year
     //creatorUserId
-
-    public Guid Id { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime EventDateFrom { get; set; }
     public DateTime EvendDateTo { get; set; }
@@ -51,10 +49,9 @@ public class CalendarEvent
     public IList<CalendarEventMember> CalendarEventMembers { get; set; } = null!;
 }
 
-public class CalendarEventMember
+public class CalendarEventMember : BaseEntity
 {
     //id, eventId, userId
-    public Guid Id { get; set; }
 
     public Guid MemberId { get; set; }
     public User Member { get; set; } = null!;

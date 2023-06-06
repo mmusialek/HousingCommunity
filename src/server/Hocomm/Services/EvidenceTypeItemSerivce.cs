@@ -17,8 +17,7 @@ public class EvidenceTypeItemSerivce : ServiceBase
     public Guid AddType(CreateEvidenceTypeDto dto)
     {
         var entity = ToEntity(dto, _metadata);
-        _context.Add(entity);
-        _context.SaveChanges();
+        AddAndSave(entity);
 
         return entity.Id;
     }

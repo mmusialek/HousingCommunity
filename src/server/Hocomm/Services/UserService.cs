@@ -18,14 +18,14 @@ public class UserService : ServiceBase
 
     public Guid CreateProfile(CreateUserProfileDto dto)
     {
-        var addressId = _addressService.AddNew(dto.Address);
-        var userEntity = ToUserEntity(dto, addressId);
+        var address = AddressService.ToEntity(dto.Address);
+        var userEntity = ToUserEntity(dto, address);
+
         _context.Add(userEntity);
         _context.SaveChanges();
 
         return dto.Id;
     }
-
 
     public static User ToUserEntity(CreateUserProfileDto dto, Guid addressId)
     {
@@ -34,6 +34,16 @@ public class UserService : ServiceBase
         res.FirstName = dto.FirstName;
         res.LastName = dto.LastName;
         res.AddressId = addressId;
+
+        return res;
+    }
+    public static User ToUserEntity(CreateUserProfileDto dto, Address address)
+    {
+        User res = new();
+        res.Id = dto.Id;
+        res.FirstName = dto.FirstName;
+        res.LastName = dto.LastName;
+        res.Address = address;
 
         return res;
     }

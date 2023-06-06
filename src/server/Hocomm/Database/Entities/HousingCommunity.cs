@@ -6,9 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Hocomm.Database.Entities;
-public class HousingCommunity
+public class HousingCommunity : BaseEntity
 {
-    public Guid Id { get; set; }
     public string Name { get; set; } = null!;
     public DateTime CreatedAt { get; set; }
     public DateTime? ModifiedAt { get; set; }
