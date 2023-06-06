@@ -17,7 +17,7 @@ public class AnnouncementService : ServiceBase
     {
     }
 
-    public async Task AddAsync(AddAnnouncementRequest request)
+    public Guid Add(AddAnnouncementRequest request)
     {
         var entity = new Announcement();
         entity.Title = request.Title;
@@ -26,7 +26,7 @@ public class AnnouncementService : ServiceBase
         entity.ValidTo = request.ValidTo;
         entity.HousingCommunityId = request.HousingCommunityId;
 
-        AddAndSave(entity);
+        return AddAndSave(entity);
     }
 
     public IEnumerable<AnnouncementDto> Get(GetAnnouncementParams query)

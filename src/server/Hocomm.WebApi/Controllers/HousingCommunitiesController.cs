@@ -13,11 +13,11 @@ namespace Hocomm.WebApi.Controllers;
 [Authorize]
 [Route("api/[controller]")]
 [ApiController]
-public class HousingCommunityController : ControllerBase
+public class HousingCommunitiesController : ControllerBase
 {
     private readonly HousingCommunityService _service;
 
-    public HousingCommunityController(HousingCommunityService service, IHttpContextAccessor httpContextAccessor)
+    public HousingCommunitiesController(HousingCommunityService service, IHttpContextAccessor httpContextAccessor)
     {
         _service = service;
 
@@ -31,7 +31,7 @@ public class HousingCommunityController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<Guid> Post([FromBody] AddHousingCommunityRequest request)
+    public Guid Post([FromBody] AddHousingCommunityRequest request)
     {
         return _service.Add(request);
     }

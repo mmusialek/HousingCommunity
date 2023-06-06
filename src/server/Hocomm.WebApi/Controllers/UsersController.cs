@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace Hocomm.WebApi.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class UserController : ControllerBase
+public class UsersController : ControllerBase
 {
     private readonly UserService _service;
 
-    public UserController(UserService service, IHttpContextAccessor httpContextAccessor)
+    public UsersController(UserService service, IHttpContextAccessor httpContextAccessor)
     {
         _service = service;
 

@@ -8,15 +8,21 @@ using Microsoft.AspNetCore.Mvc;
 namespace Hocomm.WebApi.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class UserMeterController : ControllerBase
+public class UserMeterTyperController : ControllerBase
 {
     private readonly UserMeterTypeService _service;
 
-    public UserMeterController(UserMeterTypeService service, IHttpContextAccessor httpContextAccessor)
+    public UserMeterTyperController(UserMeterTypeService service, IHttpContextAccessor httpContextAccessor)
     {
         _service = service;
 
         _service.SetMetaData(httpContextAccessor.GetMetadata());
+    }
+
+    [HttpPost]
+    public async Task<Guid> Post([FromBody] AddUserMeterTypeRequest request)
+    {
+        return await _service.AddAsync(request);
     }
 
 
@@ -24,11 +30,5 @@ public class UserMeterController : ControllerBase
     public IReadOnlyList<UserMeterTypeDto> Get([FromQuery] GetUserMeterTypeParams query)
     {
         return _service.Get(query);
-    }
-
-    [HttpPost]
-    public async Task<Guid> Post([FromBody] AddUserMeterTypeRequest request)
-    {
-        return await _service.AddAsync(request);
     }
 }

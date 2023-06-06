@@ -20,22 +20,19 @@ public class AnnouncementsController : ControllerBase
     public AnnouncementsController(AnnouncementService service, IHttpContextAccessor httpContextAccessor)
     {
         _service = service;
-
         _service.SetMetaData(httpContextAccessor.GetMetadata());
     }
 
     [HttpGet]
-    public string Get([FromQuery] GetAnnouncementParams query)
+    public IEnumerable<AnnouncementDto> Get([FromQuery] GetAnnouncementParams query)
     {
-        _service.Get(query);
-        return "ok";
+        return _service.Get(query);
     }
 
     [HttpPost]
-    public async Task<string> Post([FromBody] AddAnnouncementRequest request)
+    public Guid Post([FromBody] AddAnnouncementRequest request)
     {
-        await _service.AddAsync(request);
-        return "ok";
+        return _service.Add(request);
     }
 
     [HttpPut]
