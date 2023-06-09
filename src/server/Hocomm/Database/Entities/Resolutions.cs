@@ -15,9 +15,8 @@ public enum ResolutionVotesType
     No = 2
 }
 
-public class Resolution
+public class Resolution : BaseEntity, IDateEntity
 {
-    public Guid Id { get; set; }
     public string Title { get; set; } = null!;
     public string Message { get; set; } = null!;
     public DateTime CreatedAt { get; set; }
@@ -33,9 +32,8 @@ public class Resolution
     public IList<ResolutionVote> ResolutionVotes { get; set; } = null!;
 }
 
-public class ResolutionVote
+public class ResolutionVote : BaseEntity
 {
-    public Guid Id { get; set; }
     public ResolutionVotesType Type { get; set; }
     public DateTime CreatedAt { get; set; }
 

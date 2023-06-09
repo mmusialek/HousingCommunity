@@ -22,6 +22,6 @@ public class InternalMessageController : ControllerBase
     [HttpPost]
     public Guid Post([FromBody] CreateInternalMessageDto request)
     {
-        return _service.AddMessage(request);
+        return _service.Add(request);
     }
 }

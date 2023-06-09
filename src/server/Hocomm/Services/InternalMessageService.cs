@@ -14,7 +14,7 @@ public class InternalMessageService : ServiceBase
     {
     }
 
-    public Guid AddMessage(CreateInternalMessageDto dto)
+    public Guid Add(CreateInternalMessageDto dto)
     {
         var internalMessage = ToEntity(dto, _metadata);
         var entityConn = ToEntity(dto, internalMessage, _metadata);

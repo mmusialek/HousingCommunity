@@ -14,7 +14,7 @@ public class EvidenceTypeItemSerivce : ServiceBase
     {
     }
 
-    public Guid AddType(CreateEvidenceTypeDto dto)
+    public Guid Add(CreateEvidenceTypeDto dto)
     {
         var entity = ToEntity(dto, _metadata);
         AddAndSave(entity);
@@ -22,7 +22,7 @@ public class EvidenceTypeItemSerivce : ServiceBase
         return entity.Id;
     }
 
-    public Guid UpdateType(UpdateEvidenceTypeDto dto)
+    public Guid Update(UpdateEvidenceTypeDto dto)
     {
         var entity = _context.EvidenceTypes.First(q => q.Id == dto.EventTypeId && q.HousingCommunityId == dto.HousingCommunityId);
         // TODO check if user can modify entity

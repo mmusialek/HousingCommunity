@@ -6,9 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Hocomm.Database.Entities;
-public class User
+public class User: BaseEntity
 {
-    public Guid Id { get; set; }
 
     public string FirstName { get; set; } = null!;
     public string LastName { get; set; } = null!;
@@ -36,6 +35,14 @@ public class User
     public IList<InternalMessageConnection> FromUserInternalMessageConnections { get; set; } = null!;
     public IList<InternalMessageConnection> ToUserInternalMessageConnections { get; set; } = null!;
     public IList<InternalMessageConnection> RecievedByUserInternalMessageConnections { get; set; } = null!;
+    
+    public IList<CostInvoice> CreatedByCostInvoices { get; set; } = null!;
+    public IList<CostInvoice> ModifiedByCostInvoices { get; set; } = null!;
+    public IList<CostOther> CreatedByCostOthers { get; set; } = null!;
+    public IList<CostOther> ModifiedByCostOthers { get; set; } = null!;
+
+    public IList<EvidenceFee> CreatedByEvidenceFees { get; set; } = null!;
+    public IList<EvidenceFee> ModifiedByEvidenceFees { get; set; } = null!;
 }
 
 

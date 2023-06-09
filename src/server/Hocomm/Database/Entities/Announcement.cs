@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Hocomm.Database.Entities;
-public class Announcement : BaseEntity
+public class Announcement : BaseEntity, IDateEntity
 {
     public string Title { get; set; } = null!;
     public string Message { get; set; } = null!;

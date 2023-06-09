@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Hocomm.Database.Entities;
-public class HousingCommunity : BaseEntity
+public class HousingCommunity : BaseEntity, IDateEntity
 {
     public string Name { get; set; } = null!;
     public DateTime CreatedAt { get; set; }

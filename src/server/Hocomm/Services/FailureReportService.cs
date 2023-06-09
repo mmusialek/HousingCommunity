@@ -14,7 +14,7 @@ public class FailureReportService : ServiceBase
     {
     }
 
-    public Guid Create(CreateFailureReportDto dto)
+    public Guid Add(CreateFailureReportDto dto)
     {
         var entity = ToEntity(dto, _metadata);
         AddAndSave(entity);

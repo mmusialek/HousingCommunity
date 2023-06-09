@@ -20,12 +20,12 @@ public class EvidenceTypesController : ControllerBase
     [HttpPost]
     public Guid Post([FromBody] CreateEvidenceTypeDto request)
     {
-        return _service.AddType(request);
+        return _service.Add(request);
     }
 
     [HttpPut]
     public Guid Put([FromBody] UpdateEvidenceTypeDto request)
     {
-        return _service.UpdateType(request);
+        return _service.Update(request);
     }
 }

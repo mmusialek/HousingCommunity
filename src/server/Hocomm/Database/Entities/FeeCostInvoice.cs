@@ -10,8 +10,8 @@ namespace Hocomm.Database.Entities;
 public enum CompanyTypes
 {
     None = 0,
-    WspolnotaMieszkaniowa = 1,
-    Firma = 2,
+    HousingCommunity = 1,
+    Company = 2,
 }
 
 
@@ -22,9 +22,8 @@ public enum EvidenceFeeType
     Issued = 2,
 }
 
-public class Company
+public class Company : BaseEntity
 {
-    public Guid Id { get; set; }
     public string Name { get; set; } = null!;
     public int Nip { get; set; }
     public CompanyTypes CompanyType { get; set; }
@@ -39,10 +38,9 @@ public class Company
     public IList<CostInvoice> CostInvoices { get; set; } = null!;
 }
 
-public class CostInvoice
+public class CostInvoice : BaseEntity, IDateEntity
 {
     //id, name, invoinceNumber, issuedAt, dueTo, issuedByCompanyId, grossValue, netValue, vatValue, householdCommunityId, createdAt, modifiedAt
-    public Guid Id { get; set; }
     public string Name { get; set; } = null!;
     public string InvoinceNumber { get; set; } = null!;
     public DateTime IssuedAt { get; set; }
@@ -55,6 +53,11 @@ public class CostInvoice
     public DateTime CreatedAt { get; set; }
     public DateTime? ModifiedAt { get; set; }
 
+    public Guid CreatedById { get; set; }
+    public User CreatedBy { get; set; } = null!;
+    public Guid ModifiedById { get; set; }
+    public User ModifiedBy { get; set; } = null!;
+
     // ref
 
     public Guid HousingCommunityId { get; set; }
@@ -66,10 +69,9 @@ public class CostInvoice
 
 
 
-public class CostOther
+public class CostOther : BaseEntity, IDateEntity
 {
     //id, name, grossValue, housingCommunityId, createdAt, modifiedAt
-    public Guid Id { get; set; }
     public string Name { get; set; } = null!;
     public string InvoinceNumber { get; set; } = null!;
     public double GrossValue { get; set; }
@@ -77,22 +79,31 @@ public class CostOther
     public DateTime CreatedAt { get; set; }
     public DateTime? ModifiedAt { get; set; }
 
+    public Guid CreatedById { get; set; }
+    public User CreatedBy { get; set; } = null!;
+    public Guid ModifiedById { get; set; }
+    public User ModifiedBy { get; set; } = null!;
+
     // ref
     public Guid HousingCommunityId { get; set; }
     public HousingCommunity HousingCommunity { get; set; } = null!;
 }
 
 
-public class EvidenceFee
+public class EvidenceFee : BaseEntity, IDateEntity
 {
     //id, feeNr, evidenceItemId, paidTo, createdAt, modifiedAt, status(draft, issued)
-    public Guid Id { get; set; }
     public string FeeNr { get; set; } = null!;
     public DateTime PaidTo { get; set; }
     public EvidenceFeeType Status { get; set; }
 
     public DateTime CreatedAt { get; set; }
     public DateTime? ModifiedAt { get; set; }
+
+    public Guid CreatedById { get; set; }
+    public User CreatedBy { get; set; } = null!;
+    public Guid ModifiedById { get; set; }
+    public User ModifiedBy { get; set; } = null!;
 
 
     // ref
@@ -102,11 +113,11 @@ public class EvidenceFee
     public IList<EvidenceFeeItem> EvidenceFeeItems { get; set; } = null!;
 }
 
-public class EvidenceFeeItem
+public class EvidenceFeeItem : BaseEntity
 {
     //id, EvidenceFeeId, name, feeValue
-    public Guid Id { get; set; }
     public string Name { get; set; } = null!;
+    public double GrossValue { get; set; }
 
 
     // ref
@@ -152,6 +163,9 @@ internal static class FeeCostsInvoicesModelBuilder
         entityCostInvoice.HasOne(q => q.HousingCommunity).WithMany(q => q.CostInvoices).HasForeignKey(q => q.HousingCommunityId);
         entityCostInvoice.HasOne(q => q.IssuedByCompany).WithMany(q => q.CostInvoices).HasForeignKey(q => q.IssuedByCompanyId);
 
+        entityCostInvoice.HasOne(q => q.CreatedBy).WithMany(q => q.CreatedByCostInvoices).HasForeignKey(q => q.CreatedById);
+        entityCostInvoice.HasOne(q => q.ModifiedBy).WithMany(q => q.ModifiedByCostInvoices).HasForeignKey(q => q.ModifiedById);
+
         // CostOther
         var entityCostOther = builder.Entity<CostOther>();
         entityCostOther.HasKey(q => q.Id);
@@ -165,6 +179,8 @@ internal static class FeeCostsInvoicesModelBuilder
 
         // ref
         entityCostOther.HasOne(q => q.HousingCommunity).WithMany(q => q.CostOthers).HasForeignKey(q => q.HousingCommunityId);
+        entityCostOther.HasOne(q => q.CreatedBy).WithMany(q => q.CreatedByCostOthers).HasForeignKey(q => q.CreatedById);
+        entityCostOther.HasOne(q => q.ModifiedBy).WithMany(q => q.ModifiedByCostOthers).HasForeignKey(q => q.ModifiedById);
 
 
 
@@ -180,6 +196,8 @@ internal static class FeeCostsInvoicesModelBuilder
 
         // ref
         entityEvidenceFee.HasOne(q => q.EvidenceItem).WithMany(q => q.EvidenceFees).HasForeignKey(q => q.EvidenceItemId);
+        entityEvidenceFee.HasOne(q => q.CreatedBy).WithMany(q => q.CreatedByEvidenceFees).HasForeignKey(q => q.CreatedById);
+        entityEvidenceFee.HasOne(q => q.ModifiedBy).WithMany(q => q.ModifiedByEvidenceFees).HasForeignKey(q => q.ModifiedById);
 
 
         var entityEvidenceFeeItem = builder.Entity<EvidenceFeeItem>();

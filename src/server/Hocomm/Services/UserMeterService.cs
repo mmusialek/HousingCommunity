@@ -27,7 +27,7 @@ public class UserMeterService : ServiceBase
         return res;
     }
 
-    public async Task<Guid> AddEntryAsync(AddUserMeterRequest request)
+    public async Task<Guid> AddAsync(AddUserMeterRequest request)
     {
         UserMeter entity = new()
         {

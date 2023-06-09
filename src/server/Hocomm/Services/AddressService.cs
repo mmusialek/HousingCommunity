@@ -14,7 +14,7 @@ public class AddressService : ServiceBase
     {
     }
 
-    public Guid AddNew(AddressDto dto)
+    public Guid Add(AddressDto dto)
     {
         var entity = ToEntity(dto);
         AddAndSave(entity);

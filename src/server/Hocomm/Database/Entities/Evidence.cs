@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Hocomm.Database.Entities;
 
-public class EvidenceItem : BaseEntity
+public class EvidenceItem : BaseEntity, IDateEntity
 {
     //id, nr, floorNr, shortDescription, area, personCount, evidenceTypeId, createdAt
     public string Nr { get; set; } = null!;
@@ -39,7 +39,7 @@ public class EvidenceItem : BaseEntity
 }
 
 
-public class EvidenceType : BaseEntity
+public class EvidenceType : BaseEntity, IDateEntity
 {
     //EvidenceTypeItem
     //id, name, shortDescription, housingCommunityId, createdAt

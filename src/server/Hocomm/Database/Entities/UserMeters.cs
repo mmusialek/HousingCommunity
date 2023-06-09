@@ -8,11 +8,10 @@ using System.Threading.Tasks;
 
 namespace Hocomm.Database.Entities;
 
-public class UserMeter
+public class UserMeter : BaseEntity
 {
     //UserMeters
     //id, EvidenceItemId?, housingCommunityId, userMeterTypeId, value, createdAt
-    public Guid Id { get; set; }
     public double Value { get; set; }
     public DateTime CreatedAt { get; set; }
 
@@ -27,11 +26,10 @@ public class UserMeter
     public UserMeterType UserMeterType { get; set; } = null!;
 }
 
-public class UserMeterType
+public class UserMeterType : BaseEntity
 {
     //UserMeterTypes
     //id, name, unitType, description
-    public Guid Id { get; set; }
     public string Name { get; set; } = null!;
     public string UnitType { get; set; } = null!;
     public string Description { get; set; } = null!;

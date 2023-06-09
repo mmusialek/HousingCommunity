@@ -47,6 +47,12 @@ public class PgSqlContext : DbContext
     public DbSet<EvidenceItemMember> EvidenceItemMembers { get; set; } = null!;
     public DbSet<InternalMessageConnection> InternalMessageConnections { get; set; } = null!;
     public DbSet<InternalMessage> InternalMessages { get; set; } = null!;
+
+    public DbSet<Company> Companies { get; set; } = null!;
+    public DbSet<CostInvoice> CostInvoices { get; set; } = null!;
+    public DbSet<CostOther> CostOthers { get; set; } = null!;
+    public DbSet<EvidenceFee> EvidenceFees { get; set; } = null!;
+    public DbSet<EvidenceFeeItem> EvidenceFeeItems { get; set; } = null!;
 }
 
 public class AuthDbContextFactoryDesignTime : IDesignTimeDbContextFactory<PgSqlContext>

@@ -25,7 +25,7 @@ public class HousingCommunityService : ServiceBase
         HousingCommunity entity = new();
         entity.Name = request.Name;
         entity.Address = address;
-
+                                               
         AddAndSave(entity);
         return entity.Id;
     }
@@ -36,7 +36,7 @@ public class HousingCommunityService : ServiceBase
         return ToDto(entity);
     }
 
-    private HousingCommunityDto ToDto(HousingCommunity entity)
+    private static HousingCommunityDto ToDto(HousingCommunity entity)
     {
         HousingCommunityDto dto = new();
         dto.Name = entity.Name;

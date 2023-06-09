@@ -21,7 +21,7 @@ public class FailureReportsController : ControllerBase
     [HttpPost]
     public Guid Post([FromBody] CreateFailureReportDto request)
     {
-        return _service.Create(request);
+        return _service.Add(request);
     }
 
     [HttpPost("AddComment")]
