@@ -25,7 +25,7 @@ public class HousingCommunityService : ServiceBase
         HousingCommunity entity = new();
         entity.Name = request.Name;
         entity.Address = address;
-                                               
+
         AddAndSave(entity);
         return entity.Id;
     }

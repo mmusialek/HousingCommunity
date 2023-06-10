@@ -21,19 +21,19 @@ public class EvidencesController : ControllerBase
     [HttpPost]
     public Guid Post([FromBody] CreateEvidenceItemDto request)
     {
-        return _service.AddEvidence(request);
+        return _service.Add(request);
     }
 
     [HttpPut]
-    public Guid UpdateEvidence([FromBody] UpdateEvidenceItemDto request)
+    public Guid Update([FromBody] UpdateEvidenceItemDto request)
     {
-        return _service.UpdateEvidenceItem(request);
+        return _service.Update(request);
     }
 
     [HttpPut("evidenceUsers")]
     public Guid UpdateEvidenceItemUsers([FromBody] UpdateEvidenceItemDto request)
     {
-        return _service.UpdateEvidenceItem(request);
+        return _service.Update(request);
     }
 
 }

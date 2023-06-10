@@ -21,13 +21,13 @@ public class UserMeterController : ControllerBase
 
 
     [HttpGet]
-    public IReadOnlyList<UserMeterTypeDto> Get([FromQuery] GetUserMeterTypeParams query)
+    public IReadOnlyList<UserMeterDto> Get([FromQuery] GetUserMeterParams query)
     {
         return _service.Get(query);
     }
 
     [HttpPost]
-    public async Task<Guid> Post([FromBody] AddUserMeterTypeRequest request)
+    public async Task<Guid> Post([FromBody] AddUserMeterRequest request)
     {
         return await _service.AddAsync(request);
     }

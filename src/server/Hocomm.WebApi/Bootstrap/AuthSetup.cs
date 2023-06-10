@@ -14,6 +14,7 @@ public static class AuthSetup
         {
             options.DefaultScheme = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme;
         });
+                //.AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
         // services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>();
 
         //services.AddOpenIddict()

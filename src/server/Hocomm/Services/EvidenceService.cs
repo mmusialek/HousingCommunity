@@ -14,7 +14,7 @@ public class EvidenceService : ServiceBase
     {
     }
 
-    public Guid AddEvidence(CreateEvidenceItemDto dto)
+    public Guid Add(CreateEvidenceItemDto dto)
     {
         var entity = ToEntity(dto, _metadata);
         //_context.Add(entity);
@@ -37,7 +37,7 @@ public class EvidenceService : ServiceBase
         return entity.Id;
     }
 
-    public Guid UpdateEvidenceItem(UpdateEvidenceItemDto dto)
+    public Guid Update(UpdateEvidenceItemDto dto)
     {
         var entity = _context.EvidenceItems.First(q => q.Id == dto.EvidenceItemId);
 
