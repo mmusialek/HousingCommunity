@@ -14,7 +14,7 @@ public static class AuthSetup
         {
             options.DefaultScheme = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme;
         });
-                //.AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+        //.AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
         // services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>();
 
         //services.AddOpenIddict()
@@ -31,12 +31,12 @@ public static class AuthSetup
 
         //services.AddScoped<IAuthorizationHandler, some handler>();
 
-        //services.AddAuthorization(options =>
-        //{
-        //    options.AddPolicy(PolicyName, policyUser =>
-        //    {
-        //        policyUser.Requirements.Add(new AuthRequirement("hacom-api"));
-        //    });
-        //});
+        services.AddAuthorization(options =>
+        {
+            var policy = new AuthorizationPolicyBuilder()
+                     .RequireAuthenticatedUser()
+                     .Build();
+            options.FallbackPolicy = policy;
+        });
     }
 }

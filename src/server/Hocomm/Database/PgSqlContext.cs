@@ -53,6 +53,8 @@ public class PgSqlContext : DbContext
     public DbSet<CostOther> CostOthers { get; set; } = null!;
     public DbSet<EvidenceFee> EvidenceFees { get; set; } = null!;
     public DbSet<EvidenceFeeItem> EvidenceFeeItems { get; set; } = null!;
+    
+    public DbSet<Resolution> Resolutions { get; set; } = null!;
 }
 
 public class AuthDbContextFactoryDesignTime : IDesignTimeDbContextFactory<PgSqlContext>

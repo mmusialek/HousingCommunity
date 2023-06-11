@@ -31,9 +31,7 @@ public class AnnouncementService : ServiceBase
 
     public IEnumerable<AnnouncementDto> Get(GetAnnouncementParams query)
     {
-        var (page, skip) = query.PageDto.GetPage();
-
-        var data = _context.Announcements.Where(q => q.ValidTo < DateTime.UtcNow).Skip(skip).Take(page).ToList();
+        var data = _context.Announcements.Where(q => q.ValidTo < DateTime.UtcNow).GetPage(query.PageDto).ToList();
         var res = data.Select(ToDto);
 
         return res;
@@ -41,7 +39,7 @@ public class AnnouncementService : ServiceBase
 
     public async Task UpdateAsync(UpdateAnnouncementRequest request)
     {
-        var item = _context.Announcements.First(q => q.Id == request.Id && q.AuthorId == _metadata.UserId);
+        var item = _context.Announcements.Single(q => q.Id == request.Id && q.AuthorId == _metadata.UserId);
         item.Title = request.Title;
         item.Message = request.Message;
 

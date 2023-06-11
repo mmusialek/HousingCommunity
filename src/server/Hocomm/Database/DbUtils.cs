@@ -16,4 +16,14 @@ internal static class DbUtils
 
         return (Size: take, Skip: skip);
     }
+
+    public static IQueryable<T> GetPage<T>(this IQueryable<T> query, PageDto? pageDto)
+    {
+        var page = pageDto ?? new PageDto { Page = 1, Size = 10 };
+        var skip = page.Page * page.Size;
+        var take = page.Size;
+
+        return query.Skip(skip).Take(take);
+    }
+
 }

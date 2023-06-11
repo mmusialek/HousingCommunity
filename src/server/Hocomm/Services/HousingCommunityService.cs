@@ -32,7 +32,7 @@ public class HousingCommunityService : ServiceBase
 
     public HousingCommunityDto Get(GetHousingCommunityParams query)
     {
-        var entity = _context.HousingCommunities.First(q => q.Id.Equals(query.HousingCommunityId));
+        var entity = _context.HousingCommunities.Single(q => q.Id.Equals(query.HousingCommunityId));
         return ToDto(entity);
     }
 

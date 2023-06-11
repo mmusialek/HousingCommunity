@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vetheria.AuthServer", "Vetheria.AuthServer\Vetheria.AuthServer.csproj", "{925386EB-60E0-4DB3-8379-D6986C279210}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vetheria.Common", "Vetheria.Common\Vetheria.Common.csproj", "{78C02337-74F5-4791-9B98-209E172573B6}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VetheriaSource", "VetheriaSource", "{237081C1-B9A0-40A7-8962-650FEDE39785}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hocomm.Backend", "Hocomm.Backend", "{14538B99-B0B0-46E8-B668-DE3D9AA3D463}"
@@ -21,14 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{925386EB-60E0-4DB3-8379-D6986C279210}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{925386EB-60E0-4DB3-8379-D6986C279210}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{925386EB-60E0-4DB3-8379-D6986C279210}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{925386EB-60E0-4DB3-8379-D6986C279210}.Release|Any CPU.Build.0 = Release|Any CPU
-		{78C02337-74F5-4791-9B98-209E172573B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78C02337-74F5-4791-9B98-209E172573B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78C02337-74F5-4791-9B98-209E172573B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78C02337-74F5-4791-9B98-209E172573B6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F6711272-B792-431A-BD71-C582B90A1396}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F6711272-B792-431A-BD71-C582B90A1396}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6711272-B792-431A-BD71-C582B90A1396}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -42,8 +30,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{925386EB-60E0-4DB3-8379-D6986C279210} = {237081C1-B9A0-40A7-8962-650FEDE39785}
-		{78C02337-74F5-4791-9B98-209E172573B6} = {237081C1-B9A0-40A7-8962-650FEDE39785}
 		{F6711272-B792-431A-BD71-C582B90A1396} = {14538B99-B0B0-46E8-B668-DE3D9AA3D463}
 		{6A277A64-0CF8-4E92-9C8E-518B10197A5A} = {14538B99-B0B0-46E8-B668-DE3D9AA3D463}
 	EndGlobalSection

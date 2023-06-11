@@ -24,7 +24,7 @@ public class EvidenceTypeItemSerivce : ServiceBase
 
     public Guid Update(UpdateEvidenceTypeDto dto)
     {
-        var entity = _context.EvidenceTypes.First(q => q.Id == dto.EventTypeId && q.HousingCommunityId == dto.HousingCommunityId);
+        var entity = _context.EvidenceTypes.Single(q => q.Id == dto.EventTypeId && q.HousingCommunityId == dto.HousingCommunityId);
         // TODO check if user can modify entity
 
         entity.Name = dto.Name;

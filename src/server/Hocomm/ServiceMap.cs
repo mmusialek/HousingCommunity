@@ -18,6 +18,7 @@ public static class ServiceMap
         services.AddScoped(typeof(FailureReportService));
         services.AddScoped(typeof(HousingCommunityService));
         services.AddScoped(typeof(InternalMessageService));
+        services.AddScoped(typeof(ResolutionService));
         services.AddScoped(typeof(UserMeterService));
         services.AddScoped(typeof(UserMeterTypeService));
         services.AddScoped(typeof(UserService));

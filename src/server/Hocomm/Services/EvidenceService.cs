@@ -39,7 +39,7 @@ public class EvidenceService : ServiceBase
 
     public Guid Update(UpdateEvidenceItemDto dto)
     {
-        var entity = _context.EvidenceItems.First(q => q.Id == dto.EvidenceItemId);
+        var entity = _context.EvidenceItems.Single(q => q.Id == dto.EvidenceItemId);
 
         if (dto.FloorNr.HasValue)
         {

@@ -33,7 +33,7 @@ public class FailureReportService : ServiceBase
 
     public Guid ChangeStatus(ChangeFailureReportStatusDto dto)
     {
-        var failureRepost = _context.FailureReports.First(q => q.Id == dto.FailureReportId);
+        var failureRepost = _context.FailureReports.Single(q => q.Id == dto.FailureReportId);
         // TODO check is woner or admin, hc owner, etc
 
         if (failureRepost.Status == FailureReportStatus.Solved || failureRepost.Status == FailureReportStatus.Rejected)

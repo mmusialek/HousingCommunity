@@ -10,10 +10,8 @@ using System.Threading.Tasks;
 namespace Hocomm.Services;
 public class UserService : ServiceBase
 {
-    private AddressService _addressService;
-    public UserService(PgSqlContext context, AddressService addressService) : base(context)
+    public UserService(PgSqlContext context) : base(context)
     {
-        _addressService = addressService;
     }
 
     public Guid CreateProfile(CreateUserProfileDto dto)
@@ -37,6 +35,7 @@ public class UserService : ServiceBase
 
         return res;
     }
+
     public static User ToUserEntity(CreateUserProfileDto dto, Address address)
     {
         User res = new();

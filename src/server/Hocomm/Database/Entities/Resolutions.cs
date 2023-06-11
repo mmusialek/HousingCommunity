@@ -15,10 +15,20 @@ public enum ResolutionVotesType
     No = 2
 }
 
+public enum ResolutionStatusType
+{
+    None = 0,
+    Draft = 1,
+    Finished = 2,
+}
+
+
 public class Resolution : BaseEntity, IDateEntity
 {
     public string Title { get; set; } = null!;
     public string Message { get; set; } = null!;
+    public ResolutionStatusType Status { get; set; }
+
     public DateTime CreatedAt { get; set; }
     public DateTime? ModifiedAt { get; set; }
 
@@ -55,6 +65,7 @@ internal static class ResolutionModelBuilder
 
         entity.Property(q => q.Title).HasMaxLength(100).IsRequired();
         entity.Property(q => q.Message).IsRequired();
+        entity.Property(q => q.Status).IsRequired();
 
         entity.Property(q => q.ModifiedAt).IsRequired(false);
         entity.Property(q => q.CreatedAt).HasDefaultValueSql("timezone('utc', now())");
