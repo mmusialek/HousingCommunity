@@ -13,6 +13,7 @@ var authServiceUrl = builder.Configuration.GetSection("AuthServiceUrl").Get<stri
 
 builder.Services.AddControllers(q =>
 {
+    q.Filters.Add<HttpResponseHeadersFilter>();
     q.Filters.Add<HttpResponseExceptionFilter>();
 });
 

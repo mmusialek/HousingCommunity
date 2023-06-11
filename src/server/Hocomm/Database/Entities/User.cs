@@ -11,7 +11,7 @@ namespace Hocomm.Database.Entities;
 public enum UserRoleType
 {
     None = 0,
-    
+
 
     // role pattern
     //CanViewSth,
@@ -90,6 +90,6 @@ internal static class UserModelBuilder
         entityUserRoleMember.Property(q => q.Role).IsRequired();
 
         //ref 
-        entityUserRoleMember.HasOne(q => q.User).WithMany(q => q.UserRoleMembers).HasForeignKey(q => q.Role);
+        entityUserRoleMember.HasOne(q => q.User).WithMany(q => q.UserRoleMembers).HasForeignKey(q => q.UserId);
     }
 }

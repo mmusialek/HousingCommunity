@@ -28,7 +28,7 @@ namespace Hocomm.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Company",
+                name: "Companies",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
@@ -39,9 +39,9 @@ namespace Hocomm.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Company", x => x.Id);
+                    table.PrimaryKey("PK_Companies", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Company_Addresses_AddressId",
+                        name: "FK_Companies_Addresses_AddressId",
                         column: x => x.AddressId,
                         principalTable: "Addresses",
                         principalColumn: "Id",
@@ -85,63 +85,6 @@ namespace Hocomm.Migrations
                         name: "FK_Users_Addresses_AddressId",
                         column: x => x.AddressId,
                         principalTable: "Addresses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CostInvoice",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
-                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    InvoinceNumber = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    IssuedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    DueTo = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    GrossValue = table.Column<double>(type: "double precision", nullable: false),
-                    NetValue = table.Column<double>(type: "double precision", nullable: false),
-                    VatValue = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "timezone('utc', now())"),
-                    ModifiedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    HousingCommunityId = table.Column<Guid>(type: "uuid", nullable: false),
-                    IssuedByCompanyId = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CostInvoice", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CostInvoice_Company_IssuedByCompanyId",
-                        column: x => x.IssuedByCompanyId,
-                        principalTable: "Company",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CostInvoice_HousingCommunities_HousingCommunityId",
-                        column: x => x.HousingCommunityId,
-                        principalTable: "HousingCommunities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CostOther",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
-                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    InvoinceNumber = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    GrossValue = table.Column<double>(type: "double precision", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "timezone('utc', now())"),
-                    ModifiedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    HousingCommunityId = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CostOther", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CostOther_HousingCommunities_HousingCommunityId",
-                        column: x => x.HousingCommunityId,
-                        principalTable: "HousingCommunities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -191,6 +134,91 @@ namespace Hocomm.Migrations
                     table.ForeignKey(
                         name: "FK_Announcements_Users_AuthorId",
                         column: x => x.AuthorId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CostInvoices",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
+                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    InvoinceNumber = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    IssuedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    DueTo = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    GrossValue = table.Column<double>(type: "double precision", nullable: false),
+                    NetValue = table.Column<double>(type: "double precision", nullable: false),
+                    VatValue = table.Column<int>(type: "integer", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "timezone('utc', now())"),
+                    ModifiedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedById = table.Column<Guid>(type: "uuid", nullable: false),
+                    ModifiedById = table.Column<Guid>(type: "uuid", nullable: false),
+                    HousingCommunityId = table.Column<Guid>(type: "uuid", nullable: false),
+                    IssuedByCompanyId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CostInvoices", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CostInvoices_Companies_IssuedByCompanyId",
+                        column: x => x.IssuedByCompanyId,
+                        principalTable: "Companies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CostInvoices_HousingCommunities_HousingCommunityId",
+                        column: x => x.HousingCommunityId,
+                        principalTable: "HousingCommunities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CostInvoices_Users_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CostInvoices_Users_ModifiedById",
+                        column: x => x.ModifiedById,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CostOthers",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
+                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    InvoinceNumber = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    GrossValue = table.Column<double>(type: "double precision", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "timezone('utc', now())"),
+                    ModifiedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedById = table.Column<Guid>(type: "uuid", nullable: false),
+                    ModifiedById = table.Column<Guid>(type: "uuid", nullable: false),
+                    HousingCommunityId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CostOthers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CostOthers_HousingCommunities_HousingCommunityId",
+                        column: x => x.HousingCommunityId,
+                        principalTable: "HousingCommunities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CostOthers_Users_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CostOthers_Users_ModifiedById",
+                        column: x => x.ModifiedById,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -312,12 +340,13 @@ namespace Hocomm.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Resolution",
+                name: "Resolutions",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
                     Title = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     Message = table.Column<string>(type: "text", nullable: false),
+                    Status = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "timezone('utc', now())"),
                     ModifiedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     CreatedById = table.Column<Guid>(type: "uuid", nullable: false),
@@ -325,16 +354,35 @@ namespace Hocomm.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Resolution", x => x.Id);
+                    table.PrimaryKey("PK_Resolutions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Resolution_HousingCommunities_HousingCommunityId",
+                        name: "FK_Resolutions_HousingCommunities_HousingCommunityId",
                         column: x => x.HousingCommunityId,
                         principalTable: "HousingCommunities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Resolution_Users_CreatedById",
+                        name: "FK_Resolutions_Users_CreatedById",
                         column: x => x.CreatedById,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserRoleMember",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Role = table.Column<int>(type: "integer", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserRoleMember", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserRoleMember_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -428,7 +476,7 @@ namespace Hocomm.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EvidenceFee",
+                name: "EvidenceFees",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
@@ -437,15 +485,29 @@ namespace Hocomm.Migrations
                     Status = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "timezone('utc', now())"),
                     ModifiedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedById = table.Column<Guid>(type: "uuid", nullable: false),
+                    ModifiedById = table.Column<Guid>(type: "uuid", nullable: false),
                     EvidenceItemId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EvidenceFee", x => x.Id);
+                    table.PrimaryKey("PK_EvidenceFees", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EvidenceFee_EvidenceItems_EvidenceItemId",
+                        name: "FK_EvidenceFees_EvidenceItems_EvidenceItemId",
                         column: x => x.EvidenceItemId,
                         principalTable: "EvidenceItems",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EvidenceFees_Users_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EvidenceFees_Users_ModifiedById",
+                        column: x => x.ModifiedById,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -592,9 +654,9 @@ namespace Hocomm.Migrations
                 {
                     table.PrimaryKey("PK_ResolutionVote", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ResolutionVote_Resolution_ResolutionId",
+                        name: "FK_ResolutionVote_Resolutions_ResolutionId",
                         column: x => x.ResolutionId,
-                        principalTable: "Resolution",
+                        principalTable: "Resolutions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -631,20 +693,21 @@ namespace Hocomm.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EvidenceFeeItem",
+                name: "EvidenceFeeItems",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
                     Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    GrossValue = table.Column<double>(type: "double precision", nullable: false),
                     EvidenceFeeId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EvidenceFeeItem", x => x.Id);
+                    table.PrimaryKey("PK_EvidenceFeeItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EvidenceFeeItem_EvidenceFee_EvidenceFeeId",
+                        name: "FK_EvidenceFeeItems_EvidenceFees_EvidenceFeeId",
                         column: x => x.EvidenceFeeId,
-                        principalTable: "EvidenceFee",
+                        principalTable: "EvidenceFees",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -725,34 +788,64 @@ namespace Hocomm.Migrations
                 column: "MemberId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Company_AddressId",
-                table: "Company",
+                name: "IX_Companies_AddressId",
+                table: "Companies",
                 column: "AddressId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CostInvoice_HousingCommunityId",
-                table: "CostInvoice",
+                name: "IX_CostInvoices_CreatedById",
+                table: "CostInvoices",
+                column: "CreatedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CostInvoices_HousingCommunityId",
+                table: "CostInvoices",
                 column: "HousingCommunityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CostInvoice_IssuedByCompanyId",
-                table: "CostInvoice",
+                name: "IX_CostInvoices_IssuedByCompanyId",
+                table: "CostInvoices",
                 column: "IssuedByCompanyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CostOther_HousingCommunityId",
-                table: "CostOther",
+                name: "IX_CostInvoices_ModifiedById",
+                table: "CostInvoices",
+                column: "ModifiedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CostOthers_CreatedById",
+                table: "CostOthers",
+                column: "CreatedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CostOthers_HousingCommunityId",
+                table: "CostOthers",
                 column: "HousingCommunityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EvidenceFee_EvidenceItemId",
-                table: "EvidenceFee",
+                name: "IX_CostOthers_ModifiedById",
+                table: "CostOthers",
+                column: "ModifiedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EvidenceFeeItems_EvidenceFeeId",
+                table: "EvidenceFeeItems",
+                column: "EvidenceFeeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EvidenceFees_CreatedById",
+                table: "EvidenceFees",
+                column: "CreatedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EvidenceFees_EvidenceItemId",
+                table: "EvidenceFees",
                 column: "EvidenceItemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EvidenceFeeItem_EvidenceFeeId",
-                table: "EvidenceFeeItem",
-                column: "EvidenceFeeId");
+                name: "IX_EvidenceFees_ModifiedById",
+                table: "EvidenceFees",
+                column: "ModifiedById");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EvidenceItemMembers_CreatedByUserId",
@@ -865,13 +958,13 @@ namespace Hocomm.Migrations
                 column: "HousingCommunityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Resolution_CreatedById",
-                table: "Resolution",
+                name: "IX_Resolutions_CreatedById",
+                table: "Resolutions",
                 column: "CreatedById");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Resolution_HousingCommunityId",
-                table: "Resolution",
+                name: "IX_Resolutions_HousingCommunityId",
+                table: "Resolutions",
                 column: "HousingCommunityId");
 
             migrationBuilder.CreateIndex(
@@ -915,6 +1008,11 @@ namespace Hocomm.Migrations
                 column: "HousingCommunityId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_UserRoleMember_UserId",
+                table: "UserRoleMember",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Users_AddressId",
                 table: "Users",
                 column: "AddressId");
@@ -930,13 +1028,13 @@ namespace Hocomm.Migrations
                 name: "CalendarEventMember");
 
             migrationBuilder.DropTable(
-                name: "CostInvoice");
+                name: "CostInvoices");
 
             migrationBuilder.DropTable(
-                name: "CostOther");
+                name: "CostOthers");
 
             migrationBuilder.DropTable(
-                name: "EvidenceFeeItem");
+                name: "EvidenceFeeItems");
 
             migrationBuilder.DropTable(
                 name: "EvidenceItemMembers");
@@ -963,13 +1061,16 @@ namespace Hocomm.Migrations
                 name: "UserMeters");
 
             migrationBuilder.DropTable(
+                name: "UserRoleMember");
+
+            migrationBuilder.DropTable(
                 name: "CalendarEvent");
 
             migrationBuilder.DropTable(
-                name: "Company");
+                name: "Companies");
 
             migrationBuilder.DropTable(
-                name: "EvidenceFee");
+                name: "EvidenceFees");
 
             migrationBuilder.DropTable(
                 name: "FailureReports");
@@ -978,7 +1079,7 @@ namespace Hocomm.Migrations
                 name: "InternalMessages");
 
             migrationBuilder.DropTable(
-                name: "Resolution");
+                name: "Resolutions");
 
             migrationBuilder.DropTable(
                 name: "UserMeterTypes");

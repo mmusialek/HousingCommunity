@@ -230,7 +230,7 @@ namespace Hocomm.Migrations
 
                     b.HasIndex("AddressId");
 
-                    b.ToTable("Company");
+                    b.ToTable("Companies");
                 });
 
             modelBuilder.Entity("Hocomm.Database.Entities.CostInvoice", b =>
@@ -244,6 +244,9 @@ namespace Hocomm.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
                         .HasDefaultValueSql("timezone('utc', now())");
+
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("DueTo")
                         .HasColumnType("timestamp with time zone");
@@ -268,6 +271,9 @@ namespace Hocomm.Migrations
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("ModifiedById")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -281,11 +287,15 @@ namespace Hocomm.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedById");
+
                     b.HasIndex("HousingCommunityId");
 
                     b.HasIndex("IssuedByCompanyId");
 
-                    b.ToTable("CostInvoice");
+                    b.HasIndex("ModifiedById");
+
+                    b.ToTable("CostInvoices");
                 });
 
             modelBuilder.Entity("Hocomm.Database.Entities.CostOther", b =>
@@ -299,6 +309,9 @@ namespace Hocomm.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
                         .HasDefaultValueSql("timezone('utc', now())");
+
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
 
                     b.Property<double>("GrossValue")
                         .HasColumnType("double precision");
@@ -314,6 +327,9 @@ namespace Hocomm.Migrations
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("ModifiedById")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -321,9 +337,13 @@ namespace Hocomm.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedById");
+
                     b.HasIndex("HousingCommunityId");
 
-                    b.ToTable("CostOther");
+                    b.HasIndex("ModifiedById");
+
+                    b.ToTable("CostOthers");
                 });
 
             modelBuilder.Entity("Hocomm.Database.Entities.EvidenceFee", b =>
@@ -338,6 +358,9 @@ namespace Hocomm.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasDefaultValueSql("timezone('utc', now())");
 
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("EvidenceItemId")
                         .HasColumnType("uuid");
 
@@ -349,6 +372,9 @@ namespace Hocomm.Migrations
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("ModifiedById")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime>("PaidTo")
                         .HasColumnType("timestamp with time zone");
 
@@ -357,9 +383,13 @@ namespace Hocomm.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedById");
+
                     b.HasIndex("EvidenceItemId");
 
-                    b.ToTable("EvidenceFee");
+                    b.HasIndex("ModifiedById");
+
+                    b.ToTable("EvidenceFees");
                 });
 
             modelBuilder.Entity("Hocomm.Database.Entities.EvidenceFeeItem", b =>
@@ -372,6 +402,9 @@ namespace Hocomm.Migrations
                     b.Property<Guid>("EvidenceFeeId")
                         .HasColumnType("uuid");
 
+                    b.Property<double>("GrossValue")
+                        .HasColumnType("double precision");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -381,7 +414,7 @@ namespace Hocomm.Migrations
 
                     b.HasIndex("EvidenceFeeId");
 
-                    b.ToTable("EvidenceFeeItem");
+                    b.ToTable("EvidenceFeeItems");
                 });
 
             modelBuilder.Entity("Hocomm.Database.Entities.EvidenceItem", b =>
@@ -731,6 +764,9 @@ namespace Hocomm.Migrations
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -742,7 +778,7 @@ namespace Hocomm.Migrations
 
                     b.HasIndex("HousingCommunityId");
 
-                    b.ToTable("Resolution");
+                    b.ToTable("Resolutions");
                 });
 
             modelBuilder.Entity("Hocomm.Database.Entities.ResolutionVote", b =>
@@ -886,6 +922,25 @@ namespace Hocomm.Migrations
                     b.ToTable("UserMeterTypes");
                 });
 
+            modelBuilder.Entity("Hocomm.Database.Entities.UserRoleMember", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Role")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserRoleMember");
+                });
+
             modelBuilder.Entity("HousingCommunityUser", b =>
                 {
                     b.Property<Guid>("HousingCommunitiesId")
@@ -977,6 +1032,12 @@ namespace Hocomm.Migrations
 
             modelBuilder.Entity("Hocomm.Database.Entities.CostInvoice", b =>
                 {
+                    b.HasOne("Hocomm.Database.Entities.User", "CreatedBy")
+                        .WithMany("CreatedByCostInvoices")
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Hocomm.Database.Entities.HousingCommunity", "HousingCommunity")
                         .WithMany("CostInvoices")
                         .HasForeignKey("HousingCommunityId")
@@ -989,31 +1050,73 @@ namespace Hocomm.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Hocomm.Database.Entities.User", "ModifiedBy")
+                        .WithMany("ModifiedByCostInvoices")
+                        .HasForeignKey("ModifiedById")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CreatedBy");
+
                     b.Navigation("HousingCommunity");
 
                     b.Navigation("IssuedByCompany");
+
+                    b.Navigation("ModifiedBy");
                 });
 
             modelBuilder.Entity("Hocomm.Database.Entities.CostOther", b =>
                 {
+                    b.HasOne("Hocomm.Database.Entities.User", "CreatedBy")
+                        .WithMany("CreatedByCostOthers")
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Hocomm.Database.Entities.HousingCommunity", "HousingCommunity")
                         .WithMany("CostOthers")
                         .HasForeignKey("HousingCommunityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Hocomm.Database.Entities.User", "ModifiedBy")
+                        .WithMany("ModifiedByCostOthers")
+                        .HasForeignKey("ModifiedById")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CreatedBy");
+
                     b.Navigation("HousingCommunity");
+
+                    b.Navigation("ModifiedBy");
                 });
 
             modelBuilder.Entity("Hocomm.Database.Entities.EvidenceFee", b =>
                 {
+                    b.HasOne("Hocomm.Database.Entities.User", "CreatedBy")
+                        .WithMany("CreatedByEvidenceFees")
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Hocomm.Database.Entities.EvidenceItem", "EvidenceItem")
                         .WithMany("EvidenceFees")
                         .HasForeignKey("EvidenceItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Hocomm.Database.Entities.User", "ModifiedBy")
+                        .WithMany("ModifiedByEvidenceFees")
+                        .HasForeignKey("ModifiedById")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CreatedBy");
+
                     b.Navigation("EvidenceItem");
+
+                    b.Navigation("ModifiedBy");
                 });
 
             modelBuilder.Entity("Hocomm.Database.Entities.EvidenceFeeItem", b =>
@@ -1311,6 +1414,17 @@ namespace Hocomm.Migrations
                     b.Navigation("HousingCommunity");
                 });
 
+            modelBuilder.Entity("Hocomm.Database.Entities.UserRoleMember", b =>
+                {
+                    b.HasOne("Hocomm.Database.Entities.User", "User")
+                        .WithMany("UserRoleMembers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("HousingCommunityUser", b =>
                 {
                     b.HasOne("Hocomm.Database.Entities.HousingCommunity", null)
@@ -1417,6 +1531,12 @@ namespace Hocomm.Migrations
 
                     b.Navigation("CalendarEvents");
 
+                    b.Navigation("CreatedByCostInvoices");
+
+                    b.Navigation("CreatedByCostOthers");
+
+                    b.Navigation("CreatedByEvidenceFees");
+
                     b.Navigation("EvidenceItemMemberCreatedBy");
 
                     b.Navigation("EvidenceItemMemberOwnedByUser");
@@ -1433,6 +1553,12 @@ namespace Hocomm.Migrations
 
                     b.Navigation("FromUserInternalMessageConnections");
 
+                    b.Navigation("ModifiedByCostInvoices");
+
+                    b.Navigation("ModifiedByCostOthers");
+
+                    b.Navigation("ModifiedByEvidenceFees");
+
                     b.Navigation("RecievedByUserInternalMessageConnections");
 
                     b.Navigation("ResolutionVotes");
@@ -1442,6 +1568,8 @@ namespace Hocomm.Migrations
                     b.Navigation("ToUserInternalMessageConnections");
 
                     b.Navigation("UserMeters");
+
+                    b.Navigation("UserRoleMembers");
                 });
 
             modelBuilder.Entity("Hocomm.Database.Entities.UserMeterType", b =>
