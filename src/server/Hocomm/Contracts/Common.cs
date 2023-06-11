@@ -10,9 +10,9 @@ public class PageDto
 {
     [Required]
     [Range(1, int.MaxValue)]
-    public int Size { get; set; }
+    public int Size { get; set; } = 10;
 
     [Required]
     [Range(1, int.MaxValue)]
-    public int Page { get; set; }
+    public int Page { get; set; } = 1;
 }

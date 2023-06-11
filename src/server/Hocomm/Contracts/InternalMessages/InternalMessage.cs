@@ -20,3 +20,22 @@ public class CreateInternalMessageDto
     [Required]
     public Guid HousingCommunityId { get; set; }
 }
+
+public class GetInternalMessageParams
+{
+    [Required]
+    public Guid HousingCommunityId { get; set; }
+
+    public PageDto? Page { get; set; }
+}
+
+public class InternalMessageDto
+{
+    public Guid Id { get; set; }
+    
+    public string Message { get; set; } = null!;
+
+    public Guid FromUserId { get; set; }
+    public DateTime RecievedAt { get; set; }
+
+}

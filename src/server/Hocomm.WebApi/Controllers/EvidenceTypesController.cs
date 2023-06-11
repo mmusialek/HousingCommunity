@@ -23,6 +23,12 @@ public class EvidenceTypesController : ControllerBase
         return _service.Add(request);
     }
 
+    [HttpGet]
+    public IEnumerable<EvidenceTypeDto> Get([FromQuery] GetEvidenceTypeParams query)
+    {
+        return _service.Get(query);
+    }
+
     [HttpPut]
     public Guid Put([FromBody] UpdateEvidenceTypeDto request)
     {

@@ -29,8 +29,8 @@ public class FailureReport : BaseEntity
 
 
     // ref
-    public Guid FromUserId { get; set; }
-    public User FromUser { get; set; } = null!;
+    public Guid CreatedByUserId { get; set; }
+    public User CreatedByUser { get; set; } = null!;
 
     public Guid HousingCommunityId { get; set; }
     public HousingCommunity HousingCommunity { get; set; } = null!;
@@ -93,7 +93,7 @@ internal static class FailureReportModelBuilder
         failureReport.Property(q => q.FinishedAt).IsRequired(false);
 
         // ref
-        failureReport.HasOne(q => q.FromUser).WithMany(q => q.FailureReports).HasForeignKey(q => q.FromUserId);
+        failureReport.HasOne(q => q.CreatedByUser).WithMany(q => q.FailureReports).HasForeignKey(q => q.CreatedByUserId);
         failureReport.HasOne(q => q.HousingCommunity).WithMany(q => q.FailureReports).HasForeignKey(q => q.HousingCommunityId);
 
 

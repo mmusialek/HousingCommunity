@@ -37,6 +37,13 @@ public class EvidenceService : ServiceBase
         return entity.Id;
     }
 
+    public IList<EvidenceItemDto> Get(GetEvidenceItemsParams query)
+    {
+        var entities = _context.EvidenceItems.Where(q => q.HousingCommunityId == query.HousingCommunityId).GetPage(query.Page);
+        var res = entities.Select(ToDto).ToList();
+        return res;
+    }
+
     public Guid Update(UpdateEvidenceItemDto dto)
     {
         var entity = _context.EvidenceItems.Single(q => q.Id == dto.EvidenceItemId);
@@ -92,6 +99,21 @@ public class EvidenceService : ServiceBase
         res.PersonCount = dto.PersonCount;
         res.CreatedByUserId = metadata.UserId;
         res.HousingCommunityId = dto.HousingCommunityId;
+        res.EvidenceTypeId = dto.EvidenceTypeId;
+
+        return res;
+    }
+
+    public static EvidenceItemDto ToDto(EvidenceItem entity)
+    {
+        EvidenceItemDto res = new();
+        res.Id = entity.Id;
+        res.Nr = entity.Nr;
+        res.FloorNr = entity.FloorNr;
+        res.ShortDescription = entity.ShortDescription;
+        res.Area = entity.Area;
+        res.PersonCount = entity.PersonCount;
+        res.EvidenceTypeId = entity.EvidenceTypeId;
 
         return res;
     }

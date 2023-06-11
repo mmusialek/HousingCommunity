@@ -20,6 +20,21 @@ public class CreateEvidenceTypeDto
     public Guid HousingCommunityId { get; set; }
 }
 
+public class GetEvidenceTypeParams
+{
+    [Required]
+    public Guid HousingCommunityId { get; set; }
+
+    public PageDto? Page { get; set; }
+}
+
+public class EvidenceTypeDto
+{
+    public Guid Id { get; set; }
+    public string Name { get; set; } = null!;
+    public string ShortDescription { get; set; } = null!;
+}
+
 public class UpdateEvidenceTypeDto
 {
     [Required]

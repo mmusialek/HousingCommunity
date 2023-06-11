@@ -28,7 +28,7 @@ public class ResolutionsController : ControllerBase
 
 
     [HttpGet]
-    public IEnumerable<ResolutionDto> Post([FromQuery] GetResolutionParams request)
+    public IEnumerable<ResolutionDto> Get([FromQuery] GetResolutionParams request)
     {
         return _service.Get(request);
     }

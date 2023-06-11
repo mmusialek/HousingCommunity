@@ -23,6 +23,31 @@ public class InternalMessageService : ServiceBase
         return internalMessage.Id;
     }
 
+    public IList<InternalMessageDto> Get(GetInternalMessageParams query)
+    {
+        var entities = _context.InternalMessageConnections.Where(q => q.RecievedByUserId == _metadata.UserId).GetPage(query.Page);
+
+        var eq = from messageConnection in _context.Set<InternalMessageConnection>()
+                 join message in _context.Set<InternalMessage>()
+                 on messageConnection.InternalMessageId equals message.Id
+                 where messageConnection.RecievedByUserId == _metadata.UserId
+                 //select new { message.Id, message.Message, RecievedAt = message.CreatedAt, messageConnection.FromUserId };
+                 select new InternalMessageDto { Id = message.Id, Message = message.Message, RecievedAt = message.CreatedAt, FromUserId = messageConnection.FromUserId };
+
+        //var res = new List<InternalMessageDto>();
+        var res = eq.ToList();
+        //foreach (var entityItem in eq)
+        //{
+        //    InternalMessageDto tmp = new();
+        //    tmp.Id = entityItem.Id;
+        //    tmp.Message = entityItem.Message;
+        //    tmp.RecievedAt = entityItem.RecievedAt;
+        //    tmp.FromUserId = entityItem.FromUserId;
+        //}
+
+        return res;
+    }
+
     public static InternalMessage ToEntity(CreateInternalMessageDto dto, ServiceMetadata metadata)
     {
         InternalMessage res = new();
@@ -47,5 +72,10 @@ public class InternalMessageService : ServiceBase
         fromUserEntityCopy.RecievedByUserId = dto.ToUserId;
 
         return new[] { fromUserEntityCopy, toUserEntityCopy };
+    }
+
+    private InternalMessageDto ToDto(InternalMessageConnection entity)
+    {
+        throw new NotImplementedException();
     }
 }

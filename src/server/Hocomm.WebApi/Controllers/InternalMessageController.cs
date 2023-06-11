@@ -24,4 +24,10 @@ public class InternalMessageController : ControllerBase
     {
         return _service.Add(request);
     }
+
+    [HttpGet]
+    public IEnumerable<InternalMessageDto> Get([FromQuery] GetInternalMessageParams query)
+    {
+        return _service.Get(query);
+    }
 }

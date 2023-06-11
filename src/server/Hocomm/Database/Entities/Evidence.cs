@@ -24,6 +24,9 @@ public class EvidenceItem : BaseEntity, IDateEntity
     public Guid CreatedByUserId { get; set; }
     public User CreatedByUser { get; set; } = null!;
 
+    public Guid EvidenceTypeId { get; set; }
+    public EvidenceType EvidenceType { get; set; } = null!;
+
     public Guid HousingCommunityId { get; set; }
     public HousingCommunity HousingCommunity { get; set; } = null!;
 
@@ -54,6 +57,8 @@ public class EvidenceType : BaseEntity, IDateEntity
 
     public Guid HousingCommunityId { get; set; }
     public HousingCommunity HousingCommunity { get; set; } = null!;
+
+    public IList<EvidenceItem> EvidenceItems { get; set; } = null!;
 }
 
 public class EvidenceItemMember : BaseEntity
@@ -95,6 +100,7 @@ internal static class EvidenceItemModelBuilder
         // ref
         evidenceItem.HasOne(q => q.CreatedByUser).WithMany(q => q.EvidenceItems).HasForeignKey(q => q.CreatedByUserId);
         evidenceItem.HasOne(q => q.HousingCommunity).WithMany(q => q.EvidenceItems).HasForeignKey(q => q.HousingCommunityId);
+        evidenceItem.HasOne(q => q.EvidenceType).WithMany(q => q.EvidenceItems).HasForeignKey(q => q.EvidenceTypeId);
 
 
         var evidenceTypeItem = builder.Entity<EvidenceType>();

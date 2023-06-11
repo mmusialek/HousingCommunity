@@ -20,11 +20,52 @@ public class CreateFailureReportDto
     public Guid HousingCommunityId { get; set; }
 }
 
+public class GetFailureReportParams
+{
+    [Required]
+    public Guid HousingCommunityId { get; set; }
+
+    public PageDto? Page { get; set; }
+}
+
+public class FailureReportDto
+{
+    public Guid Id { get; set; }
+
+    public string Title { get; set; } = null!;
+
+    public string Message { get; set; } = null!;
+    public FailureReportStatus Status { get; set; }
+
+    public Guid CreatedByUserId { get; set; }
+    public DateTime CreatedAt { get; set; }
+}
+
+public class FailureReportDetailsDto
+{
+    public Guid Id { get; set; }
+
+    public string Title { get; set; } = null!;
+
+    public string Message { get; set; } = null!;
+    public FailureReportStatus Status { get; set; }
+
+    public IList<FailureReportCommentDto> Comments { get; set; } = null!;
+}
+
+public class FailureReportCommentDto
+{
+    public Guid Id { get; set; }
+
+    public string Message { get; set; } = null!;
+    public Guid FromUserId { get; set; }
+}
+
 public class AddFailureReportCommentDto
 {
     [Required]
     public string Message { get; set; } = null!;
-    
+
     [Required]
     public Guid FailureReportId { get; set; }
 }

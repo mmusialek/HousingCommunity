@@ -24,6 +24,18 @@ public class FailureReportsController : ControllerBase
         return _service.Add(request);
     }
 
+    [HttpGet("details/{id}")]
+    public FailureReportDetailsDto GetDetails(Guid id)
+    {
+        return _service.GetDetails(id);
+    }
+
+    [HttpGet]
+    public IEnumerable<FailureReportDto> Get([FromQuery] GetFailureReportParams query)
+    {
+        return _service.Get(query);
+    }
+
     [HttpPost("AddComment")]
     public Guid AddComment([FromBody] AddFailureReportCommentDto request)
     {

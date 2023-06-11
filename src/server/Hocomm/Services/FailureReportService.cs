@@ -1,6 +1,7 @@
 ﻿using Hocomm.Contracts.FailureReports;
 using Hocomm.Database;
 using Hocomm.Database.Entities;
+using Hocomm.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,24 @@ public class FailureReportService : ServiceBase
         AddAndSave(entity);
 
         return entity.Id;
+    }
+
+    public FailureReportDetailsDto GetDetails(Guid id)
+    {
+        var hocomm = _context.HousingCommunities.Where(q => q.Users.Equals(_metadata.UserId)).Select(q => q.Id).ToList()
+            ?? throw new HttpException(System.Net.HttpStatusCode.BadRequest, "Wrong Report id");
+
+        var failureReport = _context.FailureReports.Single(q => q.Id == id && hocomm.Contains(q.HousingCommunityId));
+        var res = ToDetailsDto(failureReport);
+
+        return res;
+    }
+
+    public IList<FailureReportDto> Get(GetFailureReportParams query)
+    {
+        var entities = _context.FailureReports.Where(q => q.HousingCommunityId == query.HousingCommunityId).GetPage(query.Page);
+        var res = entities.Select(ToDto).ToList();
+        return res;
     }
 
     public Guid AddComment(AddFailureReportCommentDto dto)
@@ -58,7 +77,7 @@ public class FailureReportService : ServiceBase
         res.Title = dto.Title;
         res.Message = dto.Message;
         res.HousingCommunityId = dto.HousingCommunityId;
-        res.FromUserId = metadata.UserId;
+        res.CreatedByUserId = metadata.UserId;
 
         return res;
     }
@@ -69,6 +88,42 @@ public class FailureReportService : ServiceBase
         res.Message = dto.Message;
         res.FailureReportId = dto.FailureReportId;
         res.FromUserId = metadata.UserId;
+
+        return res;
+    }
+
+    public static FailureReportDetailsDto ToDetailsDto(FailureReport entity)
+    {
+        FailureReportDetailsDto res = new();
+        res.Id = entity.Id;
+        res.Title = entity.Title;
+        res.Message = entity.Message;
+        res.Status = entity.Status;
+
+        res.Comments = new List<FailureReportCommentDto>();
+        foreach (var entityComm in entity.FailureReportsComments)
+        {
+            FailureReportCommentDto tmp = new();
+            tmp.Id = entityComm.Id;
+            tmp.Message = entityComm.Message;
+            tmp.FromUserId = entityComm.FromUserId;
+
+            res.Comments.Add(tmp);
+        }
+
+        return res;
+    }
+
+    public static FailureReportDto ToDto(FailureReport entity)
+    {
+        FailureReportDto res = new();
+        res.Id = entity.Id;
+        res.Title = entity.Title;
+        res.Message = entity.Message;
+        res.Status = entity.Status;
+
+        res.CreatedAt = entity.CreatedAt;
+        res.CreatedByUserId = entity.CreatedByUserId;
 
         return res;
     }
