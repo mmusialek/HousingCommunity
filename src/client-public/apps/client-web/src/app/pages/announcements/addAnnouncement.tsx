@@ -22,5 +22,5 @@ export const AddAnnouncement = () => {
     );
   };
 
-  return <div>add announcement</div>;
+  return <div>{renderAddForm()}</div>;
 };

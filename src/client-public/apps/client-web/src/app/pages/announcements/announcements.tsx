@@ -11,6 +11,7 @@ export const Announcements = () => {
   useEffect(() => {
     const data = getAnnouncements();
     store.setAnnouncements(data);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const renderAnnouncement = (ann: IAnnouncement) => {
