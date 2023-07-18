@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { IAnnouncement } from "../../models";
-import { StringUtils } from "../../utils";
 import { ProgressIndicator } from "../../components";
 import { useAnnouncementService, useAnnouncementStore } from "./announcementStore";
+import { IWebTableColumn, WebTable } from "../../components/webTable/webTable";
 
 export const Announcements = () => {
   const { getAnnouncements, isLoading } = useAnnouncementService();
@@ -14,20 +14,28 @@ export const Announcements = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const renderAnnouncement = (ann: IAnnouncement) => {
-    return (
-      <div key={ann.id}>
-        <div>{ann.title}</div>
-        <div>{StringUtils.formatDate(ann.createdAt)}</div>
-        <div>{ann.title}</div>
-        <div>{ann.content}</div>
-      </div>
-    );
-  };
-
   const renderList = () => {
     if (store.announcements.length) {
-      return <div>{store.announcements.map((q) => renderAnnouncement(q))}</div>;
+      const items: IAnnouncement[] = store.announcements;
+      const columns: IWebTableColumn<IAnnouncement>[] = [
+        {
+          name: "author",
+          label: "Author",
+          render: (item) => {
+            return <span>{item.author.email}</span>;
+          },
+        },
+        {
+          name: "title",
+          label: "Title",
+        },
+        {
+          name: "content",
+          label: "Content",
+        },
+      ];
+      const table = <WebTable columns={columns} items={items}></WebTable>;
+      return table;
     }
 
     return <div>no data</div>;
